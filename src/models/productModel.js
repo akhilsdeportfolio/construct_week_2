@@ -18,6 +18,11 @@ const productSchema = new mongoose.Schema(
             ref: "color",
             required: true,
         }],
+        price_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "price",
+            required: true,
+        },
         description: { type: String, trim:true, required: true },
         price: { type: Number, trim:true, required: true },
         images: [{ type: String, trim:true, required: true }],
