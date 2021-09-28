@@ -16,6 +16,7 @@ const router=express.Router()
 router.post("",async(req,res)=>{
 
     const wishlist=await Wishlist.create(req.body)
+   
 
     return res.send({wishlist})
 })
