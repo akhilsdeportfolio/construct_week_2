@@ -9,9 +9,8 @@ router.get("", async (req, res) => {
   res.send({ address });
 });
 
-
 // post user address
-router.post("/createAddress", async (req, res) => {
+router.post("", async (req, res) => {
   let createdAddress = await User.create(req.body);
   res.send({ createdAddress });
 });
