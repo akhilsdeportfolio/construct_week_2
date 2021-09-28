@@ -18,6 +18,7 @@ const productSubCategoryController = require("./controllers/productSubCategoryCo
 const productController = require("./controllers/productController");
 const shoppingBagController = require("./controllers/shoppingBag.controller");
 const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
+const paymentsController = require("./controllers/payments.controller");
 
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
@@ -57,6 +58,8 @@ app.use("/products", productController);
 
 app.use("/shoppingBag", shoppingBagController);
 app.use("/shoppingBagDetails", shoppingBagDetailsController);
+app.use("/payments",paymentsController);
+
 
 app.listen(5000, async () => {
   await connect();
