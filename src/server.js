@@ -24,11 +24,22 @@ const firebaseConfig = {
 
 const fbApp = firebaseapp.initializeApp(firebaseConfig);
 
+const wishlistController=require("./controllers/wishlist.controller")      //wishlist controller
+
+const wishlistDetailsController=require("./controllers/wishlistDetails.controller")  // wishlistDetails controller
+
+
 const app = express();
 app.use(express.json()); //for parsing json data
 app.use(express.urlencoded({ extended: false })); // for parsing body data in post requests
 
 app.use("/users",userController);
+
+
+app.use("/wishlist",wishlistController)
+
+app.use("/wishlistDetails",wishlistDetailsController)
+
 
 start = () => {
   app.listen(5000, async () => {
