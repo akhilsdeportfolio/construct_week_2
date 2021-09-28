@@ -9,6 +9,10 @@ const connect = require("./config/db");
 //add controllers here 
 
 const userController = require("./controllers/user.controller");
+const wishlistController=require("./controllers/wishlist.controller")      //wishlist controller
+const wishlistDetailsController=require("./controllers/wishlistDetails.controller")  // wishlistDetails controller
+const addressController = require("./controllers/address.controller");
+
 
 
 //this is a firebase config object dont worry about it ;
@@ -24,10 +28,6 @@ const firebaseConfig = {
 
 const fbApp = firebaseapp.initializeApp(firebaseConfig);
 
-const wishlistController=require("./controllers/wishlist.controller")      //wishlist controller
-
-const wishlistDetailsController=require("./controllers/wishlistDetails.controller")  // wishlistDetails controller
-
 
 const app = express();
 app.use(express.json()); //for parsing json data
@@ -39,6 +39,7 @@ app.use("/users",userController);
 app.use("/wishlist",wishlistController)
 
 app.use("/wishlistDetails",wishlistDetailsController)
+app.use("/address",addressController);
 
 
 start = () => {
