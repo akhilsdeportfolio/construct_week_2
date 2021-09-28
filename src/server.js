@@ -13,7 +13,6 @@ const wishlistDetailsController = require("./controllers/wishlistDetails.control
 const addressController = require("./controllers/address.controller");
 const productCategoryController = require("./controllers/productCategoryController");
 const brandController = require("./controllers/brandController");
-const colorController = require("./controllers/colorController");
 const priceController = require("./controllers/priceController");
 const productSubCategoryController = require("./controllers/productSubCategoryController");
 const productController = require("./controllers/productController");
@@ -53,7 +52,6 @@ app.use("/address", addressController);
 
 app.use("/productCategories", productCategoryController);
 app.use("/brands", brandController);
-app.use("/colors", colorController);
 app.use("/prices", priceController);
 app.use("/productSubCategories", productSubCategoryController);
 app.use("/products", productController);
