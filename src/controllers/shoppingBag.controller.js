@@ -15,4 +15,13 @@ router.post("", async (req, res) => {
   res.status(201).send({ item });
 });
 
+//Get a shopping bag according to the user_id
+router.get("/:id", async (req, res) => {
+  const item = await ShoppingBag.find({ user_id: { $eq: req.params.id } })
+    .populate("user_id")
+    .lean()
+    .exec();
+  res.status(200).send({ item });
+});
+
 module.exports = router;
