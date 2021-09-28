@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Addresses = require("../models/address.modle");
+const Addresses = require("../models/address.model");
 
 //get all the address details
 router.get("", async (req, res) => {
