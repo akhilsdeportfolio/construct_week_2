@@ -5,19 +5,19 @@ const firebaseAuth = require("firebase/auth"); //auth module for authentication 
 
 const connect = require("./config/db");
 
-
-//add controllers here 
+//add controllers here
 
 const userController = require("./controllers/user.controller");
-const wishlistController=require("./controllers/wishlist.controller")      //wishlist controller
-const wishlistDetailsController=require("./controllers/wishlistDetails.controller")  // wishlistDetails controller
+const wishlistController = require("./controllers/wishlist.controller"); //wishlist controller
+const wishlistDetailsController = require("./controllers/wishlistDetails.controller"); // wishlistDetails controller
 const addressController = require("./controllers/address.controller");
 const productCategoryController = require("./controllers/productCategoryController");
-const brandController=require("./controllers/brandController")  
+const brandController = require("./controllers/brandController");
 const colorController = require("./controllers/colorController");
-const productSubCategoryController=require("./controllers/productSubCategoryController") 
+const productSubCategoryController = require("./controllers/productSubCategoryController");
 const productController = require("./controllers/productController");
-
+const shoppingBagController = require("./controllers/shoppingBag.controller");
+const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
 
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
@@ -32,30 +32,28 @@ const firebaseConfig = {
 
 const fbApp = firebaseapp.initializeApp(firebaseConfig);
 
-
 const app = express();
 app.use(express.json()); //for parsing json data
 app.use(express.urlencoded({ extended: false })); // for parsing body data in post requests
 
+//mention routes here
 
+app.use("/users", userController);
+app.use("/wishlist", wishlistController);
+app.use("/wishlistDetails", wishlistDetailsController);
+app.use("/address", addressController);
 
-//mention routes here 
+app.use("/productCategories", productCategoryController);
+app.use("/brands", brandController);
+app.use("/colors", colorController);
+app.use("/productSubCategories", productSubCategoryController);
+app.use("/products", productController);
 
-app.use("/users",userController);
-app.use("/wishlist",wishlistController)
-app.use("/wishlistDetails",wishlistDetailsController)
-app.use("/address",addressController);
-
-app.use("/productCategories",productCategoryController);
-app.use("/brands",brandController)
-app.use("/colors",colorController)
-app.use("/productSubCategories",productSubCategoryController);
-app.use("/products",productController);
-
+app.use("/shoppingBag", shoppingBagController);
+app.use("/shoppingBagDetails", shoppingBagDetailsController);
 
 start = () => {
   app.listen(5000, async () => {
-
     await connect();
     console.log("app is listening on the port 5000");
   });
