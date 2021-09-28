@@ -16,6 +16,7 @@ const router=express.Router()
 router.post("",async(req,res)=>{
 
     const wishlist=await Wishlist.create(req.body)
+   
 
     return res.send({wishlist})
 })
@@ -50,3 +51,5 @@ router.delete("/:id",async(req,res)=>{
 
     return res.send({wishlist})
 })
+
+module.exports=router;
