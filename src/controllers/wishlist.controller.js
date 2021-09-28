@@ -50,3 +50,5 @@ router.delete("/:id",async(req,res)=>{
 
     return res.send({wishlist})
 })
+
+module.exports=router;
