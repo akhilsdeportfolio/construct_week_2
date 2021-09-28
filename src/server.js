@@ -36,8 +36,7 @@ const app = express();
 app.use(express.json()); //for parsing json data
 app.use(express.urlencoded({ extended: false })); // for parsing body data in post requests
 
-
-// public 
+// public
 app.use(express.static("public"));
 
 // view engine
@@ -59,11 +58,7 @@ app.use("/products", productController);
 app.use("/shoppingBag", shoppingBagController);
 app.use("/shoppingBagDetails", shoppingBagDetailsController);
 
-start = () => {
-  app.listen(5000, async () => {
-    await connect();
-    console.log("app is listening on the port 5000");
-  });
-};
-
-start();
+app.listen(5000, async () => {
+  await connect();
+  console.log("app is listening on the port 5000");
+});
