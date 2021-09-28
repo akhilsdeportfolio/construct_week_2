@@ -36,6 +36,13 @@ const app = express();
 app.use(express.json()); //for parsing json data
 app.use(express.urlencoded({ extended: false })); // for parsing body data in post requests
 
+
+// public 
+app.use(express.static("public"));
+
+// view engine
+app.set("view engine", "ejs");
+
 //mention routes here
 
 app.use("/users", userController);
