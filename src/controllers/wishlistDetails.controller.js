@@ -48,3 +48,7 @@ router.delete("/:id",async(req,res)=>{
 
     return res.send({wishlist_details})
 })
+
+
+
+module.exports=router;
