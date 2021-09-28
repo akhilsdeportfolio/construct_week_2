@@ -60,5 +60,6 @@ app.use("/shoppingBagDetails", shoppingBagDetailsController);
 
 app.listen(5000, async () => {
   await connect();
+
   console.log("app is listening on the port 5000");
 });
