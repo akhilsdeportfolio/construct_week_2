@@ -1,0 +1,29 @@
+{
+  "name": "nordstrom-express",
+  "version": "1.0.0",
+  "description": "this is a backend implemented project of construct week 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "firebase",
+    "masaischool",
+    "masai"
+  ],
+  "author": "team_nordstrom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akhilsdeportfolio/nordstrom-mongo-express/issues"
+  },
+  "homepage": "https://github.com/akhilsdeportfolio/nordstrom-mongo-express#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^9.1.0",
+    "mongoose": "^6.0.8"
+  }
+}

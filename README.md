@@ -1,2 +1,2 @@
-# construct_week_2
-this is a repo of construct week 2 where we were asked to build the same project we built in the construct week 1 but with backend integration, we used node js runtime,express framework and mongodb as database,We also integrated firebase authentication in to the project.
+# nordstrom-mongo-express
+Nordstrom.com is an online ecommerce site basef out od USA , we have cloned it with express and Mongo as backend and used HTML,css and javascript in the frontend
