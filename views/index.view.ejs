@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+</head>
+<body>
+    <button onsubmit="shoppingBags()">Click Here</button>
+</body>
+</html>
+
+<script>
+    function shoppingBags() {
+        console.log("Hello");
+        fetch('localhost:5000/shoppingBagDetails', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            console.log('res:', res);
+        })
+        .catch((err) => {
+            console.log('err:', err);
+        })
+    }
+</script>

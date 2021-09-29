@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.user_id.first_name %>'s Shopping Bag</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <% items.forEach((item) => { %>
+            <li>Name: <%= item.product_id.name %></li>
+            <img src = "<%= item.product_id.images[0] %>""/>
+            <li>Quantity: <%= item.quantity %></li>
+            <li>Price: ₹<%= item.quantity * item.product_id.price %></li>
+            <% }) %>
+        </ul>
+    </div>
+</body>
+</html>
