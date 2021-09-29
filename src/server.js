@@ -5,6 +5,8 @@ const firebaseAuth = require("firebase/auth"); //auth module for authentication 
 
 const connect = require("./config/db");
 
+const axios = require("axios").default; // use axios to make localhost api calls easy
+
 //add controllers here
 
 const userController = require("./controllers/user.controller");
@@ -20,6 +22,7 @@ const shoppingBagController = require("./controllers/shoppingBag.controller");
 const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
 const paymentsController = require("./controllers/payments.controller");
 
+const myAccountController = require("./controllers/myAccount.controller");
 
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
@@ -57,17 +60,14 @@ app.use("/prices", priceController);
 app.use("/productSubCategories", productSubCategoryController);
 app.use("/products", productController);
 
-
 app.use("/shoppingBag", shoppingBagController);
 app.use("/shoppingBagDetails", shoppingBagDetailsController);
-app.use("/payments",paymentsController);
 
+app.use("/myaccount", myAccountController);
 
-
-
+app.use("/payments", paymentsController);
 
 app.listen(5000, async () => {
   await connect();
-
   console.log("app is listening on the port 5000");
 });

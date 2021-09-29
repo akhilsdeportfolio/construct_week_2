@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/akhilsdeportfolio/nordstrom-mongo-express#readme",
   "dependencies": {
+    "axios": "^0.21.4",
     "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "firebase": "^9.1.0",
     "mongoose": "^6.0.8"

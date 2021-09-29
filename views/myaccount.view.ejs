@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>My account</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet">
+     
+
+      <style>
+           .list-group-item:nth-child(1){
+                border-radius: 0px;
+           }
+
+           .mb-1{
+                margin-left:10px;
+           }
+           .border{
+                border: 1px solid whitesmoke;
+           }
+           .padding{
+                padding:10px;
+           }
+      </style>
+
+</head>
+<body>
+
+
+     <div class="container-fluid">
+
+          
+
+          
+
+
+
+          <div class="row">
+
+                    
+
+
+                    <div class="col-xl-2 col-sm-12" style="background-color:whitesmoke;min-height: 100vh;padding:0px">
+                         <div class="row">
+
+                              <div class="d-flex flex-row col-12 ">
+                                   <div class="p-2">
+                                        <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
+                                   </div>
+                                   <div class="p-2" style="height:100%">
+                                        <h5 style="line-height: 5;">K akhil</h5>
+                                   </div>
+                                   
+                                 </div>
+                              
+               
+                         </div>
+                         <div class="list-group" style="width:100%;margin:0px;">
+                              <a href="#" class="list-group-item list-group-item-action active">
+                                <div class="d-flex w-100">
+                                  
+                                   <span class="material-icons">
+                                        shopping_bag
+                                        </span>
+                                  <p class="mb-1">My Purchases</p>
+                                </div>
+                                
+                              </a>
+
+                              <a href="/myaccount/wishlist" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           favorite_border
+                                        </span>
+                                     <p class="mb-1">Wish list</p>
+                                   </div>
+                                   
+                              </a>
+
+                              <a href="/myaccount/rewards" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                        redeem
+                                           </span>
+                                     <p class="mb-1">Nordy rewards</p>
+                                   </div>
+                                   
+                              </a>
+                             
+                              <a href="/myaccount/looks" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           looks
+                                           </span>
+                                     <p class="mb-1">Looks</p>
+                                   </div>
+                                   
+                              </a>
+
+
+                              <hr style="color: whitesmoke;margin:10px"/>
+
+                              <a href="/myaccount/password" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           password
+                                           </span>
+                                     <p class="mb-1">Password</p>
+                                   </div>
+                                   
+                              </a>
+
+                              <a href="/myaccount/shipping" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           local_shipping
+                                           </span>
+                                     <p class="mb-1">Shipping address</p>
+                                   </div>
+                                   
+                              </a>
+
+                              <a href="/myaccount/payments" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           payment
+                                           </span>
+                                     <p class="mb-1">Payment Methods</p>
+                                   </div>
+                                   
+                              </a>
+
+                              <a href="/myaccount/preferences" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           email
+                                           </span>
+                                     <p class="mb-1">Email and Mail Preferences</p>
+                                   </div>
+                                   
+                              </a>
+
+                              <a href="/myaccount/signout" class="list-group-item list-group-item-action">
+                                   <div class="d-flex w-100">
+                                     
+                                      <span class="material-icons">
+                                           logout
+                                           </span>
+                                     <p class="mb-1">Signout</p>
+                                   </div>
+                                   
+                              </a>
+                         </div>     
+                    </div>
+                    <div class="col-xl-10" >
+                      <div class="container-fluid">
+
+                         <h4 style="line-height: 5;">Purchases</h4>
+                         <p> You have made <%= orders %> purchases in  <select id="time" onchange="getOrders()"> 
+                              <option value="1y">  1year</option>
+                              <option value="6m">  last 6 months</option>
+                              <option value="3m">  last 3 months</option>
+                              <option value="30d">  last 30 days</option>
+                              
+                         </select></p>
+
+
+                         <hr/>
+                         
+                         <% if(orders==0) {%>
+                              <p>you have not made any purchases in this time period</p>
+                              <button type="button" class="btn btn-light border padding">shop now</button>
+
+                              <br/>
+                              <br/>
+
+                              <h6>Helpful Information</h6>
+                              <br/>
+                              <p><span>Questions? </span><a href="https://nordstrom.custhelp.com/app/chat/chat_launch/incidents.c$sent_queueid/1" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Chat with us</span></a><span> or call 1.888.282.6060.</span></p>
+
+                              <p>Shipping internationally? <a target="_blank" href="https://tracking.borderfree.com/" class="_18W94"><span class="_3MTTT _1IsgD">Check your order status</span></a>.</p>
+                              
+                              <a target="_blank" href="/content/shipping-methods-charges" class="_18W94"><span class="_3MTTT _1IsgD">Shipping methods and charges</span></a>
+                              <br/>
+                              <br/>
+                              
+                              <div class="_169_i b4KdL"><span>How do you feel about our account page updates?</span> <a href="https://cxsurvey.foresee.com/sv?cid=hJsEYpCO3ycR8vTFZ+swiw==&amp;sid=functional-acct&amp;cpp[shopperid]=5769DFA6D83E4ED948FB4B3CB3922D09&amp;cpp[channel]=NORDSTROM" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Give us feedback</span></a><span>.</span></div>
+
+                         <% } else { %>
+                                   <p>You have made <%=orders %> Orders</p>
+                          <% } %>  
+                      </div>
+                    </div>
+          </div>
+          
+          <script>
+               function getOrders()
+               {
+                    console.log("changed" + document.getElementById("time").value);
+
+               }
+          </script>
+          
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

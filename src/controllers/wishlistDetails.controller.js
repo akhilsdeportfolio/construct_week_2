@@ -25,7 +25,10 @@ router.get("",async(req,res)=>{
 
     const wishlist_details=await WishlistDetails.find().lean().exec()
 
-    return res.send({wishlist_details})
+    return res.render("wishlistDetails_users.ejs",{
+
+        wishlist_details: wishlist_details
+    })
 })
 
 
@@ -33,7 +36,7 @@ router.get("",async(req,res)=>{
 
 router.patch("/:id",async(req,res)=>{
 
-    const wishlist_details=await WishlistDetails.findById(req.params.id,req.body,{new:true}).lean().exec()
+    const wishlist_details=await WishlistDetails.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec()
 
     return res.send({wishlist_details})
 })
