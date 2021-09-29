@@ -56,17 +56,11 @@ app.use("/prices", priceController);
 app.use("/productSubCategories", productSubCategoryController);
 app.use("/products", productController);
 
-
 app.use("/shoppingBag", shoppingBagController);
 app.use("/shoppingBagDetails", shoppingBagDetailsController);
-app.use("/payments",paymentsController);
-
-
-
-
+app.use("/payments", paymentsController);
 
 app.listen(5000, async () => {
   await connect();
-
   console.log("app is listening on the port 5000");
 });
