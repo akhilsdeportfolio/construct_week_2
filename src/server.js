@@ -62,7 +62,9 @@ app.use("/shoppingBagDetails", shoppingBagDetailsController);
 app.use("/payments",paymentsController);
 
 
-
+app.get("/myaccount",async (req,res)=>{
+  res.render("myaccount.view.ejs",{data:"welcome",orders:0});
+})
 
 
 app.listen(5000, async () => {
