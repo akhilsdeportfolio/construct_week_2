@@ -20,6 +20,7 @@ const shoppingBagController = require("./controllers/shoppingBag.controller");
 const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
 const paymentsController = require("./controllers/payments.controller");
 
+
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
   apiKey: "AIzaSyDc34fFMm_hUBM1u0lPpcbQZ3p4t5EWdQE",
