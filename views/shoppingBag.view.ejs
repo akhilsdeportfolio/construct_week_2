@@ -1,21 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user.user_id.first_name %>'s Shopping Bag</title>
+    <title>
+        <%= user.user_id.first_name %>'s Shopping Bag
+    </title>
 </head>
+
 <body>
-    <div>
-        <ul>
-            <% items.forEach((item) => { %>
-            <li>Name: <%= item.product_id.name %></li>
-            <img src = "<%= item.product_id.images[0] %>""/>
-            <li>Quantity: <%= item.quantity %></li>
-            <li>Price: ₹<%= item.quantity * item.product_id.price %></li>
-            <% }) %>
-        </ul>
-    </div>
+    <div id="shopping-bag-container">
+        <div id="shopping-bag-sections">
+            <span id="shopping-bag-tag">Shopping Bag</span>
+            <span id="shopping-bag-saved">Saved for Later</span>
+        </div>
+
+        <div id="shopping-bag-titles">
+            <p id="shopping-bag-titles-name">Shopping Bag</p>
+            <p id="shopping-bag-titles-gift"><span class="material-icons">card_giftcard</span>Choose gift options when
+                you check out.</p>
+            <p id="shopping-bag-titles-text">Items in your bag are not on hold. </p>
+        </div>
+
+        <div id="shopping-bag-data">
+            <div>
+                <ul>
+                    <% items.forEach((item)=> { %>
+                        <li>Name: <%= item.product_id.name %>
+                        </li>
+                        <img src="<%= item.product_id.images[0] %>""/>
+                    <li>Quantity: <%= item.quantity %></li>
+                    <li>Price: ₹<%= item.quantity * item.product_id.price %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div id = " shopping-bag-summary">
+                        <div id="shopping-bag-payment-methods">
+                            <p>Accepted Payment Methods</p>
+                            <span id="shopping-bag-credit-logos">
+                                <img style="width: 50px"
+                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" />
+                                <img style="width: 50px"
+                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" />
+                                <img style="width: 50px"
+                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" />
+                                <img style="width: 50px"
+                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" />
+                            </span>
+
+                            <p>Need help? Call 1.888.282.6060 or <a href="">chat with us</a></p>
+
+                            <p><a href="">Shipping internationally?</a></p>
+                        </div>
+
+                        <div id="shipping-bag-price-summary">
+                            <div id="shipping-bag-subtotal">
+                                <p>Subtotal</p>
+                            </div>
+
+                            <hr style="width: 100%;" />
+                            <div><button onclick="goToCheckout()" id="shipping-bag-checkout-btn">Check Out</button>
+                            </div>
+                        </div>
+            </div>
+
+        </div>
+
 </body>
+
 </html>
