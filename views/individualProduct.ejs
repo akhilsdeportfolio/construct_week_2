@@ -8,15 +8,13 @@
 </head>
 <body>
     <div >
-            <% products.forEach((e) => {%>
                 <div style = "border:1px solid red">
-                    <p>Name: <%= e.name %></p>
-                    <p>Color: <%= e.color %></p>
-                    <%- e.details %>
-                    <p>Price: <%= e.price %></p>
-                    <a href="products/<%= e._id %>"><img src = <%= (e.images[0]) %>></img></a>
+                    <p>Name: <%= product.name %></p>
+                    <p>Color: <%= product.color %></p>
+                    <%- product.details %>
+                    <p>Price: <%= product.price %></p>
+                    <img src = <%= (product.images[0]) %>></img>
                 </div>
-            <% }) %>
     </div>
     
 </body>
