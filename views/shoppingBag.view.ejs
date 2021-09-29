@@ -4,33 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Bag</title>
+    <title><%= user.user_id.first_name %>'s Shopping Bag</title>
 </head>
 <body>
-    <button onclick="shoppingBags()">Click Here</button>
+    <div>
+        <ul>
+            <% items.forEach((item) => { %>
+            <li>Name: <%= item.product_id.name %></li>
+            <img src = "<%= item.product_id.images[0] %>""/>
+            <li>Quantity: <%= item.quantity %></li>
+            <li>Price: ₹<%= item.quantity * item.product_id.price %></li>
+            <% }) %>
+        </ul>
+    </div>
 </body>
 </html>
-
-<script>
-    function shoppingBags() {
-        console.log("Getting all the Shopping Bag IDs...");
-        fetch('http://localhost:5000/shoppingBagDetails', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then((res) => {
-            return res.json();
-        })
-        .then((res) => {
-            res.items.forEach((item) => {
-                console.log(item.shopping_bag_id.user_id);
-            });
-            //console.log('res:', res.items);
-        })
-        .catch((err) => {
-            console.log('err:', err);
-        })
-    }
-</script>

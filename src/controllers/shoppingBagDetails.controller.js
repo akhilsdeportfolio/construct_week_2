@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 const ShoppingBagDetails = require("../models/shoppingBagDetails.model");
+const ShoppingBag = require("../models/shoppingBag.model");
 
 //Get all the documents in the Shopping Bag Details collection
 router.get("", async (req, res) => {
@@ -22,11 +23,16 @@ router.get("/:id", async (req, res) => {
     shopping_bag_id: { $eq: req.params.id },
   })
     .populate("product_id")
-    .populate({ path: "shopping_bag_id", populate: { path: "user_id" } })
     .lean()
     .exec();
 
-  res.status(200).send({ items });
+  const user = await ShoppingBag.findById(req.params.id)
+    .populate("user_id")
+    .lean()
+    .exec();
+  res.render("shoppingBag.view.ejs", { items, user });
+
+  //res.status(200).send({ items, user });
 });
 
 //Post a new document in the Shopping Bag Details Collection
