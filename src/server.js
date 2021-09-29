@@ -5,6 +5,8 @@ const firebaseAuth = require("firebase/auth"); //auth module for authentication 
 
 const connect = require("./config/db");
 
+const axios = require('axios').default; // use axios to make localhost api calls easy 
+
 //add controllers here
 
 const userController = require("./controllers/user.controller");
@@ -19,6 +21,8 @@ const productController = require("./controllers/productController");
 const shoppingBagController = require("./controllers/shoppingBag.controller");
 const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
 const paymentsController = require("./controllers/payments.controller");
+
+const myAccountController = require('./controllers/myAccount.controller');
 
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
@@ -59,9 +63,7 @@ app.use("/products", productController);
 app.use("/shoppingBag", shoppingBagController);
 app.use("/shoppingBagDetails", shoppingBagDetailsController);
 
-app.get("/myaccount",async (req,res)=>{
-  res.render("myaccount.view.ejs",{data:"welcome",orders:0});
-})
+app.use("/myaccount",myAccountController);
 
 
 app.use("/payments", paymentsController);
