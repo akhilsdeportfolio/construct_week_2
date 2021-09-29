@@ -165,39 +165,15 @@
                     <div class="col-xl-10" >
                       <div class="container-fluid">
 
-                         <h4 style="line-height: 5;">Purchases</h4>
-                         <p> You have made <%= orders %> purchases in  <select id="time" onchange="getOrders()"> 
-                              <option value="1y">  1year</option>
-                              <option value="6m">  last 6 months</option>
-                              <option value="3m">  last 3 months</option>
-                              <option value="30d">  last 30 days</option>
-                              
-                         </select></p>
-
+                         <h4 style="line-height: 5;">Wishlist</h4>
 
                          <hr/>
                          
                          <% if(orders==0) {%>
-                              <p>you have not made any purchases in this time period</p>
-                              <button type="button" class="btn btn-light border padding">shop now</button>
-
-                              <br/>
-                              <br/>
-
-                              <h6>Helpful Information</h6>
-                              <br/>
-                              <p><span>Questions? </span><a href="https://nordstrom.custhelp.com/app/chat/chat_launch/incidents.c$sent_queueid/1" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Chat with us</span></a><span> or call 1.888.282.6060.</span></p>
-
-                              <p>Shipping internationally? <a target="_blank" href="https://tracking.borderfree.com/" class="_18W94"><span class="_3MTTT _1IsgD">Check your order status</span></a>.</p>
                               
-                              <a target="_blank" href="/content/shipping-methods-charges" class="_18W94"><span class="_3MTTT _1IsgD">Shipping methods and charges</span></a>
-                              <br/>
-                              <br/>
-                              
-                              <div class="_169_i b4KdL"><span>How do you feel about our account page updates?</span> <a href="https://cxsurvey.foresee.com/sv?cid=hJsEYpCO3ycR8vTFZ+swiw==&amp;sid=functional-acct&amp;cpp[shopperid]=5769DFA6D83E4ED948FB4B3CB3922D09&amp;cpp[channel]=NORDSTROM" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Give us feedback</span></a><span>.</span></div>
 
                          <% } else { %>
-                                   <p>You have made <%=orders %> Orders</p>
+                                   
                           <% } %>  
                       </div>
                     </div>
