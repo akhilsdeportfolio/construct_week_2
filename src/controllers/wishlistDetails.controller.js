@@ -25,7 +25,10 @@ router.get("",async(req,res)=>{
 
     const wishlist_details=await WishlistDetails.find().lean().exec()
 
-    return res.send({wishlist_details})
+    return res.render("wishlistDetails_users.ejs",{
+
+        wishlist_details: wishlist_details
+    })
 })
 
 

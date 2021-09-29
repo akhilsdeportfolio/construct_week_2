@@ -27,8 +27,13 @@ router.post("",async(req,res)=>{
 router.get("",async(req,res)=>{
 
     const wishlist=await Wishlist.find().lean().exec()
+    console.log(wishlist)
 
-    return res.send({wishlist})
+    return res.render("wishlist_users",{
+
+        wishlist:wishlist
+       
+    })
 })
 
 
@@ -36,7 +41,7 @@ router.get("",async(req,res)=>{
 
 router.patch("/:id",async(req,res)=>{
 
-    const wishlist=await Wishlist.findById(req.params.id,req.body,{new:true}).lean().exec()
+    const wishlist=await Wishlist.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec()
 
     return res.send({wishlist})
 })
@@ -49,7 +54,10 @@ router.delete("/:id",async(req,res)=>{
 
     const wishlist=await Wishlist.findByIdAndDelete(req.params.id).lean().exec()
 
-    return res.send({wishlist})
+    return res.render("wishlist_delete.ejs",{
+
+        wishlist:wishlist
+    })
 })
 
 module.exports=router;
