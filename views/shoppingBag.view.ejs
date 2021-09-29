@@ -25,52 +25,88 @@
         </div>
 
         <div id="shopping-bag-data">
-            <div>
-                <ul>
-                    <% items.forEach((item)=> { %>
-                        <li>Name: <%= item.product_id.name %>
-                        </li>
-                        <img src="<%= item.product_id.images[0] %>""/>
-                    <li>Quantity: <%= item.quantity %></li>
-                    <li>Price: ₹<%= item.quantity * item.product_id.price %></li>
-                    <% }) %>
-                </ul>
+
+            <% items.forEach((item)=> { %>
+                <div id="shopping-bag-data-div">
+                    <div id="shopping-bag-data-div-img">
+                        <img src="<%= item.product_id.images[0] %>" />
+                    </div>
+                    <div id="shopping-bag-data-product-text">
+                        <p class="shopping-bag-product-p-text">
+                            <%= item.product_id.brand_id %>
+                        </p>
+                        <p class="shopping-bag-product-p-text" style="font-weight: 400;">
+                            <%= item.product_id.name %>
+                        </p>
+                        <p class="shopping-bag-product-p-text">Size: One Size</p>
+                        <p class="shopping-bag-product-p-text">
+                            Color: <%= item.product_id.color %>
+                        </p>
+                        <p class="shopping-bag-product-p-text">Item: #<%= item.product_id._id %>
+                        </p>
+                        <div class="vertical-space"></div>
+                        <p style="margin-bottom: 0px;"><span class="material-icons">local_shipping</span>
+                            Delivery</p>
+                        <p class="shopping-bag-product-p-text">International orders usually arrive within 5–13
+                            business
+                            days. We'll give
+                            you delivery dates in checkout.</p>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+                            <p
+                                style="text-align: left; font-size: 14px; text-decoration: none; color: rgb(1, 100, 107);">
+                                Remove</p>
+                        </div>
+                    </div>
+                    <div id="shopping-bag-data-product-quantity">
+                        <label style="font-size: 18px;">Qty</label>
+                        <input value="<%= item.quantity %>" style="border: 1px solid rgb(37, 37, 37); font-size: 14px;">
+                    </div>
+                    <div id="shopping-bag-data-product-price">
+                        <span>
+                            <p style="font-weight: 500; margin: 5px;">₹<%= item.product_id.price * item.quantity %>
+                            </p>
+                            <p class="shopping-bag-product-p-text" style="margin: 0px;">(₹<%= item.product_id.price %>
+                                    each)</p>
+                        </span>
+                    </div>
+                </div>
+                <% }) %>
+
+        </div>
+
+        <hr />
+
+        <div id=" shopping-bag-summary">
+            <div id="shopping-bag-payment-methods">
+                <p>Accepted Payment Methods</p>
+                <span id="shopping-bag-credit-logos">
+                    <img style="width: 50px"
+                        src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" />
+                    <img style="width: 50px"
+                        src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" />
+                    <img style="width: 50px"
+                        src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" />
+                    <img style="width: 50px"
+                        src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" />
+                </span>
+
+                <p>Need help? Call 1.888.282.6060 or <a href="">chat with us</a></p>
+
+                <p><a href="">Shipping internationally?</a></p>
+            </div>
+
+            <div id="shipping-bag-price-summary">
+                <div id="shipping-bag-subtotal">
+                    <p>Subtotal</p>
+                </div>
+
+                <hr style="width: 100%;" />
+                <div><button onclick="goToCheckout()" id="shipping-bag-checkout-btn">Check Out</button>
+                </div>
             </div>
         </div>
 
-        <hr/>
-
-        <div id = " shopping-bag-summary">
-                        <div id="shopping-bag-payment-methods">
-                            <p>Accepted Payment Methods</p>
-                            <span id="shopping-bag-credit-logos">
-                                <img style="width: 50px"
-                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" />
-                                <img style="width: 50px"
-                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" />
-                                <img style="width: 50px"
-                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" />
-                                <img style="width: 50px"
-                                    src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" />
-                            </span>
-
-                            <p>Need help? Call 1.888.282.6060 or <a href="">chat with us</a></p>
-
-                            <p><a href="">Shipping internationally?</a></p>
-                        </div>
-
-                        <div id="shipping-bag-price-summary">
-                            <div id="shipping-bag-subtotal">
-                                <p>Subtotal</p>
-                            </div>
-
-                            <hr style="width: 100%;" />
-                            <div><button onclick="goToCheckout()" id="shipping-bag-checkout-btn">Check Out</button>
-                            </div>
-                        </div>
-            </div>
-
-        </div>
+    </div>
 
 </body>
 
