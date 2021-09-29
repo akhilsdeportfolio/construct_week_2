@@ -5,7 +5,7 @@ const router = express.Router();
 const Product = require("../models/productModel");
 
 
-//CREATE Brand
+//CREATE product
 
 router.post("/",async (req,res)=>{
 
@@ -15,27 +15,35 @@ router.post("/",async (req,res)=>{
 });
 
 
-// GET ALL Brands
+// GET ALL product
 
 router.get("/",async (req,res)=>{
 
      let products = await Product.find().lean();
 
-     res.status(200).send({products});
+     // res.status(200).send({products});
+
+     return res.render('productPage.ejs', {
+          products: products,
+        });
 });
 
 
-//GET Brand by ID
+//GET product by ID
 
 router.get("/:id",async (req,res)=>{
 
     let product = await Product.findById(req.params.id).lean();
 
-    res.status(200).send({product});
+//     res.status(200).send({product});
+
+    return res.render('individualProduct.ejs', {
+     product: product,
+   });
 });
 
 
-//update Brand by ID
+//update product by ID
 
 router.patch("/:id",async (req,res)=>{
 
@@ -47,7 +55,7 @@ router.patch("/:id",async (req,res)=>{
 });
 
 
-//delete Brand by ID
+//delete product by ID
 
 router.delete("/:id",async (req,res)=>{
 
