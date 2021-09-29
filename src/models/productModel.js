@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema(
         specification: { type: String, trim:true, required: true },
         rating:{ type: Number, trim:true, required: true }
     },
-    {
+    { 
         versionKey: false,
         timestamps: true,
     }
