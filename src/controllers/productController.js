@@ -21,7 +21,11 @@ router.get("/",async (req,res)=>{
 
      let products = await Product.find().lean();
 
-     res.status(200).send({products});
+     // res.status(200).send({products});
+
+     return res.render('productPage.ejs', {
+          products: products,
+        });
 });
 
 
