@@ -26,7 +26,7 @@ router.post("",async(req,res)=>{
 
 router.get("",async(req,res)=>{
 
-    const wishlist=await Wishlist.find().lean().exec()
+    const wishlist=await Wishlist.find().populate("user_id").lean().exec()
     console.log(wishlist)
 
     return res.render("wishlist_users",{

@@ -4,17 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>WishlistDetails_users</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-    <% wishlist_details.forEach(function(w){%>
 
-        <p>wishlist_id:<%= w.wishlist_id %></p>
-        <p>product_id:<%= w.product_id%></p>
+   
+<body>
+    <style>
+        #wl_main>div{
+           display: flex;
+           flex-direction: column;
+           
+           
+
+            
+        }
+        #wishlist_product{
+            
+            display: grid;
+            padding: 1%;
+            float: left;
+            
+            
+           
+           
+
+        }
+        .img{
+            max-height: 250px;
+        align-content: ;
+        }
+       .wl{
+            padding: 5px;
+            margin-top: 0px;
+        }
+        .price_wl{
+            padding: 5px;
+            font-weight: 700;
+            margin-top: 0px;
+        }
+    </style>
+    
+    <h3>Wishlist</h3>
+    <div id="wl_main">
+
+    
+    <% wishlist_details.forEach(function(w){%>
+        <div id="wishlist_product" style="border: 1px solid black;">
+        <a href="products/<%= w.product_id._id %>"><img class="img" src = <%= (w.product_id.images[0]) %>></img></a>
+        <p class="wl">Name:-<%= w.product_id.name%></p>
+        <p class="wl">Color:-<%= w.product_id.color%></p>
+        <p class="price_wl">Price:-₹<%= w.product_id.price%></p>
         
+    </div>
         
 
     <%})%>
+</div>
     
 </body>
 </html>
