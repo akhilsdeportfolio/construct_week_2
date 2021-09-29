@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= user.user_id.first_name %>'s Shopping Bag
+        <%= user.user_id.first_name %>'s Shopping Bag | Nordstrom
     </title>
+    <link rel="stylesheet" href="../css/shoppingBag.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -33,7 +35,7 @@
                     </div>
                     <div id="shopping-bag-data-product-text">
                         <p class="shopping-bag-product-p-text">
-                            <%= item.product_id.brand_id %>
+                            <%= item.product_id.brand_id.brand_name %>
                         </p>
                         <p class="shopping-bag-product-p-text" style="font-weight: 400;">
                             <%= item.product_id.name %>
