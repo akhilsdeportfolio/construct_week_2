@@ -23,7 +23,7 @@ router.post("",async(req,res)=>{
 
 router.get("",async(req,res)=>{
 
-    const wishlist_details=await WishlistDetails.find().lean().exec()
+    const wishlist_details=await WishlistDetails.find().populate("product_id").lean().exec()
 
     return res.render("wishlistDetails_users.ejs",{
 

@@ -1,26 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Decor & Mirrors | Nordstorm</title>
+    <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
+        type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/product.css" type="text/css">
-    
+
     <title>Products</title>
 </head>
+
 <body>
     <%- include("partials/navbar"); %>
-    <div >
-            <% products.forEach((e) => {%>
-                <div style = "border:1px solid red">
-                    <p>Name: <%= e.name %></p>
-                    <p>Color: <%= e.color %></p>
-                    <%- e.details %>
-                    <p>Price: <%= e.price %></p>
-                    <a href="products/<%= e._id %>"><img src = <%= (e.images[0]) %>></img></a>
+
+
+        <div id="product-grid-container">
+            <div id="product-grid-filter">
+
+                <div id="product-grid-brand">
+                    <hr />
+
+                    <div class="product-grid-filter-div">
+
+                        <p>Brand</p>
+                        <span class="material-icons product-grid-plus-icon" id="product-grid-brand-icon"
+                            onclick="toggleDisplay('product-grid-brand-content', 'product-grid-brand-icon')">add</span>
+                    </div>
+
+                    <!-- <span class="material-icons" id = "search-icon">search<input id = "search-brand" placeholder = "Find a brand"/></span> -->
+
+                    <div id="product-grid-brand-content">
+                        <div id="product-grid-search-box">
+                            <span class="material-icons">search</span>
+                            <input type="text" placeholder="Find a brand">
+                        </div>
+                    </div>
+
+                    <hr />
                 </div>
-            <% }) %>
-    </div>
-    
+
+
+
+                <div id="product-grid-color">
+                    <div class="product-grid-filter-div">
+                        <p>Color</p>
+                        <span class="material-icons product-grid-plus-icon" id="product-grid-color-icon"
+                            onclick="toggleDisplay('product-grid-color-content', 'product-grid-color-icon')">add</span>
+                    </div>
+
+
+
+                    <div id="product-grid-color-content"></div>
+                    <hr />
+                </div>
+
+                <div id="product-grid-type">
+                    <div class="product-grid-filter-div">
+                        <p>Product Type</p>
+                        <span class="material-icons product-grid-plus-icon" id="product-grid-type-icon"
+                            onclick="toggleDisplay('product-grid-type-content', 'product-grid-type-icon')">add</span>
+                    </div>
+
+
+                    <div id="product-grid-type-content"></div>
+
+                    <hr />
+                </div>
+
+            </div>
+
+            <div id="product-grid-data-div">
+                <h3>Art, Wall Decor & Mirrors</h3>
+                <p id="product-grid-itemCount"></p>
+                <div id="product-grid-sorting">
+                    <select onchange="sortBy(value)">
+                        <option value="newest">Sort by:</option>
+                        <option value="lowToHigh">Sort by price: low to high</option>
+                        <option value="highToLow">Sort by price: high to low</option>
+                    </select>
+                </div>
+
+                <div id='product-grid-data'>
+                    <% products.forEach((e)=> {%>
+                        <div class="product-grid-product-data">
+                            <a href="products/<%= e._id %>"><img src=<%=(e.images[0]) %>></img></a>
+                            <div id="product-grid-product-text">
+                                <div id="product-grid-quick-view" style="visibility: visible;">
+                                    <p>Quick View</p>
+                                </div>
+                            </div>
+                            <a href="products/<%= e._id %>" id="product-grid-description">
+                                <%= e.brand_id.brand_name %>
+                                    <%= e.name %>
+                            </a>
+                            <p id="product-grid-product-price" style="font-weight: 600;">INR <%= e.price %>
+                            </p>
+                            <p>
+                                ★ <%= e.rating %>
+                            </p>
+
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
 </body>
+
 </html>

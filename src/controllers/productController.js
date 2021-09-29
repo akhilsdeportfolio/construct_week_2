@@ -19,7 +19,7 @@ router.post("/",async (req,res)=>{
 
 router.get("/",async (req,res)=>{
 
-     let products = await Product.find().lean();
+     let products = await Product.find().populate("brand_id").lean();
 
      // res.status(200).send({products});
 
@@ -33,7 +33,7 @@ router.get("/",async (req,res)=>{
 
 router.get("/:id",async (req,res)=>{
 
-    let product = await Product.findById(req.params.id).lean();
+    let product = await Product.findById(req.params.id).lean();     
 
 //     res.status(200).send({product});
 

@@ -6,7 +6,9 @@ const Addresses = require("../models/address.model");
 //get all the address details
 router.get("", async (req, res) => {
   let address = await Addresses.find().lean().exec(); 
-  res.send({ address });
+  res.render('address.view.ejs', {
+    address: address
+  } );
 });
 
 // post user address
