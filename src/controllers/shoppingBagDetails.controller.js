@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
   const items = await ShoppingBagDetails.find({
     shopping_bag_id: { $eq: req.params.id },
   })
-    .populate("product_id")
+    .populate({path: "product_id", populate: {path: "brand_id"}})
     .lean()
     .exec();
 
