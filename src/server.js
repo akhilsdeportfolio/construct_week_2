@@ -21,7 +21,7 @@ const productController = require("./controllers/productController");
 const shoppingBagController = require("./controllers/shoppingBag.controller");
 const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.controller");
 const paymentsController = require("./controllers/payments.controller");
-
+const checkoutController = require("./controllers/checkout.controller");
 const myAccountController = require("./controllers/myAccount.controller");
 
 //this is a firebase config object dont worry about it ;
@@ -66,6 +66,7 @@ app.use("/shoppingBagDetails", shoppingBagDetailsController);
 app.use("/myaccount", myAccountController);
 
 app.use("/payments", paymentsController);
+app.use("/checkout", checkoutController);
 
 app.get("/login",function(req,res){
   res.render("login.veiw.ejs",{});
