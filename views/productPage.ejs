@@ -18,98 +18,169 @@
 </head>
 
 <body>
-    <%- include("partials/navbar"); %>
+    <div id='product-grid-main-container'>
+        <%- include("partials/navbar"); %>
 
 
-        <div id="product-grid-container">
-            <div id="product-grid-filter">
+            <div id="product-grid-container">
+                <div id="product-grid-filter">
 
-                <div id="product-grid-brand">
-                    <hr />
+                    <div id="product-grid-brand">
+                        <hr />
 
-                    <div class="product-grid-filter-div">
+                        <div class="product-grid-filter-div">
 
-                        <p>Brand</p>
-                        <span class="material-icons product-grid-plus-icon" id="product-grid-brand-icon"
-                            onclick="toggleDisplay('product-grid-brand-content', 'product-grid-brand-icon')">add</span>
-                    </div>
-
-                    <!-- <span class="material-icons" id = "search-icon">search<input id = "search-brand" placeholder = "Find a brand"/></span> -->
-
-                    <div id="product-grid-brand-content">
-                        <div id="product-grid-search-box">
-                            <span class="material-icons">search</span>
-                            <input type="text" placeholder="Find a brand">
+                            <p>Brand</p>
+                            <span class="material-icons product-grid-plus-icon" id="product-grid-brand-icon"
+                                onclick="toggleDisplay('product-grid-brand-content', 'product-grid-brand-icon')">add</span>
                         </div>
-                    </div>
 
-                    <hr />
-                </div>
+                        <!-- <span class="material-icons" id = "search-icon">search<input id = "search-brand" placeholder = "Find a brand"/></span> -->
 
+                        <div id="product-grid-brand-content">
+                            <div id="product-grid-search-box">
+                                <span class="material-icons">search</span>
+                                <input type="text" placeholder="Find a brand">
+                            </div>
+                        </div>
 
-
-                <div id="product-grid-color">
-                    <div class="product-grid-filter-div">
-                        <p>Color</p>
-                        <span class="material-icons product-grid-plus-icon" id="product-grid-color-icon"
-                            onclick="toggleDisplay('product-grid-color-content', 'product-grid-color-icon')">add</span>
-                    </div>
-
-
-
-                    <div id="product-grid-color-content"></div>
-                    <hr />
-                </div>
-
-                <div id="product-grid-type">
-                    <div class="product-grid-filter-div">
-                        <p>Product Type</p>
-                        <span class="material-icons product-grid-plus-icon" id="product-grid-type-icon"
-                            onclick="toggleDisplay('product-grid-type-content', 'product-grid-type-icon')">add</span>
+                        <hr />
                     </div>
 
 
-                    <div id="product-grid-type-content"></div>
 
-                    <hr />
+                    <div id="product-grid-color">
+                        <div class="product-grid-filter-div">
+                            <p>Color</p>
+                            <span class="material-icons product-grid-plus-icon" id="product-grid-color-icon"
+                                onclick="toggleDisplay('product-grid-color-content', 'product-grid-color-icon')">add</span>
+                        </div>
+
+
+
+                        <div id="product-grid-color-content"></div>
+                        <hr />
+                    </div>
+
+                    <div id="product-grid-type">
+                        <div class="product-grid-filter-div">
+                            <p>Product Type</p>
+                            <span class="material-icons product-grid-plus-icon" id="product-grid-type-icon"
+                                onclick="toggleDisplay('product-grid-type-content', 'product-grid-type-icon')">add</span>
+                        </div>
+
+
+                        <div id="product-grid-type-content"></div>
+
+                        <hr />
+                    </div>
+
                 </div>
 
+                <div id="product-grid-data-div">
+                    <h3>Art, Wall Decor & Mirrors</h3>
+                    <p id="product-grid-itemCount"></p>
+                    <div id="product-grid-sorting">
+                        <select onchange="sortBy(value)">
+                            <option value="newest">Sort by:</option>
+                            <option value="lowToHigh">Sort by price: low to high</option>
+                            <option value="highToLow">Sort by price: high to low</option>
+                        </select>
+                    </div>
+
+                    <div id='product-grid-data'>
+                        <% products.forEach((e)=> {%>
+                            <div class="product-grid-product-data">
+                                <a href="products/<%= e._id %>"><img src=<%=(e.images[0]) %>></img></a>
+                                <div id="product-grid-product-text">
+                                    <div id="product-grid-quick-view" onclick="openModal()">
+                                        <p>Quick View</p>
+                                    </div>
+                                </div>
+                                <a href="products/<%= e._id %>" id="product-grid-description">
+                                    <%= e.brand_id.brand_name %>
+                                        <%= e.name %>
+                                </a>
+                                <p id="product-grid-product-price" style="font-weight: 600;">INR <%= e.price %>
+                                </p>
+                                <p>
+                                    Rating : <%=(e.rating) %>
+                                </p>
+                            </div>
+
+
+
+                            <% }) %>
+                    </div>
+                </div>
             </div>
 
-            <div id="product-grid-data-div">
-                <h3>Art, Wall Decor & Mirrors</h3>
-                <p id="product-grid-itemCount"></p>
-                <div id="product-grid-sorting">
-                    <select onchange="sortBy(value)">
-                        <option value="newest">Sort by:</option>
-                        <option value="lowToHigh">Sort by price: low to high</option>
-                        <option value="highToLow">Sort by price: high to low</option>
-                    </select>
-                </div>
-
-                <div id='product-grid-data'>
-                    <% products.forEach((e)=> {%>
-                        <div class="product-grid-product-data">
-                            <a href="products/<%= e._id %>"><img src=<%=(e.images[0]) %>></img></a>
-                            <div id="product-grid-product-text">
-                                <div id="product-grid-quick-view" style="visibility: visible;">
-                                    <p>Quick View</p>
+            <% products.forEach((e)=> {%>
+                <div id="product-grid-modalBox">
+                    <div id="product-grid-modal-product-info">
+                        <div>
+                            <span id="product-grid-closeBtn" class="material-icons" onclick="closeModal()">close</span>
+                            <div id="product-grid-modal-div">
+                                <div id="product-grid-modal-img"><img src=<%=(e.images[0]) %>>
+                                </div>
+                                <div id="product-grid-modal-content">
+                                    <p id="product-grid-modal-product-name">
+                                        <%= e.name %>
+                                    </p>
+                                    <p id="product-grid-modal-product-brand">
+                                        <%= e.brand_id.brand_name %>
+                                    </p>
+                                    <p id="product-grid-modal-product-price">INR <%= e.price %>
+                                    </p>
+                                    <p id="product-grid-modal-product-price-content">Price varies with currency
+                                        exchange rates and may
+                                        be different than in store.</p>
+                                    <p id="product-grid-modal-product-about">
+                                        <%= e.description %>
+                                    </p><button id="product-grid-modal-product-addToBag">
+                                        <div><span class="material-icons">shopping_bag</span></div>
+                                        <p>Add to Bag</p>
+                                    </button>
+                                    <p id="product-grid-modal-product-add"><span class="material-icons">add</span>
+                                    <p onclick="addInWishlist()">Add to Wish List</p>
+                                    </p>
+                                    <p id="product-grid-modal-product-details" style="text-decoration: underline;">See
+                                        full
+                                        details</p>
                                 </div>
                             </div>
-                            <a href="products/<%= e._id %>" id="product-grid-description">
-                                <%= e.brand_id.brand_name %>
-                                    <%= e.name %>
-                            </a>
-                            <p id="product-grid-product-price" style="font-weight: 600;">INR <%= e.price %>
-                            </p>
-                            <p>
-                                ★ <%= e.rating %>
-                            </p>
-
                         </div>
-                        <% }) %>
+                    </div>
                 </div>
-            </div>
+                <% }) %>
+
+    </div>
 </body>
+<!-- style="display: block;" -->
+
+
+<script>
+
+
+    let closeBtn = document.getElementById('product-grid-closeBtn');
+    let modal = document.getElementById('product-grid-modalBox');
+    let modalContent = document.getElementById('product-grid-modal-content');
+    let container = document.getElementById('product-grid-main-container');
+    let modalImage = document.getElementById('product-grid-modal-img');
+    let footer = document.getElementById('product-grid-footer');
+
+    let openModal = () => {
+
+        modal.style.display = 'block';
+        // container.style.filter = 'blur(6px)';
+    }
+
+    let closeModal = () => {
+
+        modal.style.display = "none";
+        container.style.filter = "blur(0px)";
+    }
+
+</script>
 
 </html>
