@@ -58,6 +58,9 @@ router.post("/isUserPresent", async (req, res) => {
 
 
 router.post("/createUser", async (req, res) => {
+
+  req.body.email.trim();
+
   let createdUser = await User.create(req.body);
   res.send(createdUser);
 });
