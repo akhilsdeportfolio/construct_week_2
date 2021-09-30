@@ -1,6 +1,6 @@
 var item_price_value;
 
-checkoutPage = (shoppingBag_id) => {
+checkoutPage = (shoppingBag) => {
   var required_value;
   var total_price = document.getElementById("total_price");
   var required_event;
@@ -8,7 +8,12 @@ checkoutPage = (shoppingBag_id) => {
   var ordernum = document.getElementById("orderId");
   var to_check;
   var c = document.getElementById("anotherbtn");
+
+  var shoppingBag_id = shoppingBag._id;
+  var user_id = shoppingBag.user_id;
+
   getShoppingBagDetails(shoppingBag_id);
+  getUserAddress(user_id);
 };
 
 getShoppingBagDetails = (shoppingBag_id) => {
@@ -124,3 +129,22 @@ function required(num) {
   var shipping_price = document.getElementById("shipping_price");
   shipping_price.textContent = element.children[0].textContent;
 }
+
+getUserAddress = (user_id) => {
+  console.log(user_id);
+  fetch(`http://localhost:5000/address/${user_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+};
