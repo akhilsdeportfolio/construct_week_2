@@ -43,6 +43,21 @@ router.get("/:id",async (req,res)=>{
 });
 
 
+//GET product by ID
+
+
+
+router.get("/:sortBy/sort",async (req,res)=>{
+
+     let products = await Product.find().populate("brand_id").sort({"price":req.params.sortBy}).lean();     
+
+     // res.status(200).send({products});
+ 
+     return res.render('productPage.ejs', {
+          products: products,
+        });
+ });
+
 //update product by ID
 
 router.patch("/:id",async (req,res)=>{
