@@ -9,7 +9,22 @@ router.get("/all", async (req, res) => {
   res.send({ users });
 });
 
+router.post("/isUserPresent/:email", async (req, res) => {
+  let email = req.params.email;
+  let users = await User.find({email:{$eq:email}}).lean().exec();
+  
+  res.send("user is present");
+  console.log(users);
+  res.send({ users});
+});
+
+
+
+
 //CREATE USER POST
+
+
+
 
 router.post("/createUser", async (req, res) => {
   let createdUser = await User.create(req.body);

@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Bag</title>
 </head>
+
 <body>
     <button onclick="shoppingBags()">Click Here</button>
 </body>
+
 </html>
 
 <script>
     function shoppingBags() {
         console.log("Getting all the Shopping Bag IDs...");
         fetch('http://localhost:5000/shoppingBagDetails', {
-            method: 'GET',
+            method: 'DELETE"',
             headers: {
                 'Content-Type': 'application/json',
             }
         })
-        .then((res) => {
-            return res.json();
-        })
-        .then((res) => {
-            res.items.forEach((item) => {
-                console.log(item.shopping_bag_id.user_id);
-            });
-            //console.log('res:', res.items);
-        })
-        .catch((err) => {
-            console.log('err:', err);
-        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                res.items.forEach((item) => {
+                    console.log(item.shopping_bag_id.user_id);
+                });
+                //console.log('res:', res.items);
+            })
+            .catch((err) => {
+                console.log('err:', err);
+            })
+
+        window.onre
     }
 </script>

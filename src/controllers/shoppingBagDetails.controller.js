@@ -13,7 +13,6 @@ router.get("", async (req, res) => {
     .populate({ path: "shopping_bag_id", populate: { path: "user_id" } })
     .lean()
     .exec();
-
   res.status(200).send({ items });
 });
 
@@ -22,7 +21,7 @@ router.get("/:id", async (req, res) => {
   const items = await ShoppingBagDetails.find({
     shopping_bag_id: { $eq: req.params.id },
   })
-    .populate({path: "product_id", populate: {path: "brand_id"}})
+    .populate({ path: "product_id", populate: { path: "brand_id" } })
     .lean()
     .exec();
 
@@ -30,8 +29,8 @@ router.get("/:id", async (req, res) => {
     .populate("user_id")
     .lean()
     .exec();
-  res.render("shoppingBag.view.ejs", { items, user });
 
+  res.render("shoppingBag.view.ejs", { items, user });
   //res.status(200).send({ items, user });
 });
 
@@ -48,7 +47,14 @@ router.patch("/:id", async (req, res) => {
     req.body,
     { new: true }
   );
-  return res.status(202).send({ item });
+
+  let shoppingBagId = item.shopping_bag_id;
+
+  const user = await ShoppingBag.findById(shoppingBagId)
+    .populate("user_id")
+    .lean()
+    .exec();
+  return res.status(202).send({ item, user });
 });
 
 //Delete the shopping bag document from the collection

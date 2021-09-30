@@ -1,21 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Decor & Mirrors | Nordstorm</title>
+    <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
+        type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/individualProduct.css" type="text/css">
+
     <title>Products</title>
 </head>
+
 <body>
-    <div >
-                <div style = "border:1px solid red">
-                    <p>Name: <%= product.name %></p>
-                    <p>Color: <%= product.color %></p>
-                    <%- product.details %>
-                    <p>Price: <%= product.price %></p>
-                    <img src = <%= (product.images[0]) %>></img>
+
+    <div id="product-grid-container">
+        <%- include("partials/navbar"); %>
+            <div id="details" style="position:relative;overflow:hidden">
+                <div class="image-holder">
+                    <div id="image_product" class="flex-box"><img class="prod-img"
+                            src=<%=(product.images[0]) %>
+                            style="min-height: 200px; max-height: 520px;"></div>
+
                 </div>
+
+                <div class="product-holder">
+                    <div id="discription_product" class="flex-box">
+                        <h2 class="pro_det_name"><%= product.name %></h2>
+                        <p class="pro_det_p" style="font-size: 15px;"><%= product.brand_id.brand_name %></p>
+                        <h3 class="pro_det_h3">INR <%= product.price %></h3>
+                        <p class="pro_det_p2">Price varies with currency exchange rates and may be different than in
+                            store.</p>
+                        <p class="pro_det_p"><%= product.description %></p>
+                        <p class="pro_det_p" style="font-weight: 400;">Colors available: <span
+                                style="font-weight: 500;color: <%= product.color %>;"><%= product.color %></span></p><input type="text" id="quantity"
+                            value="1"><br><button id="button1" style="font-size: 19px;"><span class="material-icons"
+                                style="font-size: 24px;">shopping_bag</span> Add to Bag</button><button id="wishlist">+
+                            Add To Wish List</button>
+                    </div>
+                </div>
+
+                <div id="recommended-product">
+                    <p style="font-size: 20px; font-weight: 500;">You might also like</p>
+
+                    <img
+                        src="https://n.io.nordstrommedia.com/id/sr3/d6cc85b0-201f-46a6-b6dd-791c83ae6eec.jpeg?crop=pad&amp;pad_color=FFF&amp;format=jpeg&amp;w=100&amp;h=150">
+
+                    <p style="text-align: center; margin: 0px; font-size: 12px;">DENY DESIGNS</p>
+                    <p style="text-align: center; margin: 0px; font-size: 17px;">INR 3094</p>
+
+                    <img
+                        src="https://n.io.nordstrommedia.com/id/sr3/afcad95c-d478-48b2-915f-3d9a1bb2e716.jpeg?crop=pad&amp;pad_color=FFF&amp;format=jpeg&amp;w=100&amp;h=150">
+
+                    <p style="text-align: center; margin: 0px; font-size: 12px;">NEWGATE</p>
+                    <p style="text-align: center; margin: 0px; font-size: 17px;">INR 2048</p>
+                </div>
+            </div>
+            <div id="flex" style="margin-left:30px;">
+                <div id="discription_list" class="disc">
+                    <h4 class="pro_det_h4">DETAILS &amp; CARE</h4>
+                    <p class="pro_det_p" style="font-size: 14px;"><%= product.description %>
+                    </p>
+                    <p><%- product.details %></p>
+                    <p class="pro_det_p3" style="color: rgb(37, 37, 37); font-weight: 500;">Free Shipping &amp; Returns
+                        <a href="http://www.google.com" style="color: rgb(37, 37, 37); font-weight: 400;">See more</a>
+                    </p>
+                </div>
+                <hr style="width: 90%">
+                <div id="have_questions" class="flex-box">
+                    <h4 class="pro_det_h4"><span class="material-icons">forum</span></h4>
+                    <p class="pro_det_p">Connect with us to get free style advice, product recommendations or customer
+                        service help.</p><button id="pro_det_chatnow">Chat Now</button>
+                </div>
+                <hr>
+                <div id="ratings"></div>
+            </div>
+            <%- include("partials/footer"); %>
     </div>
-    
+
 </body>
+
 </html>
