@@ -42,6 +42,10 @@ body {
   color: rgb(44, 44, 44);
 }
 
+#shopping-bag-data > hr {
+  width: 100%;
+}
+
 #shopping-bag-data-div {
   display: grid;
   grid-template-columns: 20% 45% 20% 15%;
