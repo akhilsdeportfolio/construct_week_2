@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user.model");
 
+
+
 // GET ALL USERS
 router.get("/all", async (req, res) => {
   let users = await User.find().lean().exec();
@@ -57,8 +59,7 @@ router.post("/isUserPresent", async (req, res) => {
 
 router.post("/createUser", async (req, res) => {
   let createdUser = await User.create(req.body);
-
-  res.redirect("/myaccount");
+  res.send(createdUser);
 });
 
 router.patch("/updateUser/:id", async (req, res) => {
