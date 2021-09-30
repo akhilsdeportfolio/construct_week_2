@@ -46,7 +46,7 @@
   background-color: black;
   text-align: center;
   color: white;
-
+  margin: 0px;
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.15px;
@@ -91,7 +91,7 @@
 }
 
 #nav-bar > div {
-  width: 96.5%;
+  width: 100%;
   margin: auto;
 }
 
