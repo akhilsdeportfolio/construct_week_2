@@ -37,7 +37,7 @@ router.post("/login",async (req,res)=>{
 
 
 router.post("/isUserPresent", async (req, res) => {
-  let query = req.body.email;
+  let query = req.body.email.trim();
   console.log(query);
   let users = await User.find({email:{$eq:query}}).count();
   console.log("users present "+users);
