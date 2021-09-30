@@ -86,8 +86,6 @@ createProducts = (items) => {
 
   items_price.textContent = "₹" + total;
   item_price_value = total;
-
-  console.log(total_price);
   total_price.textContent = "₹" + (item_price_value + 2487 + 2360);
 };
 
@@ -131,7 +129,6 @@ function required(num) {
 }
 
 getUserAddress = (user_id) => {
-  console.log(user_id);
   fetch(`http://localhost:5000/address/${user_id}`, {
     method: "GET",
     headers: {
@@ -142,9 +139,234 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
+      populateUserAddress(res.addresses);
     })
     .catch((err) => {
       console.log("err:", err);
     });
 };
+
+populateUserAddress = (arr) => {
+  var address = arr[0];
+  var user = address.user_id;
+
+  if (arr != null) {
+    var emailInput = document.getElementById("emailInput");
+    emailInput.value = user.email;
+
+    var firstName = document.getElementById("firstName");
+    firstName.value = user.first_name;
+
+    var lastName = document.getElementById("lastName");
+    lastName.value = user.last_name;
+
+    var addressInput = document.getElementById("addressInput");
+    addressInput.value = address.address;
+
+    var address2 = document.getElementById("address2");
+    address2.value = address.address2;
+
+    if (address.address2 === undefined || address.address2 === null) {
+      address2.value = "";
+    } else {
+      address2.value = address.address2;
+    }
+
+    var postal = document.getElementById("Postal");
+    postal.value = address.postal_code;
+
+    var city = document.getElementById("city");
+    city.value = address.city;
+
+    var region = document.getElementById("region");
+    if (address.region === undefined || address.region === null) {
+      region.value = "";
+    } else {
+      region.value = address.region;
+    }
+
+    var phone = document.getElementById("phone");
+    phone.value = address.phone;
+
+    var country = document.getElementById("Country");
+    country.value = address.country;
+  }
+};
+
+function checkValues() {
+  if (event.target.textContent == "Continue>>") {
+    var emlLable = document.getElementById("emaillabel");
+    var firstNameLabel = document.getElementById("firstNamelabel");
+    var lastNameLabel = document.getElementById("lastNamelabel");
+    var addLabel = document.getElementById("addresslabel");
+    var postLabel = document.getElementById("Postallabel");
+    var cityLabel = document.getElementById("citylabel");
+    var phonelabel = document.getElementById("phonelabel");
+    var Countrylabel = document.getElementById("Countrylabel");
+
+    var eml_input = document.getElementById("emailInput");
+    var first_input = document.getElementById("firstName");
+    var last_input = document.getElementById("lastName");
+    var add_input = document.getElementById("addressInput");
+    var post_input = document.getElementById("Postal");
+    var city_input = document.getElementById("city");
+    var phone_input = document.getElementById("phone");
+    var Country_input = document.getElementById("Country");
+
+    if (
+      eml_input.value == "" ||
+      first_input.value == "" ||
+      last_input.value == "" ||
+      add_input.value == "" ||
+      post_input.value == "" ||
+      city_input.value == "" ||
+      phone_input.value == "" ||
+      Country_input.value == ""
+    ) {
+      emlLable.style.display = "block";
+      firstNameLabel.style.display = "block";
+      lastNameLabel.style.display = "block";
+      addLabel.style.display = "block";
+      postLabel.style.display = "block";
+      cityLabel.style.display = "block";
+      phonelabel.style.display = "block";
+      Countrylabel.style.display = "block";
+
+      eml_input.style.borderColor = "#d30c0c";
+      first_input.style.borderColor = "#d30c0c";
+      last_input.style.borderColor = "#d30c0c";
+      add_input.style.borderColor = "#d30c0c";
+      post_input.style.borderColor = "#d30c0c";
+      city_input.style.borderColor = "#d30c0c";
+      phone_input.style.borderColor = "#d30c0c";
+      Country_input.style.borderColor = "#d30c0c";
+    } else {
+      emlLable.style.display = "none";
+      firstNameLabel.style.display = "none";
+      lastNameLabel.style.display = "none";
+      addLabel.style.display = "none";
+      postLabel.style.display = "none";
+      cityLabel.style.display = "none";
+      phonelabel.style.display = "none";
+      Countrylabel.style.display = "none";
+
+      eml_input.style.borderColor = "rgb(206, 198, 198)";
+      first_input.style.borderColor = "rgb(206, 198, 198)";
+      last_input.style.borderColor = "rgb(206, 198, 198)";
+      add_input.style.borderColor = "rgb(206, 198, 198)";
+      post_input.style.borderColor = "rgb(206, 198, 198)";
+      city_input.style.borderColor = "rgb(206, 198, 198)";
+      phone_input.style.borderColor = "rgb(206, 198, 198)";
+      Country_input.style.borderColor = "rgb(206, 198, 198)";
+
+      var firstName = document.getElementById("firstName").value;
+      var lastName = document.getElementById("lastName").value;
+      var addressInput = document.getElementById("addressInput").value;
+      var address2 = document.getElementById("address2").value;
+      var city = document.getElementById("city").value;
+      var region = document.getElementById("region").value;
+      var Country = document.getElementById("Country").value;
+      var Postal = document.getElementById("Postal").value;
+
+      document.getElementById("displayname").textContent = (
+        firstName +
+        " " +
+        lastName
+      ).toUpperCase();
+      document.getElementById("displayAddress").textContent = (
+        addressInput +
+        "," +
+        address2 +
+        "," +
+        city +
+        "," +
+        region +
+        " " +
+        Postal +
+        " " +
+        Country
+      ).toUpperCase();
+
+      document.getElementById("emailInput").value = "";
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
+      document.getElementById("addressInput").value = "";
+      document.getElementById("address2").value = "";
+      document.getElementById("city").value = "";
+      document.getElementById("region").value = "";
+      document.getElementById("Country").value = "";
+      document.getElementById("Postal").value = "";
+      document.getElementById("phone").value = "";
+
+      if (required_event == undefined) {
+        required_event =
+          "STANDARD IMPORT CHARGES COLLECTED UPON DELIVERY 11–21 BUSINESS DAYS";
+      } else {
+        document.getElementById("imports").textContent = required_event;
+      }
+
+      var gone = document.getElementById("Gone");
+      var address_display = document.getElementById("address_display");
+      var credit_details = document.getElementById("credit-details");
+
+      if (gone.style.display === "none") {
+        gone.style.display = "block";
+      } else {
+        console.log("Flag...");
+        gone.style.display = "none";
+        address_display.style.display = "flex";
+        credit_details.style.display = "block";
+      }
+
+      d.textContent = "Place Order>>";
+    }
+  } else {
+    placeOrder();
+  }
+}
+
+function placeOrder() {
+  if (event.target.textContent == "SHOP MORE") {
+    window.location.href = "landing_page.html";
+  } else {
+    var cardnumber = document.getElementById("cardnumber");
+    var month = document.getElementById("month");
+    var code = document.getElementById("code");
+
+    if (cardnumber.value == "" || month.value == "" || code.value == "") {
+      cardnumber.style.borderColor = "#d30c0c";
+      month.style.borderColor = "#d30c0c";
+      code.style.borderColor = "#d30c0c";
+    } else {
+      let creditArray = [cardnumber.value, month.value, code.value];
+
+      let flag = true;
+
+      for (let i = 0; i < 3; i++) {
+        if (!card(creditArray[i].toString(), i)) {
+          flag = false;
+        }
+      }
+
+      if (flag) {
+        cardnumber.style.borderColor = "rgb(206, 198, 198)";
+        month.style.borderColor = "rgb(206, 198, 198)";
+        code.style.borderColor = "rgb(206, 198, 198)";
+
+        d.textContent = "Loading...";
+        c.textContent = "Loading...";
+        var num = Math.round(Math.random() * 100000);
+        setTimeout(function () {
+          modal.style.display = "block";
+          blur_effect.setAttribute("class", "blur");
+          ordernum.textContent = num;
+          localStorage.setItem(to_check, JSON.stringify([]));
+        }, 3000);
+      } else {
+        cardnumber.style.borderColor = "#d30c0c";
+        month.style.borderColor = "#d30c0c";
+        code.style.borderColor = "#d30c0c";
+      }
+    }
+  }
+}
