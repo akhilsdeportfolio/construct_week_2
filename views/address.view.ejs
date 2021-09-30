@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/address.css">
+
+
+    <link rel="stylesheet" href="/css/product.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
     <title>Wishlist_user</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -26,36 +34,30 @@
       integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
       crossorigin="anonymous"
     ></script>
-    <style>
-      input {
-        margin: 5px;
-      }
-      .eachAddDivCon{
-        display: grid;
-        grid-template-columns: repeat(3,30%);
-        grid-gap: 15px;
-        justify-content: center;
-      } 
-      .eachAddDiv{
-        border: 1px solid black;
-        padding: 10px;
-        border-radius: 3px;
-      } 
-      p>span{
-        font-weight: 600;
-      }
-      #button_right_shift{
-        margin-left: 10px;
-      }
-      h3{
-        margin-left: 10px;
-      }
-    </style>
+    
   </head>
 
   <body>
 
-    <button
+    <%- include("partials/navbar"); %>
+
+
+    <h3>Address list of users</h3>
+   <div class="eachAddDivCon">
+     
+    <% address.forEach(function(add){%>
+      <div class="eachAddDiv">
+    <p><span>Address :</span> <%=add.address %></p>
+    <p><span>Address2 :</span>  <%=add.address2 %></p>
+    <p><span> Postal Code : </span><%=add.postal_code %></p>
+    <p><span>City :</span> <%=add.city %></p>
+    <p><span>Phone :</span> <%=add.phone %></p>
+    <a href="/address/delete/<%= add._id%>">Click here to delete address</a>
+    </div>
+    <%})%>
+    </div>
+
+        <button
       type="button"
       class="btn btn-primary"
       data-bs-toggle="modal"
@@ -111,30 +113,13 @@
             </form>
           </div>
           <div class="modal-footer">
-            <!-- <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button> -->
           </div>
         </div>
       </div>
     </div>
-    <h3>Address list of users</h3>
-   <div class="eachAddDivCon">
-     
-    <% address.forEach(function(add){%>
-      <div class="eachAddDiv">
-    <p><span>Address :</span> <%=add.address %></p>
-    <p><span>Address2 :</span>  <%=add.address2 %></p>
-    <p><span> Postal Code : </span><%=add.postal_code %></p>
-    <p><span>City :</span> <%=add.city %></p>
-    <p><span>Phone :</span> <%=add.phone %></p>
-    <a href="/address/delete/<%= add._id%>">Click here to delete address</a>
-    </div>
-    <%})%>
-    </div>
+
+
+
+
   </body>
 </html>
