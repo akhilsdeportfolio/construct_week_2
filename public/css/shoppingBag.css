@@ -1,147 +1,147 @@
 body {
-    font-family: Brandon Text, Arial, sans-serif;
-    margin: 0px;
-    padding: 0px;
+  font-family: Brandon Text, Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
 }
 
 #shopping-bag-container {
-    font-family: Roboto, Arial, sans-serif;
-    width: 60%;
-    background-color: rgb(255, 255, 255);
-    margin: 10px auto;
+  font-family: Roboto, Arial, sans-serif;
+  width: 60%;
+  background-color: rgb(255, 255, 255);
+  margin: 10px auto;
 }
 
 #shopping-bag-container > hr {
-    width: 100%;
+  width: 100%;
 }
 
 #shopping-bag-sections {
-    width: 35%;
-    /* border: 1px solid rgb(167, 167, 167); */
-    display: grid;
-    grid-template-columns: 50% 50%;
-    font-weight: 500;
-    color: rgb(65, 65, 65);
-    border: 1px solid rgb(190, 190, 190);
+  width: 35%;
+  /* border: 1px solid rgb(167, 167, 167); */
+  display: grid;
+  grid-template-columns: 50% 50%;
+  font-weight: 500;
+  color: rgb(65, 65, 65);
+  border: 1px solid rgb(190, 190, 190);
 }
 
 #shopping-bag-sections > * {
-    padding: 15px;
-    text-align: center;
+  padding: 15px;
+  text-align: center;
 }
 
 #shopping-bag-tag {
-    background-color: rgb(212, 212, 212);
-    border: 1px solid rgb(212, 212, 212);
-    border-radius: 3px;
+  background-color: rgb(212, 212, 212);
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 3px;
 }
 
 #shopping-bag-data {
-    color:rgb(44, 44, 44);
+  color: rgb(44, 44, 44);
 }
 
 #shopping-bag-data-div {
-    display: grid;
-    grid-template-columns: 20% 45% 20% 15%;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: 20% 45% 20% 15%;
+  gap: 10px;
 }
 
 #shopping-bag-data-div-img > * {
-    margin: 10px auto;
-    width: 80%;
+  margin: 10px auto;
+  width: 80%;
 }
 
 #shopping-bag-summary {
-    display: grid;
-    grid-template-columns: 35% 35%;
-    gap: 30%;
+  display: grid;
+  grid-template-columns: 35% 35%;
+  gap: 30%;
 }
 
 #shipping-bag-subtotal {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    font-size: 18px;
-    font-weight: 500;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 #shipping-bag-checkout-btn {
-    width: 100%;
-    font-size: 20px;
-    padding: 10px;
-    border: 0px;
-    background-color: black;
-    color: white;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  border: 0px;
+  background-color: black;
+  color: white;
 }
 
 #shopping-bag-titles-name {
-    font-size: 24px;
-    font-weight: 500;
-    color: rgb(51, 51, 51);
-    letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+  letter-spacing: 1px;
 }
 
 #shopping-bag-empty {
-    font-size: 24px;
-    font-weight: 500;
-    color:rgb(31, 30, 30);
-    text-decoration: none;
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(31, 30, 30);
+  text-decoration: none;
 }
 
 #shopping-bag-empty > a {
-    text-decoration: none;
-    color:rgb(31, 30, 30);
+  text-decoration: none;
+  color: rgb(31, 30, 30);
 }
 
 #shopping-bag-empty > a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #bag-icon-text {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    text-decoration: none;
-    gap: 5px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-decoration: none;
+  gap: 5px;
 }
 
 #itemsInBag {
-    width: 100%;
-    height: 50%;
-    border-radius: 50%;
-    font-weight: 800;
-    font-size: 18px;
-    color: rgb(61, 61, 61);
-    margin-bottom: 12px;
+  width: 100%;
+  height: 50%;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 18px;
+  color: rgb(61, 61, 61);
+  margin-bottom: 12px;
 }
 
 #shopping-bag-data-product-quantity {
-    display: grid;
-    width: 50%;
-    grid-template-columns: 40% 40%;
-    height: 30px;
-    gap: 5px;
-    color: rgb(0, 61, 61);
-    font-size: 14px;
-    font-weight: 300;
+  display: grid;
+  width: 50%;
+  grid-template-columns: 40% 40%;
+  height: 30px;
+  gap: 5px;
+  color: rgb(0, 61, 61);
+  font-size: 14px;
+  font-weight: 300;
 }
 
 #shopping-bag-data-product-quantity > * {
-    color: rgb(0, 61, 61);
-    padding: 10px 10px;
-    font-weight: 300;
+  color: rgb(0, 61, 61);
+  padding: 10px 10px;
+  font-weight: 300;
 }
 
 .shopping-bag-product-p-text {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 0px;
-    font-size: 15px;
-    font-weight: 300;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0px;
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .vertical-space {
-    height: 14px;
+  height: 14px;
 }
 
 #main-content a:hover {
-    border-bottom: 2px solid black;
+  border-bottom: 2px solid black;
 }
