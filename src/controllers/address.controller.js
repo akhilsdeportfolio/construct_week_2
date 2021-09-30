@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const Addresses = require("../models/address.model");
-
 //get all the address details
 router.get("", async (req, res) => {
   let address = await Addresses.find().lean().exec(); 
@@ -10,7 +9,6 @@ router.get("", async (req, res) => {
     address: address
   } );
 });
-
 // post user address
 router.post("", async (req, res) => {
   let createdAddress = await Addresses.create(req.body);
