@@ -18,7 +18,7 @@ router.post("", async (req, res) => {
 });
 
 // delete user address
-router.delete("/delete/:id", async (req, res) => {
+router.get("/delete/:id", async (req, res) => {
   let deleteAddress = await Addresses.findByIdAndDelete(req.params.id);
   res.send({ deleteAddress });
 });
