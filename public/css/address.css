@@ -1,0 +1,28 @@
+   input {
+        margin: 5px;
+      }
+      .eachAddDivCon{
+        display: grid;
+        grid-template-columns: repeat(3,30%);
+        grid-gap: 15px;
+        justify-content: center;
+      } 
+      .eachAddDiv{
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 3px;
+      } 
+      .eachAddDiv p{
+        margin: 0px;
+
+      }
+      p>span{
+        font-weight: 600;
+      }
+      #button_right_shift{
+       margin: 10px;
+      }
+      h3{
+        margin-left: 10px;
+      }
+      

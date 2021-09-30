@@ -4,53 +4,122 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/address.css">
+
+
+    <link rel="stylesheet" href="/css/product.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
     <title>Wishlist_user</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+      integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+      crossorigin="anonymous"
+    ></script>
+    
   </head>
+
   <body>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <%- include("partials/navbar"); %>
+
+
+    <h3>Address list of users</h3>
+   <div class="eachAddDivCon">
+     
+    <% address.forEach(function(add){%>
+      <div class="eachAddDiv">
+    <p><span>Address :</span> <%=add.address %></p>
+    <p><span>Address2 :</span>  <%=add.address2 %></p>
+    <p><span> Postal Code : </span><%=add.postal_code %></p>
+    <p><span>City :</span> <%=add.city %></p>
+    <p><span>Phone :</span> <%=add.phone %></p>
+    <a href="/address/delete/<%= add._id%>">Click here to delete address</a>
+    </div>
+    <%})%>
+    </div>
+
+        <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      id="button_right_shift"
+    >
       Add new Address
     </button>
-    
+
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">
+              Enter your address details
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form action="/address" method="post">
-
-              <input placeholder="Name" name="name"/>
-
+              <!-- <input placeholder="Name" name="name"/> -->
+              <input
+                type="text"
+                class="form-control"
+                name="user_id"
+                placeholder="Enter User Id"
+              />
+              <input type="text" class="form-control" name="address" placeholder="Adrress" />
+              <input type="text" class="form-control" name="address2" placeholder="Address2" />
+              <input
+                type="number"
+                class="form-control"
+                name="postal_code"
+                placeholder="Enter postal code"
+              />
+              <input type="text" class="form-control" name="city" placeholder="City" />
+              <input type="text" class="form-control" name="region" placeholder="Reigon" />
+              <input type="number" class="form-control" name="phone" placeholder=" Phone" />
+              <input type="text" class="form-control" name="country" placeholder="Country" />
+              <input type="submit" class="btn btn-primary" />
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>            
           </div>
         </div>
       </div>
     </div>
-    <h3>Address list of users</h3>
 
-    <% address.forEach(function(add){%>
-    <p>Address   : <%=add.address %></p>
-    <p>Address2  : <%=add.address2 %></p>
-    <p>Postal Code : <%=add.postal_code %></p>
-    <p>City    : <%=add.city %></p>
-    <p>Phone   : <%=add.phone %></p>
-    <%})%>
 
-    
-    
+
+
   </body>
 </html>
-<script>
-    
-</script>
