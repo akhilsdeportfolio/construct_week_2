@@ -10,7 +10,7 @@
       href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="../css/shoppingBag.css" />
+    <link rel="stylesheet" href="../css/shoppingBag.css" type="text/css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -41,6 +41,8 @@
   </head>
 
   <body>
+    <%- include("partials/navbar"); %>
+
     <div id="shopping-bag-container">
       <div id="shopping-bag-sections">
         <span id="shopping-bag-tag">Shopping Bag</span>
@@ -187,7 +189,10 @@
 
           <hr style="width: 100%" />
           <div>
-            <button onclick="goToCheckout()" id="shipping-bag-checkout-btn">
+            <button
+              onclick="goToCheckout(<%= JSON.stringify(user.user_id) %>)"
+              id="shipping-bag-checkout-btn"
+            >
               Check Out
             </button>
           </div>
