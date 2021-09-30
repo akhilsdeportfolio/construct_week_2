@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+     
+     <div class="signup-container container" id="email_container">
+          <h2 style="margin:10px;">Sign In | Create Account</h2>
+          <p style="margin:10px;">Enter your email to get started</p>
+  
+          <form action="/users/createUser" method="post">
+
+               <label class="signup-label" for="email">First Name</label>
+               <br>
+               <input class="signup-input" type="text" name="first_name" id="email" style="margin:10px;"  />    
+
+               <label class="signup-label" for="email">Last Name</label>
+          <br>
+          <input class="signup-input" type="text" name="last_name" id="email" style="margin:10px;"/>
+
+
+          <label class="signup-label" for="email">Email</label>
+          <br>
+          <input class="signup-input" type="text" name="email" id="email" style="margin:10px;" value="<%= email%> " />
+          <br>
+
+
+          <label class="signup-label" for="email">Password</label>
+          <br>
+          <input class="signup-input" type="password" name="password" id="email" style="margin:10px;"  />
+
+
+          <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
+          <button type="submit" class="signup-btn" >Next</button>
+  
+          <p style="margin:10px;">By tapping Next, you agree to our<a href="privacy.html">Privacy Policy</a> and <a
+                  href="terms.html">Terms & Conditions</a>.</p>
+          </form>                  
+      </div>
+  
+</body>
+</html>
