@@ -16,7 +16,7 @@ router.get("", async (req, res) => {
   res.status(200).send({ items });
 });
 
-//Get all the documents having the same shopping bag id
+//RENDER all the documents having the same shopping bag id
 router.get("/:id", async (req, res) => {
   const items = await ShoppingBagDetails.find({
     shopping_bag_id: { $eq: req.params.id },
@@ -32,6 +32,24 @@ router.get("/:id", async (req, res) => {
 
   res.render("shoppingBag.view.ejs", { items, user });
   //res.status(200).send({ items, user });
+});
+
+//SEND all the documents having the same shopping bag id
+router.get("/details/:id", async (req, res) => {
+  const items = await ShoppingBagDetails.find({
+    shopping_bag_id: { $eq: req.params.id },
+  })
+    .populate({ path: "product_id", populate: { path: "brand_id" } })
+    .lean()
+    .exec();
+
+  const user = await ShoppingBag.findById(req.params.id)
+    .populate("user_id")
+    .lean()
+    .exec();
+
+  //res.render("shoppingBag.view.ejs", { items, user });
+  res.status(200).send({ items, user });
 });
 
 //Post a new document in the Shopping Bag Details Collection

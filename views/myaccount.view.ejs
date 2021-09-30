@@ -8,7 +8,8 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet">
-     
+      <link rel="stylesheet" href="/css/myaccount.css" type="text/css" />
+      
 
       <style>
            .list-group-item:nth-child(1){
@@ -32,7 +33,7 @@
 
      <div class="container-fluid">
 
-          
+          <%- include("partials/navbar"); %>
 
           
 
@@ -202,6 +203,11 @@
                       </div>
                     </div>
           </div>
+
+
+
+          <%- include("partials/footer"); %>
+
           
           <script>
                function getOrders()

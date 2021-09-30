@@ -37,3 +37,7 @@ changeField = (documentId, fieldName, fieldValue) => {
       console.log("err:", err);
     });
 };
+
+goToCheckout = (user_id) => {
+  window.location.href = `http://localhost:5000/checkout/${user_id._id}`;
+};

@@ -6,13 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wall Decor & Mirrors | Nordstorm</title>
+    <link rel="stylesheet" href="/css/product.css">
+
     <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
         type="image/x-icon">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/product.css" type="text/css">
 
     <title>Products</title>
 </head>
@@ -81,8 +82,9 @@
                     <h3>Art, Wall Decor & Mirrors</h3>
                     <p id="product-grid-itemCount"></p>
                     <div id="product-grid-sorting">
-                        <select onchange="sortBy(value)">
-                            <option value="newest">Sort by:</option>
+                        <select onclick="sortBy(value)">
+                            <option>Sort</option>
+                            <option value="newest">Sort by:normal</option>
                             <option value="lowToHigh">Sort by price: low to high</option>
                             <option value="highToLow">Sort by price: high to low</option>
                         </select>
@@ -115,72 +117,13 @@
                 </div>
             </div>
 
-            <% products.forEach((e)=> {%>
-                <div id="product-grid-modalBox">
-                    <div id="product-grid-modal-product-info">
-                        <div>
-                            <span id="product-grid-closeBtn" class="material-icons" onclick="closeModal()">close</span>
-                            <div id="product-grid-modal-div">
-                                <div id="product-grid-modal-img"><img src=<%=(e.images[0]) %>>
-                                </div>
-                                <div id="product-grid-modal-content">
-                                    <p id="product-grid-modal-product-name">
-                                        <%= e.name %>
-                                    </p>
-                                    <p id="product-grid-modal-product-brand">
-                                        <%= e.brand_id.brand_name %>
-                                    </p>
-                                    <p id="product-grid-modal-product-price">INR <%= e.price %>
-                                    </p>
-                                    <p id="product-grid-modal-product-price-content">Price varies with currency
-                                        exchange rates and may
-                                        be different than in store.</p>
-                                    <p id="product-grid-modal-product-about">
-                                        <%= e.description %>
-                                    </p><button id="product-grid-modal-product-addToBag">
-                                        <div><span class="material-icons">shopping_bag</span></div>
-                                        <p>Add to Bag</p>
-                                    </button>
-                                    <p id="product-grid-modal-product-add"><span class="material-icons">add</span>
-                                    <p onclick="addInWishlist()">Add to Wish List</p>
-                                    </p>
-                                    <p id="product-grid-modal-product-details" style="text-decoration: underline;">See
-                                        full
-                                        details</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% }) %>
-
                 <%- include("partials/footer"); %>
     </div>
 </body>
 <!-- style="display: block;" -->
 
 
-<script>
-
-
-    let closeBtn = document.getElementById('product-grid-closeBtn');
-    let modal = document.getElementById('product-grid-modalBox');
-    let modalContent = document.getElementById('product-grid-modal-content');
-    let container = document.getElementById('product-grid-main-container');
-    let modalImage = document.getElementById('product-grid-modal-img');
-    let footer = document.getElementById('product-grid-footer');
-
-    let openModal = () => {
-
-        modal.style.display = 'block';
-        // container.style.filter = 'blur(6px)';
-    }
-
-    let closeModal = () => {
-
-        modal.style.display = "none";
-        container.style.filter = "blur(0px)";
-    }
+<script src="/js/productPage.js">
 
 </script>
 

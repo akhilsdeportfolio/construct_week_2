@@ -3,19 +3,50 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user.model");
 
+
+
 // GET ALL USERS
 router.get("/all", async (req, res) => {
   let users = await User.find().lean().exec();
   res.send({ users });
 });
 
-router.post("/isUserPresent/:email", async (req, res) => {
-  let email = req.params.email;
-  let users = await User.find({email:{$eq:email}}).lean().exec();
-  
-  res.send("user is present");
-  console.log(users);
-  res.send({ users});
+
+
+
+router.post("/login",async (req,res)=>{
+
+
+    let username = req.body.email.trim();
+    let pass = req.body.password.trim();
+    //console.log(username);
+    //console.log(pass);
+
+      let user = await User.find({$and:[{email:{$eq:username}},{password:{$eq:pass}}]}).lean().exec();
+      console.log(user.length);
+
+      //res.send(user); 
+      if(user.length > 0)
+        res.render("myaccount.view.ejs",{user:user[0],orders:0});
+      else
+        res.send("login failed");
+
+        //res.send(user);
+
+
+})
+
+
+
+router.post("/isUserPresent", async (req, res) => {
+  let query = req.body.email.trim();
+  console.log(query);
+  let users = await User.find({email:{$eq:query}}).count();
+  console.log("users present "+users);
+  if(users > 0) 
+    res.render("signin.veiw.ejs",{email:query.trim()});
+  else
+    res.render("signup.veiw.ejs",{email:query.trim()});
 });
 
 
@@ -27,9 +58,11 @@ router.post("/isUserPresent/:email", async (req, res) => {
 
 
 router.post("/createUser", async (req, res) => {
-  let createdUser = await User.create(req.body);
 
-  res.send({ createdUser });
+  req.body.email.trim();
+
+  let createdUser = await User.create(req.body);
+  res.send(createdUser);
 });
 
 router.patch("/updateUser/:id", async (req, res) => {
