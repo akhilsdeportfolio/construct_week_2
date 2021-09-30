@@ -1,5 +1,13 @@
+var item_price_value;
+
 checkoutPage = (shoppingBag_id) => {
-  //console.log("Sample Function...");
+  var required_value;
+  var total_price = document.getElementById("total_price");
+  var required_event;
+  var d = document.getElementById("continue");
+  var ordernum = document.getElementById("orderId");
+  var to_check;
+  var c = document.getElementById("anotherbtn");
   getShoppingBagDetails(shoppingBag_id);
 };
 
@@ -22,10 +30,10 @@ getShoppingBagDetails = (shoppingBag_id) => {
 };
 
 createProducts = (items) => {
+  var total_price = document.getElementById("total_price");
   var total = 0;
   for (k in items) {
     var e = items[k];
-    console.log(e);
     var main_div = document.createElement("div");
 
     var image_div = document.createElement("div");
@@ -73,4 +81,46 @@ createProducts = (items) => {
 
   items_price.textContent = "₹" + total;
   item_price_value = total;
+
+  console.log(total_price);
+  total_price.textContent = "₹" + (item_price_value + 2487 + 2360);
 };
+
+function required(num) {
+  var req = document.getElementsByClassName("required");
+
+  for (var i = 0; i < req.length; i++) {
+    req[i].style.borderColor = "white";
+  }
+
+  event.currentTarget.style.borderColor = "#2a9dcc";
+
+  required_event = (
+    event.currentTarget.children[0].children[1].children[0].textContent +
+    "\n" +
+    event.currentTarget.children[0].children[1].children[1].textContent +
+    "\n" +
+    event.currentTarget.children[1].children[0].textContent
+  ).toUpperCase();
+
+  var element = event.currentTarget.children[2];
+
+  if (num == 2) {
+    element.children[0].textContent = "₹3,325";
+    required_value = 3325;
+  } else if (num == 3) {
+    element.children[0].textContent = "₹3,428";
+    required_value = 3428;
+  } else if (num == 4) {
+    element.children[0].textContent = "₹3,628";
+    required_value = 3628;
+  } else {
+    element.children[0].textContent = "₹2,487";
+    required_value = 2487;
+  }
+
+  total_price.textContent =
+    "₹" + Number(item_price_value + required_value + 2360);
+  var shipping_price = document.getElementById("shipping_price");
+  shipping_price.textContent = element.children[0].textContent;
+}
