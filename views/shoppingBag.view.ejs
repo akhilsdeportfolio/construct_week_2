@@ -38,6 +38,16 @@
       crossorigin="anonymous"
     ></script>
     <script src=" /js/shoppingBag.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -117,7 +127,9 @@
               value="<%= item.quantity %>"
             >
               <!-- <option value="<%= item.quantity %>"><%= item.quantity %></option> -->
-              <option value="<%= item.quantity %>"><%= item.quantity %></option>
+              <option value="<%= item.quantity %>" selected hidden>
+                <%= item.quantity %>
+              </option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
