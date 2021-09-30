@@ -42,9 +42,9 @@ router.post("/isUserPresent", async (req, res) => {
   let users = await User.find({email:{$eq:query}}).count();
   console.log("users present "+users);
   if(users > 0) 
-    res.render("signin.veiw.ejs",{email:query});
+    res.render("signin.veiw.ejs",{email:query.trim()});
   else
-    res.render("signup.veiw.ejs",{email:query}) ;
+    res.render("signup.veiw.ejs",{email:query.trim()});
 });
 
 
