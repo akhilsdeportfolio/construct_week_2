@@ -40,10 +40,17 @@
     <h3>Address list of users</h3>
 
     <% address.forEach(function(add){%>
-    <p>Address of each user: <%=add.address_location %></p>
-    <a href="/address/delete/<%=add._id%>">Remove Address</a>
+    <p>Address   : <%=add.address %></p>
+    <p>Address2  : <%=add.address2 %></p>
+    <p>Postal Code : <%=add.postal_code %></p>
+    <p>City    : <%=add.city %></p>
+    <p>Phone   : <%=add.phone %></p>
     <%})%>
 
     
+    
   </body>
 </html>
+<script>
+    
+</script>
