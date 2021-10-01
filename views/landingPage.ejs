@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nordstrom Online & In Store: Shoes, Jewelry, Clothing, Makeup, Dresses</title>
+    <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
+        type="image/x-icon">
+    <script src="https://use.fontawesome.com/0d7192da0b.js"></script>
+    <link rel="stylesheet" href="/css/landingPage.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body onclick="removeDropdown()">
+    <%- include("partials/navbar"); %>
+
+    <div id="simpleModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn">&times;</span>
+            <p style="font-size: 25px; color:rgb(58, 55, 55); margin-bottom: 5px;">We Ship to India
+            <p>
+            <h3 style="font-size: 12px; color:rgb(63, 59, 59);margin-bottom: 12px;">A few things to know:</h3>
+            <div style="margin-left:17px;">
+                <ul style="list-style-type:disc; font-size: 12px;">
+                    <li>Prices and payment are shown in INR.</li>
+                    <li>International shipping costs are based on your items, shipping method and destination.</li>
+                    <li>Not shipping to India? <a>Change your country</a></li>
+                </ul>
+            </div>
+            <p style="font-size: 12px;color: #393939; margin-top:12px"><a>Get more details</a> or <a>contact us</a> if
+                you have questions about international shipping.</p>
+        </div>
+    </div>
+
+</body>
+
+<script src="/js/navbar.js"> </script>
+
+<script src="/js/landingPage.js"> </script>
+
+<%- include("partials/footer"); %>
+
+</html>

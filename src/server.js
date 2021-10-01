@@ -69,6 +69,10 @@ app.use("/myaccount", myAccountController);
 app.use("/payments", paymentsController);
 app.use("/checkout", checkoutController);
 
+app.get("/landingpage",function(req,res){
+  res.render("landingPage.ejs",{});
+})
+
 app.get("/login",function(req,res){
   res.render("login.veiw.ejs",{});
 })

@@ -15,8 +15,18 @@ router.post("", async (req, res) => {
   res.send({ createdAddress });
 });
 
+//get user addresses by the user id
+router.get("/:id", async (req, res) => {
+  let addresses = await Addresses.find({ user_id: { $eq: req.params.id } })
+    .populate("user_id")
+    .lean()
+    .exec();
+
+  res.send({ addresses });
+});
+
 // delete user address
-router.get("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   let deleteAddress = await Addresses.findByIdAndDelete(req.params.id);
   res.redirect("/address");
 });
