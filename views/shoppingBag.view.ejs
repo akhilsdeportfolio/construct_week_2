@@ -50,7 +50,7 @@
     />
   </head>
 
-  <body>
+  <body onload="checkShoppingBag(<%=JSON.stringify(items) %>)">
     <%- include("partials/navbar"); %>
 
     <div id="shopping-bag-container">

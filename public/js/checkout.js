@@ -7,11 +7,13 @@ var shoppingBag_items;
 var user_id;
 var total;
 var user_address;
+var userDetails;
 
 checkoutPage = (shoppingBag) => {
   var required_value;
   var shoppingBag_id = shoppingBag._id;
   user_id = shoppingBag.user_id;
+  getUserDetails(user_id);
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
 };
@@ -131,6 +133,26 @@ function required(num) {
   shipping_price.textContent = element.children[0].textContent;
 }
 
+getUserDetails = (user_id) => {
+  fetch(`http://localhost:5000/users/${user_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      user_address = res.addreses;
+      populateUserAddress(res.addresses);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+};
+
 getUserAddress = (user_id) => {
   fetch(`http://localhost:5000/address/${user_id}`, {
     method: "GET",
@@ -142,6 +164,7 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
+      console.log(res);
       user_address = res.addreses;
       populateUserAddress(res.addresses);
     })
@@ -154,16 +177,18 @@ populateUserAddress = (arr) => {
   var address = arr[0];
   var user = address.user_id;
 
+  console.log(arr);
+
+  var emailInput = document.getElementById("emailInput");
+  emailInput.value = userDetails.email;
+
+  var firstName = document.getElementById("firstName");
+  firstName.value = userDetails.first_name;
+
+  var lastName = document.getElementById("lastName");
+  lastName.value = userDetails.last_name;
+
   if (arr != null) {
-    var emailInput = document.getElementById("emailInput");
-    emailInput.value = user.email;
-
-    var firstName = document.getElementById("firstName");
-    firstName.value = user.first_name;
-
-    var lastName = document.getElementById("lastName");
-    lastName.value = user.last_name;
-
     var addressInput = document.getElementById("addressInput");
     addressInput.value = address.address;
 
@@ -276,7 +301,8 @@ function checkValues() {
       var Country = document.getElementById("Country").value;
       var Postal = document.getElementById("Postal").value;
 
-      if (user_address === null) {
+      console.log("User Address:", user_address);
+      if (user_address === null || user_address === undefined) {
         addUserAddress(
           addressInput,
           address2,
@@ -519,7 +545,7 @@ addUserAddress = (
   Postal,
   phone_input
 ) => {
-  fetch(`http://localhost:5000/address}`, {
+  fetch(`http://localhost:5000/address`, {
     method: "POST",
     body: JSON.stringify({
       user_id: user_id,

@@ -41,3 +41,17 @@ changeField = (documentId, fieldName, fieldValue) => {
 goToCheckout = (user_id) => {
   window.location.href = `http://localhost:5000/checkout/${user_id._id}`;
 };
+
+checkShoppingBag = (items) => {
+  if (items === null || items.length === 0) {
+    var bagData = document.getElementById("shopping-bag-data");
+    bagData.innerHTML = "";
+    var text = document.createElement("p");
+    text.innerHTML = `Your bag is empty.`;
+    // <a href = 'landing_page.html'>Click here to continue shopping!</a>
+    text.setAttribute("id", "shopping-bag-empty");
+    bagData.append(text);
+    var checkout = document.getElementById("shopping-bag-summary");
+    checkout.style.display = "none";
+  }
+};
