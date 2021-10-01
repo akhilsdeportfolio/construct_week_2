@@ -35,7 +35,7 @@ router.patch("/updateAddress/:id", async (req, res) => {
 });
 
 // get a particular user address
-router.get("/singleAddress/:id", async function (req, res) {
+router.get("/:id", async function (req, res) {
   let singleAddress = await Addresses.find({ user_id: { $eq: req.params.id } })
     .lean()
     .exec();

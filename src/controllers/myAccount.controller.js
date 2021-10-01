@@ -3,7 +3,7 @@ const express = require("express");
 const router= express.Router();
 
 
-router.get("/",async (req,res)=>{
+router.get("/:id",async (req,res)=>{
      res.render("myaccount.view.ejs",{data:"welcome",orders:0});
 });
 
