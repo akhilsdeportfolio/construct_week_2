@@ -13,6 +13,13 @@ router.get("/all", async (req, res) => {
 });
 
 
+router.get("/:id", async (req, res) => {
+  let users = await User.find({_id:req.params.id}).lean().exec();
+  res.send({userDetails:users[0] });
+});
+
+
+
 
 
 router.post("/login",async (req,res)=>{
