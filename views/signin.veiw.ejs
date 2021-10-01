@@ -81,20 +81,22 @@
           <h2 style="margin:10px;">Sign In | Create Account</h2>
           <p style="margin:10px;">Enter your email to get started</p>
   
-          <form action="/users/login" method="post">
+          <form onsubmit="checkUser(event)">
+
+            <!--action="/users/login" method="post"-->
 
          
 
 
           <label class="signup-label" for="email">Email</label>
           <br>
-          <input class="signup-input" type="text" name="email" style="margin:10px;" value="<%=email%> " />
+          <input class="signup-input" id="email" type="text" name="email" style="margin:10px;" value="<%=email%> " />
           <br>
 
 
           <label class="signup-label" for="email">Password</label>
           <br>
-          <input class="signup-input" type="password" name="password" style="margin:10px;"  />
+          <input class="signup-input" type="password" id="password" name="password" style="margin:10px;"  />
 
 
           <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
@@ -104,6 +106,57 @@
                   href="terms.html">Terms & Conditions</a>.</p>
           </form>                  
       </div>
+
+      <script>
+
+
+                   async function checkUser(e)
+                    {
+                        e.preventDefault();
+
+                        let email = document.getElementById("email").value;
+                        let password = document.getElementById("password").value;
+                        console.log(email,password);
+
+
+
+                        let response = await fetch("http://localhost:5000/users/login",(
+                            {
+                                method:'POST',
+                                headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                                },
+                                body:JSON.stringify({
+                                    "email":email,
+                                    "password":password
+                                })                            
+                            }
+                        ));
+
+                        let res=await response.json();
+                        console.log(res);
+                            
+                        if(res.status==true)
+                        {
+                            localStorage.setItem("user_id",res.user._id);
+                            alert("login success");
+                            let user_id=localStorage.getItem("user_id");
+                            window.location=`/myaccount/${user_id}`;
+                        }
+                        else
+                        {
+                            alert("failed to login please check the details and try again");
+                        }
+                    }
+
+
+
+
+
+
+
+      </script>
   
 </body>
 </html>
