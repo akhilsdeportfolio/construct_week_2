@@ -9,7 +9,7 @@
      <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet">
       <link rel="stylesheet" href="/css/myaccount.css" type="text/css" />
-      
+      <script src="/js/navbar.js"> </script>
 
       <style>
            .list-group-item:nth-child(1){
@@ -29,7 +29,7 @@
 
 </head>
 <body>
-
+     <%- include("partials/navbar")%>
 
      <div class="container-fluid">
 
@@ -176,7 +176,7 @@
                          </select></p>
 
 
-                         <hr/>
+                         
                          
                          <% if(orders==0) {%>
                               <p>you have not made any purchases in this time period</p>
