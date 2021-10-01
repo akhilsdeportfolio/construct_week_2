@@ -9,7 +9,6 @@ function removeProduct(documentId) {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
       window.location.href = `http://localhost:5000/shoppingBagDetails/${res.item.shopping_bag_id}`;
     })
     .catch((err) => {

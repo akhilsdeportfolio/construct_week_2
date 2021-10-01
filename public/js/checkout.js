@@ -471,7 +471,7 @@ closeModal = (shoppingBag_id) => {
   modal.style.display = "none";
   blur_effect.setAttribute("class", "noblur");
 
-  //window.location.href = `http://localhost:5000/shoppingBagDetails/${shoppingBag_id}`;
+  window.location.href = `http://localhost:5000/landingpage`;
 };
 
 addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_input) => {
@@ -544,6 +544,11 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
 
   uploadOrderDetails(order);
 
+  for (k in shoppingBag_items) {
+    console.log(shoppingBag_items[k]);
+    removeProduct(shoppingBag_items[k]._id);
+  }
+
   return order_number;
 };
 
@@ -579,7 +584,6 @@ uploadOrderDetails = (order) => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
       updateOrderNumber(order_number);
     })
     .catch((err) => {
@@ -602,10 +606,28 @@ updateOrderNumber = (order_number) => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
+      return
     })
     .catch((err) => {
       console.log("err:", err);
     });
 }
 
+
+removeProduct = (documentId) => {
+  fetch(`http://localhost:5000/shoppingBagDetails/${documentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      return;
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
