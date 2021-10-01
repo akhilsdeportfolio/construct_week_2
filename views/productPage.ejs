@@ -18,7 +18,7 @@
     <title>Products</title>
 </head>
 
-<body>
+<body onclick="removeDropdown()">
     <div id='product-grid-main-container'>
         <%- include("partials/navbar"); %>
 
@@ -39,9 +39,23 @@
                         <!-- <span class="material-icons" id = "search-icon">search<input id = "search-brand" placeholder = "Find a brand"/></span> -->
 
                         <div id="product-grid-brand-content">
-                            <div id="product-grid-search-box">
-                                <span class="material-icons">search</span>
-                                <input type="text" placeholder="Find a brand">
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-brand product-grid-checkmark" type="checkbox"
+                                    value="Deny Designs" onchange="addfilter(value)">
+                                <p for="Deny Designs">Deny Designs</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-brand product-grid-checkmark" type="checkbox" value="Chopvalue" onchange="addfilter(value)">
+                                <p for="Chopvalue">Chopvalue</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-brand product-grid-checkmark" type="checkbox"
+                                    value="Oliver Gal" onchange="addfilter(value)">
+                                <p for="Oliver Gal">Oliver Gal</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-brand product-grid-checkmark" type="checkbox" value="Marimekko" onchange="addfilter(value)">
+                                <p for="Marimekko">Marimekko</p>
                             </div>
                         </div>
 
@@ -59,19 +73,84 @@
 
 
 
-                        <div id="product-grid-color-content"></div>
+                        <div id="product-grid-color-content">
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Green">
+                                <p for="Green">Green</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Pink">
+                                <p for="Pink">Pink</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Grey">
+                                <p for="Grey">Grey</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Brown">
+                                <p for="Brown">Brown</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Gold">
+                                <p for="Gold">Gold</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Black">
+                                <p for="Black">Black</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Red">
+                                <p for="Red">Red</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Blue">
+                                <p for="Blue">Blue</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Yellow">
+                                <p for="Yellow">Yellow</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Orange">
+                                <p for="Orange">Orange</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-color product-grid-checkmark" type="checkbox" value="Teal">
+                                <p for="Teal">Teal</p>
+                            </div>
+                        </div>
                         <hr />
                     </div>
 
                     <div id="product-grid-type">
                         <div class="product-grid-filter-div">
-                            <p>Product Type</p>
+                            <p>Price Range</p>
                             <span class="material-icons product-grid-plus-icon" id="product-grid-type-icon"
                                 onclick="toggleDisplay('product-grid-type-content', 'product-grid-type-icon')">add</span>
                         </div>
 
 
-                        <div id="product-grid-type-content"></div>
+                        <div id="product-grid-type-content">
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-type product-grid-checkmark" type="checkbox"
+                                    value="0-2000">
+                                <p for="Decorative Accents">0-2000</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-type product-grid-checkmark" type="checkbox" value="2001-4000">
+                                <p for="Framed Art">2001-4000</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                    class="product-grid-type product-grid-checkmark" type="checkbox"
+                                    value="4001-10000">
+                                <p for="Wall Hanging">4001-10000</p>
+                            </div>
+                            <div class="product-grid-checkbox-div"><input
+                                class="product-grid-type product-grid-checkmark" type="checkbox"
+                                value="More than 10000">
+                            <p for="Wall Hanging">More than 10000</p>
+                        </div>
+                        </div>
 
                         <hr />
                     </div>
@@ -91,15 +170,16 @@
                     </div>
 
                     <div id='product-grid-data'>
-                        <% products.forEach((e)=> {%>
+                        <!-- <% products.forEach((e)=> {%>
                             <div class="product-grid-product-data">
-                                <a href="products/<%= e._id %>"><img src=<%=(e.images[0]) %>></img></a>
+                                <a href="http://localhost:5000/products/<%= e._id %>"><img src=<%=(e.images[0])
+                                        %>></img></a>
                                 <div id="product-grid-product-text">
                                     <div id="product-grid-quick-view" onclick="openModal()">
                                         <p>Quick View</p>
                                     </div>
                                 </div>
-                                <a href="products/<%= e._id %>" id="product-grid-description">
+                                <a href="http://localhost:5000/products/<%= e._id %>" id="product-grid-description">
                                     <%= e.brand_id.brand_name %>
                                         <%= e.name %>
                                 </a>
@@ -107,24 +187,24 @@
                                 </p>
                                 <p>
                                     Rating : <%=(e.rating) %>
-                                </p>
-                            </div>
+                                </p> -->
+                            <!-- </div>
 
 
 
-                            <% }) %>
+                            <% }) %> -->
                     </div>
                 </div>
             </div>
 
-                <%- include("partials/footer"); %>
+            <%- include("partials/footer"); %>
     </div>
 </body>
 <!-- style="display: block;" -->
 
 
-<script src="/js/productPage.js">
+<script src="/js/navbar.js"> </script>
 
-</script>
+<script src="/js/productPage.js"> </script>
 
 </html>
