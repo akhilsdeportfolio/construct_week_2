@@ -77,24 +77,35 @@ router.post("/createUser", async (req, res) => {
   let createdUser = await User.create(req.body);
   // create shopping id 
 
-
-  // create wishid 
-
-
+  let jsonResp = {createdUser};
   axios.post('http://localhost:5000/wishlist', {
     user_id:createdUser._id
   })
   .then(function (response) {
     console.log(response.data);
-    res.send({createdUser,wishlist:response.data});
+    jsonResp["wishlist"]=response.data;
+
+    axios.post('http://localhost:5000/shoppingBag', {
+    user_id:createdUser._id
+    }).then((response)=>{
+      jsonResp["shoppingBag"]=response.data;
+      res.send({status:true,jsonResp});  
+    })
+
+
+
+    
+
+
+
+
+
   })
   .catch(function (error) {
-    console.log(error);
+    res.send({status:false,error})
   });
   
   
-
-
   
 });
 
