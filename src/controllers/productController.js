@@ -38,18 +38,20 @@ router.get("/all",async (req,res)=>{
 
 router.get("/filters",async (req,res)=>{
 
+     let brandArray = req.query.brands.split(",")
 
-     console.log(req.query)
+     let brands = await Brand.find({ 'brand_name': { $in: brandArray } }).populate().lean();  
 
-     let brands = await Brand.find({ brand_name : req.query.brands } ).populate().lean();  
+     let searchArray =[]
 
-     let products = await Product.find({ brand_id: brands[0]._id }).populate("brand_id").lean();     
+     for(let i=0;i<brands.length;i++){
+          searchArray.push(brands[i]._id)
+     }
 
-     // res.status(200).send({products});
+     let products = await Product.find({ brand_id: {$in : searchArray }}).populate("brand_id").lean();     
 
-     return res.render('productPage.ejs', {
-          products: products,
-        });
+     res.status(200).send(products);
+
  });
 
 //GET product by ID
@@ -57,8 +59,6 @@ router.get("/filters",async (req,res)=>{
 router.get("/:id",async (req,res)=>{
 
     let product = await Product.findById(req.params.id).lean();     
-
-//     res.status(200).send({product});
 
     return res.render('individualProduct.ejs', {
      product: product,
@@ -74,9 +74,7 @@ router.get("/:sortBy/sort",async (req,res)=>{
 
      let products = await Product.find().populate("brand_id").sort({"price":req.params.sortBy}).lean();     
  
-     return res.render('productPage.ejs', {
-          products: products,
-        });
+     res.status(200).send(products);
  });
 
 
