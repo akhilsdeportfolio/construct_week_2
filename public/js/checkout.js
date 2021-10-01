@@ -144,9 +144,7 @@ getUserDetails = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
-      user_address = res.addreses;
-      populateUserAddress(res.addresses);
+      userDetails = res.userDetails;
     })
     .catch((err) => {
       console.log("err:", err);
@@ -164,8 +162,7 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
-      user_address = res.addreses;
+      user_address = res.addresses;
       populateUserAddress(res.addresses);
     })
     .catch((err) => {
@@ -174,10 +171,10 @@ getUserAddress = (user_id) => {
 };
 
 populateUserAddress = (arr) => {
+  console.log(userDetails);
   var address = arr[0];
-  var user = address.user_id;
 
-  console.log(arr);
+  console.log("Address:", arr.addresses);
 
   var emailInput = document.getElementById("emailInput");
   emailInput.value = userDetails.email;
@@ -188,7 +185,7 @@ populateUserAddress = (arr) => {
   var lastName = document.getElementById("lastName");
   lastName.value = userDetails.last_name;
 
-  if (arr != null) {
+  if (address.length != 0) {
     var addressInput = document.getElementById("addressInput");
     addressInput.value = address.address;
 
