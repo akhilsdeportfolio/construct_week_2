@@ -8,6 +8,7 @@ var user_id;
 var total;
 var user_address;
 var userDetails;
+var order_number;
 
 checkoutPage = (shoppingBag) => {
   var required_value;
@@ -16,6 +17,7 @@ checkoutPage = (shoppingBag) => {
   getUserDetails(user_id);
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
+  fetchNewOrderNumber();
 };
 
 getShoppingBagDetails = (shoppingBag_id) => {
@@ -152,7 +154,7 @@ getUserDetails = (user_id) => {
 };
 
 getUserAddress = (user_id) => {
-  fetch(`http://localhost:5000/address/${user_id}`, {
+  fetch(`http://localhost:5000/address/dataAdd/${user_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -162,8 +164,8 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      user_address = res.addresses;
-      populateUserAddress(res.addresses);
+      user_address = res;
+      populateUserAddress(res);
     })
     .catch((err) => {
       console.log("err:", err);
@@ -171,10 +173,7 @@ getUserAddress = (user_id) => {
 };
 
 populateUserAddress = (arr) => {
-  console.log(userDetails);
   var address = arr[0];
-
-  console.log("Address:", arr.addresses);
 
   var emailInput = document.getElementById("emailInput");
   emailInput.value = userDetails.email;
@@ -185,7 +184,7 @@ populateUserAddress = (arr) => {
   var lastName = document.getElementById("lastName");
   lastName.value = userDetails.last_name;
 
-  if (address.length != 0) {
+  if (address) {
     var addressInput = document.getElementById("addressInput");
     addressInput.value = address.address;
 
@@ -298,8 +297,7 @@ function checkValues() {
       var Country = document.getElementById("Country").value;
       var Postal = document.getElementById("Postal").value;
 
-      console.log("User Address:", user_address);
-      if (user_address === null || user_address === undefined) {
+      if (user_address === null || user_address === undefined || user_address.length === 0) {
         addUserAddress(
           addressInput,
           address2,
@@ -421,18 +419,12 @@ function placeOrder() {
             .getElementById("imports")
             .textContent.trim()
             .split("\n");
+          var orderNumber = createOrder(total_price, items_price, shipping_price, duties_and_tax, address, imports);
           modal.style.display = "block";
           blur_effect.setAttribute("class", "blur");
-          ordernum.textContent = num;
+          ordernum.textContent = orderNumber;
           //localStorage.setItem(to_check, JSON.stringify([]));
-          createOrder(
-            total_price,
-            items_price,
-            shipping_price,
-            duties_and_tax,
-            address,
-            imports
-          );
+
         }, 3000);
       } else {
         cardnumber.style.borderColor = "#d30c0c";
@@ -479,69 +471,10 @@ closeModal = (shoppingBag_id) => {
   modal.style.display = "none";
   blur_effect.setAttribute("class", "noblur");
 
-  //window.location.href = `http://localhost:5000/shoppingBagDetails/${shoppingBag_id}`;
+  window.location.href = `http://localhost:5000/landingpage`;
 };
 
-createOrder = (
-  total_price,
-  items_price,
-  shipping_price,
-  duties_and_tax,
-  address,
-  imports
-) => {
-  var products = [];
-
-  for (k in shoppingBag_items) {
-    var item = shoppingBag_items[k];
-
-    var obj = {
-      product: item.product_id,
-      quantity: item.quantity,
-    };
-
-    products.push(obj);
-  }
-
-  total_price = Number(total_price.split("").splice(1).join(""));
-  items_price = Number(items_price.split("").splice(1).join(""));
-  shipping_price = Number(shipping_price.split("").splice(1).join(""));
-  imports = imports
-    .filter((el) => {
-      return el != "";
-    })
-    .map((el) => {
-      return el.trim();
-    })
-    .join(" ");
-
-  console.log("Total Price:", total_price);
-  console.log("Item Price:", items_price);
-  console.log("Shipping Price:", shipping_price);
-  console.log(
-    "Imports:",
-    imports
-      .filter((el) => {
-        return el != "";
-      })
-      .map((el) => {
-        return el.trim();
-      })
-      .join(" ")
-  );
-  console.log("Address:", address);
-  console.log("Duties and Tax:", duties_and_tax);
-};
-
-addUserAddress = (
-  addressInput,
-  address2,
-  city,
-  region,
-  Country,
-  Postal,
-  phone_input
-) => {
+addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_input) => {
   fetch(`http://localhost:5000/address`, {
     method: "POST",
     body: JSON.stringify({
@@ -568,3 +501,133 @@ addUserAddress = (
       console.log("err:", err);
     });
 };
+
+
+
+createOrder = (total_price, items_price, shipping_price, duties_and_tax, address, imports) => {
+  var products = [];
+
+  for (k in shoppingBag_items) {
+    var item = shoppingBag_items[k];
+
+    var obj = {
+      product: item.product_id,
+      quantity: item.quantity,
+    };
+    products.push(obj);
+  }
+
+  total_price = Number(total_price.split("").splice(1).join(""));
+  items_price = Number(items_price.split("").splice(1).join(""));
+  shipping_price = Number(shipping_price.split("").splice(1).join(""));
+
+  imports = imports
+    .filter((el) => {
+      return el != "";
+    })
+    .map((el) => {
+      return el.trim();
+    })
+    .join(" ");
+
+  var order = {
+    user_id: user_id,
+    products: products,
+    total_price: total_price,
+    items_total_price: items_price,
+    shipping_price: shipping_price,
+    duties_tax: duties_and_tax,
+    delivery_address: address,
+    delivery_method: imports,
+    order_number: order_number
+  }
+
+  uploadOrderDetails(order);
+
+  for (k in shoppingBag_items) {
+    console.log(shoppingBag_items[k]);
+    removeProduct(shoppingBag_items[k]._id);
+  }
+
+  return order_number;
+};
+
+fetchNewOrderNumber = () => {
+  var order;
+  fetch(`http://localhost:5000/orderNumbers/6156b86b69c58a54ec07bd62`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      order_number = res.item.order_number;
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
+
+
+uploadOrderDetails = (order) => {
+  fetch(`http://localhost:5000/orders`, {
+    method: "POST",
+    body: JSON.stringify(order),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      updateOrderNumber(order_number);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
+
+updateOrderNumber = (order_number) => {
+  var number = order_number + 1;
+  fetch(`http://localhost:5000/orderNumbers/6156b86b69c58a54ec07bd62`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      order_number: number
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      return
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
+
+
+removeProduct = (documentId) => {
+  fetch(`http://localhost:5000/shoppingBagDetails/${documentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      return;
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}

@@ -40,6 +40,14 @@ router.patch("/updateAddress/:id", async (req, res) => {
 });
 
 // get a particular user address
+  router.get("/dataAdd/:id", async function (req, res) {
+    let singleAddress = await Addresses.find({ user_id: { $eq: req.params.id } })
+      .lean()
+      .exec();
+    res.send(singleAddress)
+  })
+
+// get a particular user address
 router.get("/:id", async function (req, res) {
   let singleAddress = await Addresses.find({ user_id: { $eq: req.params.id } })
     .lean()
@@ -50,8 +58,10 @@ router.get("/:id", async function (req, res) {
   res.render("address.view.ejs", {
     address: singleAddress,user_id:req.params.id
   });
-
-  //res.send(singleAddress);
 });
+  //res.send(singleAddress);
+
+  
+
 
 module.exports = router;
