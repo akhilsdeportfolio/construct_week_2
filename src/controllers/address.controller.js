@@ -7,7 +7,7 @@ const Addresses = require("../models/address.model");
 
 router.get("/del/:id/user/:uid", async (req, res) => {
   let deleteAddress = await Addresses.findByIdAndDelete(req.params.id);
-  let url ="/myaccount/"+req.params.uid
+  let url ="/myaccount/"+req.params.uid+"/shipping"
   res.redirect(url);
 });
 
@@ -21,7 +21,7 @@ router.get("", async (req, res) => {
 // post user address
 router.post("", async (req, res) => {
   let createdAddress = await Addresses.create(req.body);
-  res.send({ createdAddress });
+  res.send({ status:true,createdAddress });
 });
 
 // delete user address

@@ -97,27 +97,29 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form action="/address" method="post">
+            <form onsubmit="addAddress(event)">
               <!-- <input placeholder="Name" name="name"/> -->
               <input
+                id="uid"
                 type="text"
                 class="form-control"
                 name="user_id"
                 value="<%= user_id %>"
                 placeholder="Enter User Id"
               />
-              <input type="text" class="form-control" name="address" placeholder="Adrress" />
-              <input type="text" class="form-control" name="address2" placeholder="Address2" />
+              <input type="text" id="address" class="form-control" name="address" placeholder="Adrress" />
+              <input type="text" id="address2" class="form-control" name="address2" placeholder="Address2" />
               <input
+                id="postal"
                 type="number"
                 class="form-control"
                 name="postal_code"
                 placeholder="Enter postal code"
               />
-              <input type="text" class="form-control" name="city" placeholder="City" />
-              <input type="text" class="form-control" name="region" placeholder="Reigon" />
-              <input type="number" class="form-control" name="phone" placeholder=" Phone" />
-              <input type="text" class="form-control" name="country" placeholder="Country" />
+              <input type="text" id="city" class="form-control" name="city" placeholder="City" />
+              <input type="text" id= "region" class="form-control" name="region" placeholder="Reigon" />
+              <input type="number" id="phone" class="form-control" name="phone" placeholder=" Phone" />
+              <input type="text" id="country" class="form-control" name="country" placeholder="Country" />
               <input type="submit" class="btn btn-primary" />
             </form>
           </div>
@@ -127,6 +129,68 @@
       </div>
     </div>
 
+
+
+    <script>
+
+        async function addAddress(event)
+        { 
+            event.preventDefault();
+            console.log(event);
+
+            let user_id=document.getElementById("uid").value.trim();
+            let address = document.getElementById("address").value.trim();
+            let address2= document.getElementById("address2").value.trim();
+            let city = document.getElementById("city").value.trim();
+            let region = document.getElementById("region").value.trim();
+            let postal = document.getElementById("postal").value.trim();
+            let phone=document.getElementById("phone").value.trim();            
+            let country = document.getElementById("country").value.trim();
+          
+
+
+            let json = JSON.stringify(
+              {
+                user_id:user_id,
+                address:address,
+                address2:address2,
+                city:city,
+                region:region,
+                postal_code:postal,
+                phone:phone,
+                country:country
+              }
+            )
+
+
+            let response = await fetch("http://localhost:5000/address",({
+                method:'POST',
+                headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                },
+                body : json
+            }));
+
+            let res=await response.json();
+
+
+            if(res.status==true)
+            {
+              window.location.reload();
+              //console.log(res);
+            }
+            else{
+              console.error(res);
+            }
+
+
+            
+
+        }
+
+
+    </script>
     
 
   </body>
