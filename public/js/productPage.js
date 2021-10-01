@@ -1,3 +1,8 @@
+let currentArray; let products;
+
+let data_div = document.getElementById('product-grid-data');
+
+
 let sortBy = (value) =>{
 
     if (value === 'lowToHigh') {
@@ -5,14 +10,18 @@ let sortBy = (value) =>{
         } else if (value === 'highToLow') {
             sorting(-1)
         }else if(value==="newest"){
-            window.location.href = `http://localhost:5000/products`
+            allProducts()
         }
     }
 
 
-    function sorting(x) {
+    async function sorting(x) {
 
-        window.location.href = `http://localhost:5000/products/${x}/sort`
+        let response = await fetch(`http://localhost:5000/products/${x}/sort`)
+
+        products = await response.json();
+
+        await createProductCatalogue(products)
 
     }
 
@@ -34,22 +43,49 @@ let sortBy = (value) =>{
     // filter/?brands=nike,puma,adida&color=pink,red,white
 
 
+    async function addfilter(){
+
+        var brandfilters = [];
+        var checkbox = document.getElementsByClassName('product-grid-checkmark');
+        for (let i = 0; i < checkbox.length; i++) {
+            var brands = checkbox[i].className.split(" ");
+            if (checkbox[i].checked) {
+                if (brands[0] === 'product-grid-brand') {
+                    brandfilters.push(checkbox[i].value);
+                }
+
+            }
+        }
+
+        console.log(brandfilters)
 
 
-    // async function addfilter(brand){
+        if (brandfilters.length === 0) {
+            data_div.innerHTML = "";
+            allProducts()
+        } else {
 
-    //     // let x = encodeURI(`http://localhost:5000/products/filters?brands=${brand}`)
+            let brand = brandfilters[0]
 
-        
-    //     // let response = await fetch(x)
 
-    //     // let data = await response.json();
+            for(let i=1;i<brandfilters.length;i++){
+                brand = brand +","+brandfilters[i]
+            }
 
-    //     // console.log(data)
 
-    //     window.location.href = encodeURI(`http://localhost:5000/products/filters?brands=${brand}`)
-        
-    // }
+            let x = encodeURI(`http://localhost:5000/products/filters?brands=${brand}`)
+
+            let response = await fetch(x)
+    
+            products = await response.json();
+
+            currentArray = products;
+    
+            await createProductCatalogue(currentArray)
+
+        }
+
+    }
 
 
     // 
@@ -60,14 +96,9 @@ let sortBy = (value) =>{
     // window.location.href = encodeURI(`http://localhost:5000/products/filters?brands=${brand},${brand},${brand}&color=${color}`)
 
 
-    let currentArray; let products;
-
-    let data_div = document.getElementById('product-grid-data');
-
-    async function createProductCatalogue(pro) {
 
 
-        products = await allProducts()
+    function createProductCatalogue(products) {
 
         currentArray = products
 
@@ -152,9 +183,10 @@ let sortBy = (value) =>{
 
         products = await response.json();
         
-        return products
+        await createProductCatalogue(products)
     }
 
-    let pro;
+    
+    allProducts()
 
-    createProductCatalogue(pro)
+    
