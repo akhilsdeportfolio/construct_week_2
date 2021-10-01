@@ -204,9 +204,12 @@
 
                         let wid = resp.jsonResp.wishlist.wishlist._id;
                         let sid = resp.jsonResp.shoppingBag.item._id;
-
+                        let uid = resp.jsonResp.createdUser._id;
+ 
                         localStorage.setItem("wid",wid);
                         localStorage.setItem("sid",sid);
+                        localStorage.setItem("uid",uid);
+                        
 
 
                     }
