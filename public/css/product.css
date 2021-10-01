@@ -124,13 +124,13 @@ body {
     text-align: center;
     border: 1px solid rgb(189, 189, 189);
     padding: 10px 0px;
-    visibility: visible;
+    visibility: hidden;
 }
 
 #product-grid-quick-view>p {
     padding: 3px;
     margin: 0px;
-    color: rgb(32, 32, 32);
+    color: rgb(83, 55, 55);
     font-size: 15px;
 }
 
