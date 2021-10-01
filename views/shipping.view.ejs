@@ -11,7 +11,7 @@
       rel="stylesheet">
       <link rel="stylesheet" href="/css/myaccount.css" type="text/css" />
       
-
+      <script src="/js/navbar.js"> </script>
       <style>
            .list-group-item:nth-child(1){
                 border-radius: 0px;
@@ -32,11 +32,16 @@
                 display: flex;
                 flex-direction: column;
            }
+           .list-group-item.active{
+  z-index:0;
+}
+
       </style>
 
 </head>
 <body>
 
+     <%- include("partials/navbar")%>
 
      <div class="container-fluid">
 
@@ -79,7 +84,7 @@
                                 
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/wishlist" class="list-group-item list-group-item-action active">
+                              <a href="/myaccount/<%=user._id%>/wishlist" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -90,7 +95,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/rewards" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -101,7 +106,7 @@
                                    
                               </a>
                              
-                              <a href="/myaccount/<%=user._id%>/looks" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -126,7 +131,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/shipping" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/shipping" class="list-group-item list-group-item-action active">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -137,7 +142,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/payments" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -148,7 +153,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/preferences" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">

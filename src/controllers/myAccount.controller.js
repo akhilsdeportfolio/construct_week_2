@@ -4,26 +4,25 @@ const User = require("../models/user.model");
 const WishList = require("../models/wishlist.model");
 const WishListDetails = require("../models/wishlistDetails.model");
 const Addresses = require("../models/address.model");
+const Orders = require("../models/order.model");
+const axios = require("axios").default;
+
+
+
 router.get("/:id",async (req,res)=>{
-
-     
-
-     try{
      let userData =await User.find({"_id":req.params.id}).lean().exec();
-
      console.log(userData);
-     res.render("myaccount.view.ejs",{user:userData[0],orders:0});
-     }
-     catch(e)
-     {
-
-               res.send(e);
-     }
 
 
+     axios.get(`http://localhost:5000/orders/users/${req.params.id}`,{          
+     }).then((response)=>{
+          res.render("myaccount.view.ejs",{user:userData[0],orders:response.data.length,response:response.data.items});
+     }).catch((err)=>{
+          console.error(err);
+     })
 
 
-     
+   
 });
 
 router.get("/:id/wishlist",async (req,res)=>{

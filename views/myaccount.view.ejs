@@ -25,6 +25,26 @@
            .padding{
                 padding:10px;
            }
+           .left{
+                float: left;
+           }
+           .right{
+                float: right;
+           }
+           .clear{
+                clear: both;
+           }
+           bold{
+                font-weight: 700;
+                
+           }
+           .material-icons {
+               position: relative;
+               /* Adjust these values accordingly */
+               top: 5px;
+               left: 5px;
+               font-size: 20px;
+               }
       </style>
 
 </head>
@@ -51,7 +71,7 @@
                                         <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
                                    </div>
                                    <div class="p-2" style="height:100%">
-                                        <h5 style="line-height: 5;"><%= user.first_name%> <%= user.last_name%></h5>
+                                        <h5 style="line-height: 5;"><%= user.first_name%></h5>
                                         
                                    </div>
                                    
@@ -82,7 +102,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/rewards" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -93,7 +113,7 @@
                                    
                               </a>
                              
-                              <a href="/myaccount/<%=user._id%>/looks" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -129,7 +149,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/payments" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -140,7 +160,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/<%=user._id%>/preferences" class="list-group-item list-group-item-action">
+                              <a href="#" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -166,15 +186,7 @@
                     <div class="col-xl-10" >
                       <div class="container-fluid">
 
-                         <h4 style="line-height: 5;">Purchases</h4>
-                         <p> You have made <%= orders %> purchases in  <select id="time" onchange="getOrders()"> 
-                              <option value="1y">  1year</option>
-                              <option value="6m">  last 6 months</option>
-                              <option value="3m">  last 3 months</option>
-                              <option value="30d">  last 30 days</option>
-                              
-                         </select></p>
-
+                        
 
                          
                          
@@ -198,7 +210,45 @@
                               <div class="_169_i b4KdL"><span>How do you feel about our account page updates?</span> <a href="https://cxsurvey.foresee.com/sv?cid=hJsEYpCO3ycR8vTFZ+swiw==&amp;sid=functional-acct&amp;cpp[shopperid]=5769DFA6D83E4ED948FB4B3CB3922D09&amp;cpp[channel]=NORDSTROM" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Give us feedback</span></a><span>.</span></div>
 
                          <% } else { %>
-                                   <p>You have made <%=orders %> Orders</p>
+                              <div class="list-group" style="border: 2px solid whitesmoke;">
+
+                                   <% response.forEach((resp)=>{%>
+                                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                     <div class="d-flex w-100 justify-content-between" style="max-width: 60%;">
+                                      <div class="left">
+
+                                             
+                                             <img height="200px" width="200px" src="<%=resp.products[0].product.images[0]%>" class="img-responsive" alt="...">
+                                      </div>
+
+                                      <div class="right" style="text-align: left;">
+                                        <h5 class="mb-1" style="color: black;">Order ID : &nbsp;<%=resp._id%></h5>
+                                        <bold style="margin-left: 10px;"><i class="material-icons" >payments</i> <span style="font-size: 16px;">&nbsp; &#8377; <%=resp.total_price%></bold>
+
+                                        
+                                        <p class="mb-1">
+                                             <bold ><i class="material-icons" >shopping_bag</i> <span style="font-size: 16px;">&nbsp;</bold>
+                                             
+                                                  <span><%=resp.products.length%> Items ordered</span>
+                                                  
+                                             
+                                        
+                                        <br/>
+                                        <small><i class="material-icons" >home</i> <span style="font-size: 16px;">&nbsp; <%=resp.delivery_address%></span></small>
+                                        <br/>
+                                        <small ><i class="material-icons" >schedule</i> <span style="font-size: 16px;">&nbsp; <%=resp.createdAt%></span></small> <small><span><i class="material-icons">check_circle</i>&nbsp;  Delivered </small>
+                                       
+
+                                        </p>          
+                                     </div>
+
+                                     <div class="clear"></div>
+                                     
+                                      </div>
+                                       
+                                   </a>
+                                   <%})%>
+                              </div>     
                           <% } %>  
                       </div>
                     </div>
