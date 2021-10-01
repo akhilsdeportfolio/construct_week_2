@@ -89,10 +89,14 @@ let sortBy = (value) =>{
             var p_brand = document.createElement('p');
             p_brand.innerText = product.brand_id.brand_name;
 
+            var a = document.createElement('a');
+            a.href = `http://localhost:5000/products/${product._id}`
+
             var image = document.createElement('img');
             image.src = product.images[0];
 
             var description = document.createElement('a');
+            description.href=`http://localhost:5000/products/${product._id}`
             description.setAttribute('id', 'product-grid-description');
             description.innerText = product.brand_id.brand_name + " " + product.name;
 
@@ -123,7 +127,9 @@ let sortBy = (value) =>{
                 productText.append(quick_view, description, p_price);
             }
 
-            div.append(image, productText);
+            a.append(image)
+
+            div.append(a, productText);
             div.onmouseenter = function () {
                 quick_view.style.visibility = 'visible';
             }
