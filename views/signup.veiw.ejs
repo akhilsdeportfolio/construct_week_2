@@ -78,35 +78,155 @@
           <h2 style="margin:10px;">Sign In | Create Account</h2>
           <p style="margin:10px;">Enter your email to get started</p>
   
-          <form action="/users/createUser" method="post">
+          <form onsubmit="signupUser(event)">
+
+            <!--action="/users/createUser" method="post"-->
 
                <label class="signup-label" for="email">First Name</label>
                <br>
-               <input class="signup-input" type="text" name="first_name" id="email" style="margin:10px;"  />    
+               <input class="signup-input" type="text" id="fname" name="first_name" id="email" style="margin:10px;"  />    
 
                <label class="signup-label" for="email">Last Name</label>
           <br>
-          <input class="signup-input" type="text" name="last_name" id="email" style="margin:10px;"/>
+          <input class="signup-input" type="text" id="lname" name="last_name" id="email" style="margin:10px;"/>
 
 
           <label class="signup-label" for="email">Email</label>
           <br>
-          <input class="signup-input" type="text" name="email" id="email" style="margin:10px;" value="<%=email%>" />
+          <input class="signup-input" type="text" id="email" name="email" id="email" style="margin:10px;" value="<%=email%>" disabled/>
           <br>
 
 
           <label class="signup-label" for="email">Password</label>
           <br>
-          <input class="signup-input" type="password" name="password" id="email" style="margin:10px;"  />
+          <input class="signup-input" type="password" id="password" name="password" id="email" style="margin:10px;"  />
 
-
+          <p style="color:red" id="error"></p>
           <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
           <button type="submit" class="signup-btn" >Next</button>
+
+          
   
           <p style="margin:10px;">By tapping Next, you agree to our<a href="privacy.html">Privacy Policy</a> and <a
                   href="terms.html">Terms & Conditions</a>.</p>
           </form>                  
       </div>
-  
+      
+
+      <script>
+
+
+
+                function validateEmail(email) {
+                    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
+                }
+
+                function isValidPassword(string) {
+                    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+                    return re.test(string);
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                async function signupUser(e)
+                {
+                    e.preventDefault(); 
+                    
+                    
+
+                
+                    let fName = document.getElementById("fname").value.trim();
+                    let lName = document.getElementById("lname").value.trim();
+                    let email = document.getElementById("email").value.trim();
+                    let password = document.getElementById("password").value.trim();
+
+
+
+                    if(fName==''||lName==''||isValidPassword(password)==false||validateEmail(email)==false)
+                    {
+                        console.error("error in form validation")
+
+
+                        document.getElementById("fname").setAttribute("class","error");
+                        document.getElementById("lname").setAttribute("class","error");
+                        document.getElementById("password").setAttribute("class","error");
+
+
+
+
+                        document.getElementById("error").innerText="please enter all fields password should be alphanumeric with capital and small case letters and 1 special character.length should be atleast 6 chars long"
+                    }
+                    else
+                    {
+
+                        
+                        document.getElementById("error").innerText=null;
+                        
+
+                        let json = JSON.stringify(
+                        {
+                            first_name :fName,
+                            last_name:lName,
+                            email:email,
+                            password:password
+                        }
+                    )
+
+
+                    let resp=await fetch("http://localhost:5000/users/createUser",(
+                        {
+                            method:"POST",
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body:json
+                        }
+                    ));
+
+                    resp=await resp.json();
+
+                    console.log(resp);
+                    if(resp.status==true)
+                    {
+
+
+                        let wid = resp.jsonResp.wishlist.wishlist._id;
+                        let sid = resp.jsonResp.shoppingBag.item._id;
+
+                        localStorage.setItem("wid",wid);
+                        localStorage.setItem("sid",sid);
+
+
+                    }
+
+
+
+                    }
+
+
+                    
+
+
+
+                    
+
+
+                }
+
+
+
+      </script>
 </body>
 </html>
