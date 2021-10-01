@@ -53,5 +53,17 @@ checkShoppingBag = (items) => {
     bagData.append(text);
     var checkout = document.getElementById("shopping-bag-summary");
     checkout.style.display = "none";
+  } else {
+    var tag = document.getElementById("shopping-bag-tag");
+    var quantity = 0;
+
+    items.forEach((el) => {
+      return (quantity += el.quantity);
+    });
+    tag.innerText = `Shopping Bag (${quantity})`;
   }
+};
+
+goToPage = (product_id) => {
+  window.location.href = `http://localhost:5000/products/${product_id}`;
 };

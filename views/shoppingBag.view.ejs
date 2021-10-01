@@ -58,7 +58,7 @@
         <span id="shopping-bag-tag">Shopping Bag</span>
         <span id="shopping-bag-saved">Saved for Later</span>
       </div>
-
+      <br />
       <div id="shopping-bag-titles">
         <p id="shopping-bag-titles-name">Shopping Bag</p>
         <p id="shopping-bag-titles-gift">
@@ -74,7 +74,10 @@
         <% var sum = 0 %> <% items.forEach((item)=> { %>
         <div id="shopping-bag-data-div">
           <div id="shopping-bag-data-div-img">
-            <img src="<%= item.product_id.images[0] %>" />
+            <img
+              src="<%= item.product_id.images[0] %>"
+              onclick="goToPage(<%= JSON.stringify(item.product_id._id)%>)"
+            />
           </div>
           <div id="shopping-bag-data-product-text">
             <p class="shopping-bag-product-p-text">
@@ -101,12 +104,7 @@
             <div style="display: grid; grid-template-columns: repeat(2, 1fr)">
               <p
                 onclick="removeProduct(<%= JSON.stringify(item._id) %>)"
-                style="
-                  text-align: left;
-                  font-size: 14px;
-                  text-decoration: none;
-                  color: rgb(1, 100, 107);
-                "
+                class="shopping-bag-data-div-removeBtn"
               >
                 Remove
               </p>
@@ -140,14 +138,6 @@
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
             </select>
           </div>
           <div id="shopping-bag-data-product-price">
@@ -210,6 +200,7 @@
           </div>
         </div>
       </div>
+      <hr style="width: 100%" />
     </div>
 
     <%- include("partials/footer"); %>

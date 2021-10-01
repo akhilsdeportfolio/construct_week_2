@@ -57,6 +57,22 @@ body {
   width: 80%;
 }
 
+#shopping-bag-data-div-img:hover {
+  cursor: pointer;
+}
+
+.shopping-bag-data-div-removeBtn {
+  text-align: left;
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(1, 100, 107);
+}
+
+.shopping-bag-data-div-removeBtn:hover {
+  cursor: pointer;
+  font-weight: 500;
+}
+
 #shopping-bag-summary {
   display: grid;
   grid-template-columns: 35% 35%;
