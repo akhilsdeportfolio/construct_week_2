@@ -18,7 +18,7 @@ router.post("", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const item = await OrderNumber.findByIdAndUpdate(
     req.params.id,
-    req.body.params,
+    req.body,
     { new: true }
   );
 

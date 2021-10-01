@@ -8,6 +8,7 @@ var user_id;
 var total;
 var user_address;
 var userDetails;
+var order_number;
 
 checkoutPage = (shoppingBag) => {
   var required_value;
@@ -16,6 +17,7 @@ checkoutPage = (shoppingBag) => {
   getUserDetails(user_id);
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
+  fetchNewOrderNumber();
 };
 
 getShoppingBagDetails = (shoppingBag_id) => {
@@ -152,7 +154,7 @@ getUserDetails = (user_id) => {
 };
 
 getUserAddress = (user_id) => {
-  fetch(`http://localhost:5000/address/${user_id}`, {
+  fetch(`http://localhost:5000/address/dataAdd/${user_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -162,8 +164,8 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      user_address = res.address;
-      populateUserAddress(res.address);
+      user_address = res;
+      populateUserAddress(res);
     })
     .catch((err) => {
       console.log("err:", err);
@@ -182,7 +184,7 @@ populateUserAddress = (arr) => {
   var lastName = document.getElementById("lastName");
   lastName.value = userDetails.last_name;
 
-  if (address.length != 0) {
+  if (address) {
     var addressInput = document.getElementById("addressInput");
     addressInput.value = address.address;
 
@@ -295,7 +297,7 @@ function checkValues() {
       var Country = document.getElementById("Country").value;
       var Postal = document.getElementById("Postal").value;
 
-      if (user_address === null || user_address === undefined) {
+      if (user_address === null || user_address === undefined || user_address.length === 0) {
         addUserAddress(
           addressInput,
           address2,
@@ -417,18 +419,12 @@ function placeOrder() {
             .getElementById("imports")
             .textContent.trim()
             .split("\n");
+          var orderNumber = createOrder(total_price, items_price, shipping_price, duties_and_tax, address, imports);
           modal.style.display = "block";
           blur_effect.setAttribute("class", "blur");
-          ordernum.textContent = num;
+          ordernum.textContent = orderNumber;
           //localStorage.setItem(to_check, JSON.stringify([]));
-          createOrder(
-            total_price,
-            items_price,
-            shipping_price,
-            duties_and_tax,
-            address,
-            imports
-          );
+
         }, 3000);
       } else {
         cardnumber.style.borderColor = "#d30c0c";
@@ -506,10 +502,10 @@ addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_i
     });
 };
 
+
+
 createOrder = (total_price, items_price, shipping_price, duties_and_tax, address, imports) => {
   var products = [];
-
-  var order_number = fetchNewOrderNumber();
 
   for (k in shoppingBag_items) {
     var item = shoppingBag_items[k];
@@ -518,7 +514,6 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
       product: item.product_id,
       quantity: item.quantity,
     };
-
     products.push(obj);
   }
 
@@ -548,9 +543,12 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
   }
 
   uploadOrderDetails(order);
+
+  return order_number;
 };
 
 fetchNewOrderNumber = () => {
+  var order;
   fetch(`http://localhost:5000/orderNumbers/6156b86b69c58a54ec07bd62`, {
     method: "GET",
     headers: {
@@ -561,7 +559,7 @@ fetchNewOrderNumber = () => {
       return res.json();
     })
     .then((res) => {
-      return res.order_number;
+      order_number = res.item.order_number;
     })
     .catch((err) => {
       console.log("err:", err);
@@ -570,6 +568,44 @@ fetchNewOrderNumber = () => {
 
 
 uploadOrderDetails = (order) => {
-  console.log(order);
+  fetch(`http://localhost:5000/orders`, {
+    method: "POST",
+    body: JSON.stringify(order),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      updateOrderNumber(order_number);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
+
+updateOrderNumber = (order_number) => {
+  var number = order_number + 1;
+  fetch(`http://localhost:5000/orderNumbers/6156b86b69c58a54ec07bd62`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      order_number: number
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
 }
 

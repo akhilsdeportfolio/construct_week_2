@@ -9,7 +9,7 @@ let orderSchema = new mongoose.Schema({
     duties_tax: { type: Number, trim: true, required: true },
     delivery_address: { type: String, trim: true, required: true },
     delivery_method: { type: String, trim: true, required: true },
-    order_number: { type: String, trim: true, required: true }
+    order_number: { type: Number, trim: true, required: true }
 }, {
     versionKey: false,
     timestamps: true
