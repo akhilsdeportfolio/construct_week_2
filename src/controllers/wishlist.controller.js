@@ -9,9 +9,15 @@ const Wishlist = require("../models/wishlist.model")
 const router=express.Router()
 
 
+
+
+
 //-----------------CRUD API Requests--------------\\
 
 //    1. POST
+
+
+
 
 router.post("",async(req,res)=>{
 
@@ -37,6 +43,18 @@ router.get("",async(req,res)=>{
 })
 
 
+
+router.delete("/remove/:id",async(req,res)=>{
+
+    const wishlist=await Wishlist.findByIdAndDelete(req.params.id).lean().exec()
+
+    return res.render("wishlist_delete.ejs",{
+
+        wishlist:wishlist
+    })
+})
+
+
 //     3. PATCH
 
 router.patch("/:id",async(req,res)=>{
@@ -50,14 +68,5 @@ router.patch("/:id",async(req,res)=>{
 //     4.  DELETE
 
 
-router.delete("/:id",async(req,res)=>{
-
-    const wishlist=await Wishlist.findByIdAndDelete(req.params.id).lean().exec()
-
-    return res.render("wishlist_delete.ejs",{
-
-        wishlist:wishlist
-    })
-})
 
 module.exports=router;

@@ -49,7 +49,6 @@
   <body>
 
   
-    <%- include("partials/navbar"); %>
 
     <h3>Address list of users</h3>
    <div class="eachAddDivCon">
@@ -61,7 +60,7 @@
     <p><span> Postal Code : </span><%=add.postal_code %></p>
     <p><span>City :</span> <%=add.city %></p>
     <p><span>Phone :</span> <%=add.phone %></p>
-    <a href="/address/delete/<%= add._id%>">Click here to delete address</a>
+    <a href="/address/del/<%= add._id%>/user/<%=user_id%>">Click here to delete address</a>
     </div>
     <%})%>
     </div>
@@ -104,6 +103,7 @@
                 type="text"
                 class="form-control"
                 name="user_id"
+                value="<%= user_id %>"
                 placeholder="Enter User Id"
               />
               <input type="text" class="form-control" name="address" placeholder="Adrress" />
@@ -127,8 +127,7 @@
       </div>
     </div>
 
-    <%- include("partials/footer"); %>
-
+    
 
   </body>
 </html>
