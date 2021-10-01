@@ -23,6 +23,7 @@ const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.c
 const paymentsController = require("./controllers/payments.controller");
 const checkoutController = require("./controllers/checkout.controller");
 const myAccountController = require("./controllers/myAccount.controller");
+const orderController = require("./controllers/order.controller");
 
 //this is a firebase config object dont worry about it ;
 const firebaseConfig = {
@@ -39,7 +40,7 @@ const fbApp = firebaseapp.initializeApp(firebaseConfig);
 
 const app = express();
 app.use(express.json()); //for parsing json data
-app.use(express.urlencoded({extended:true})); // for parsing body data in post requests
+app.use(express.urlencoded({ extended: true })); // for parsing body data in post requests
 
 // public
 app.use(express.static("public"));
@@ -68,13 +69,15 @@ app.use("/myaccount", myAccountController);
 app.use("/payments", paymentsController);
 app.use("/checkout", checkoutController);
 
-app.get("/landingpage",function(req,res){
-  res.render("landingPage.ejs",{});
-})
+app.use("/orders", orderController);
 
-app.get("/login",function(req,res){
-  res.render("login.veiw.ejs",{});
-})
+app.get("/landingpage", function (req, res) {
+  res.render("landingPage.ejs", {});
+});
+
+app.get("/login", function (req, res) {
+  res.render("login.veiw.ejs", {});
+});
 
 app.listen(5000, async () => {
   await connect();
