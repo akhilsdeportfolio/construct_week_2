@@ -543,10 +543,11 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
     shipping_price: shipping_price,
     duties_tax: duties_and_tax,
     delivery_address: address,
-    delivery_method: imports
+    delivery_method: imports,
+    order_number: order_number
   }
 
-  console.log(order);
+  uploadOrderDetails(order);
 };
 
 fetchNewOrderNumber = () => {
@@ -568,5 +569,7 @@ fetchNewOrderNumber = () => {
 }
 
 
-uploadOrderDetails()
+uploadOrderDetails = (order) => {
+  console.log(order);
+}
 
