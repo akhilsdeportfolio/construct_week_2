@@ -37,7 +37,8 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-    <script src=" /js/shoppingBag.js"></script>
+    <script src="/js/shoppingBag.js"></script>
+    <script src="/js/navbar.js"></script>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -50,7 +51,7 @@
     />
   </head>
 
-  <body onload="checkShoppingBag(<%=JSON.stringify(items) %>)">
+  <body onload="checkShoppingBag(<%=JSON.stringify(items) %>)" onclick="removeDropdown()">
     <%- include("partials/navbar"); %>
 
     <div id="shopping-bag-container">
