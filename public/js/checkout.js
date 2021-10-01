@@ -162,8 +162,8 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
-      user_address = res.addresses;
-      populateUserAddress(res.addresses);
+      user_address = res.address;
+      populateUserAddress(res.address);
     })
     .catch((err) => {
       console.log("err:", err);
@@ -171,10 +171,7 @@ getUserAddress = (user_id) => {
 };
 
 populateUserAddress = (arr) => {
-  console.log(userDetails);
   var address = arr[0];
-
-  console.log("Address:", arr.addresses);
 
   var emailInput = document.getElementById("emailInput");
   emailInput.value = userDetails.email;
@@ -298,7 +295,6 @@ function checkValues() {
       var Country = document.getElementById("Country").value;
       var Postal = document.getElementById("Postal").value;
 
-      console.log("User Address:", user_address);
       if (user_address === null || user_address === undefined) {
         addUserAddress(
           addressInput,
@@ -513,7 +509,7 @@ addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_i
 createOrder = (total_price, items_price, shipping_price, duties_and_tax, address, imports) => {
   var products = [];
 
-  fetchNewOrderNumber();
+  var order_number = fetchNewOrderNumber();
 
   for (k in shoppingBag_items) {
     var item = shoppingBag_items[k];
@@ -539,12 +535,18 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
     })
     .join(" ");
 
-  console.log("Total Price:", total_price);
-  console.log("Item Price:", items_price);
-  console.log("Shipping Price:", shipping_price);
-  console.log("Imports:", imports);
-  console.log("Address:", address);
-  console.log("Duties and Tax:", duties_and_tax);
+  var order = {
+    user_id: user_id,
+    products: products,
+    total_price: total_price,
+    items_total_price: items_price,
+    shipping_price: shipping_price,
+    duties_tax: duties_and_tax,
+    delivery_address: address,
+    delivery_method: imports
+  }
+
+  console.log(order);
 };
 
 fetchNewOrderNumber = () => {
@@ -558,10 +560,13 @@ fetchNewOrderNumber = () => {
       return res.json();
     })
     .then((res) => {
-      console.log(res);
+      return res.order_number;
     })
     .catch((err) => {
       console.log("err:", err);
     });
 }
+
+
+uploadOrderDetails()
 

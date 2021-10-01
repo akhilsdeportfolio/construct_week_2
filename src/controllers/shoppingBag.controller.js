@@ -21,7 +21,6 @@ router.get("/:id", async (req, res) => {
     .populate("user_id")
     .lean()
     .exec();
-  console.log(item);
   res.status(200).send({ item });
 });
 
