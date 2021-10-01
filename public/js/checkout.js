@@ -4,11 +4,14 @@ var ordernum = document.getElementById("orderId");
 var c = document.getElementById("anotherbtn");
 var total_price = document.getElementById("total_price");
 var shoppingBag_items;
+var user_id;
+var total;
+var user_address;
 
 checkoutPage = (shoppingBag) => {
   var required_value;
   var shoppingBag_id = shoppingBag._id;
-  var user_id = shoppingBag.user_id;
+  user_id = shoppingBag.user_id;
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
 };
@@ -34,7 +37,7 @@ getShoppingBagDetails = (shoppingBag_id) => {
 
 createProducts = (items) => {
   var total_price = document.getElementById("total_price");
-  var total = 0;
+  total = 0;
   for (k in items) {
     var e = items[k];
     var main_div = document.createElement("div");
@@ -107,16 +110,16 @@ function required(num) {
   var element = event.currentTarget.children[2];
 
   if (num == 2) {
-    element.children[0].textContent = "₹3,325";
+    element.children[0].textContent = "₹3325";
     required_value = 3325;
   } else if (num == 3) {
-    element.children[0].textContent = "₹3,428";
+    element.children[0].textContent = "₹3428";
     required_value = 3428;
   } else if (num == 4) {
-    element.children[0].textContent = "₹3,628";
+    element.children[0].textContent = "₹3628";
     required_value = 3628;
   } else {
-    element.children[0].textContent = "₹2,487";
+    element.children[0].textContent = "₹2487";
     required_value = 2487;
   }
 
@@ -139,6 +142,7 @@ getUserAddress = (user_id) => {
       return res.json();
     })
     .then((res) => {
+      user_address = res.addreses;
       populateUserAddress(res.addresses);
     })
     .catch((err) => {
@@ -272,6 +276,18 @@ function checkValues() {
       var Country = document.getElementById("Country").value;
       var Postal = document.getElementById("Postal").value;
 
+      if (user_address === null) {
+        addUserAddress(
+          addressInput,
+          address2,
+          city,
+          region,
+          Country,
+          Postal,
+          phone_input.value
+        );
+      }
+
       document.getElementById("displayname").textContent = (
         firstName +
         " " +
@@ -365,11 +381,35 @@ function placeOrder() {
         c.textContent = "Loading...";
         var num = Math.round(Math.random() * 100000);
         setTimeout(function () {
+          let total_price = document
+            .getElementById("total_price")
+            .textContent.trim();
+          let items_price = document
+            .getElementById("items_price")
+            .textContent.trim();
+          let shipping_price = document
+            .getElementById("shipping_price")
+            .textContent.trim();
+          let duties_and_tax = 2360;
+          let address = document
+            .getElementById("displayAddress")
+            .textContent.trim();
+          let imports = document
+            .getElementById("imports")
+            .textContent.trim()
+            .split("\n");
           modal.style.display = "block";
           blur_effect.setAttribute("class", "blur");
           ordernum.textContent = num;
           //localStorage.setItem(to_check, JSON.stringify([]));
-          createOrder();
+          createOrder(
+            total_price,
+            items_price,
+            shipping_price,
+            duties_and_tax,
+            address,
+            imports
+          );
         }, 3000);
       } else {
         cardnumber.style.borderColor = "#d30c0c";
@@ -419,7 +459,14 @@ closeModal = (shoppingBag_id) => {
   //window.location.href = `http://localhost:5000/shoppingBagDetails/${shoppingBag_id}`;
 };
 
-createOrder = () => {
+createOrder = (
+  total_price,
+  items_price,
+  shipping_price,
+  duties_and_tax,
+  address,
+  imports
+) => {
   var products = [];
 
   for (k in shoppingBag_items) {
@@ -433,5 +480,68 @@ createOrder = () => {
     products.push(obj);
   }
 
-  console.log(products);
+  total_price = Number(total_price.split("").splice(1).join(""));
+  items_price = Number(items_price.split("").splice(1).join(""));
+  shipping_price = Number(shipping_price.split("").splice(1).join(""));
+  imports = imports
+    .filter((el) => {
+      return el != "";
+    })
+    .map((el) => {
+      return el.trim();
+    })
+    .join(" ");
+
+  console.log("Total Price:", total_price);
+  console.log("Item Price:", items_price);
+  console.log("Shipping Price:", shipping_price);
+  console.log(
+    "Imports:",
+    imports
+      .filter((el) => {
+        return el != "";
+      })
+      .map((el) => {
+        return el.trim();
+      })
+      .join(" ")
+  );
+  console.log("Address:", address);
+  console.log("Duties and Tax:", duties_and_tax);
+};
+
+addUserAddress = (
+  addressInput,
+  address2,
+  city,
+  region,
+  Country,
+  Postal,
+  phone_input
+) => {
+  fetch(`http://localhost:5000/address}`, {
+    method: "POST",
+    body: JSON.stringify({
+      user_id: user_id,
+      address: addressInput,
+      address2: address2,
+      postal_code: Postal,
+      city: city,
+      region: region,
+      phone: phone_input,
+      country: Country,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
 };
