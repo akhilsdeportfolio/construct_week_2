@@ -46,8 +46,8 @@ checkShoppingBag = (items) => {
     var bagData = document.getElementById("shopping-bag-data");
     bagData.innerHTML = "";
     var text = document.createElement("p");
-    text.innerHTML = `Your bag is empty.`;
-    // <a href = 'landing_page.html'>Click here to continue shopping!</a>
+    text.innerHTML = `Your bag is empty.
+    <a href='/landingpage'>Click here to continue shopping!</a>`;
     text.setAttribute("id", "shopping-bag-empty");
     bagData.append(text);
     var checkout = document.getElementById("shopping-bag-summary");

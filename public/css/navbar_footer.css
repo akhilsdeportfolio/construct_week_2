@@ -93,6 +93,7 @@
 #nav-bar {
   margin-top: 25px;
   padding-bottom: 13px;
+  width: 100%;
 }
 
 #nav-bar > div {
