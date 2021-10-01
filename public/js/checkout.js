@@ -482,66 +482,7 @@ closeModal = (shoppingBag_id) => {
   //window.location.href = `http://localhost:5000/shoppingBagDetails/${shoppingBag_id}`;
 };
 
-createOrder = (
-  total_price,
-  items_price,
-  shipping_price,
-  duties_and_tax,
-  address,
-  imports
-) => {
-  var products = [];
-
-  for (k in shoppingBag_items) {
-    var item = shoppingBag_items[k];
-
-    var obj = {
-      product: item.product_id,
-      quantity: item.quantity,
-    };
-
-    products.push(obj);
-  }
-
-  total_price = Number(total_price.split("").splice(1).join(""));
-  items_price = Number(items_price.split("").splice(1).join(""));
-  shipping_price = Number(shipping_price.split("").splice(1).join(""));
-  imports = imports
-    .filter((el) => {
-      return el != "";
-    })
-    .map((el) => {
-      return el.trim();
-    })
-    .join(" ");
-
-  console.log("Total Price:", total_price);
-  console.log("Item Price:", items_price);
-  console.log("Shipping Price:", shipping_price);
-  console.log(
-    "Imports:",
-    imports
-      .filter((el) => {
-        return el != "";
-      })
-      .map((el) => {
-        return el.trim();
-      })
-      .join(" ")
-  );
-  console.log("Address:", address);
-  console.log("Duties and Tax:", duties_and_tax);
-};
-
-addUserAddress = (
-  addressInput,
-  address2,
-  city,
-  region,
-  Country,
-  Postal,
-  phone_input
-) => {
+addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_input) => {
   fetch(`http://localhost:5000/address`, {
     method: "POST",
     body: JSON.stringify({
@@ -568,3 +509,59 @@ addUserAddress = (
       console.log("err:", err);
     });
 };
+
+createOrder = (total_price, items_price, shipping_price, duties_and_tax, address, imports) => {
+  var products = [];
+
+  fetchNewOrderNumber();
+
+  for (k in shoppingBag_items) {
+    var item = shoppingBag_items[k];
+
+    var obj = {
+      product: item.product_id,
+      quantity: item.quantity,
+    };
+
+    products.push(obj);
+  }
+
+  total_price = Number(total_price.split("").splice(1).join(""));
+  items_price = Number(items_price.split("").splice(1).join(""));
+  shipping_price = Number(shipping_price.split("").splice(1).join(""));
+
+  imports = imports
+    .filter((el) => {
+      return el != "";
+    })
+    .map((el) => {
+      return el.trim();
+    })
+    .join(" ");
+
+  console.log("Total Price:", total_price);
+  console.log("Item Price:", items_price);
+  console.log("Shipping Price:", shipping_price);
+  console.log("Imports:", imports);
+  console.log("Address:", address);
+  console.log("Duties and Tax:", duties_and_tax);
+};
+
+fetchNewOrderNumber = () => {
+  fetch(`http://localhost:5000/orderNumbers/6156b86b69c58a54ec07bd62`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+}
+

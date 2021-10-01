@@ -23,6 +23,7 @@ const shoppingBagDetailsController = require("./controllers/shoppingBagDetails.c
 const paymentsController = require("./controllers/payments.controller");
 const checkoutController = require("./controllers/checkout.controller");
 const myAccountController = require("./controllers/myAccount.controller");
+const orderNumberController = require("./controllers/orderNumber.controller");
 const orderController = require("./controllers/order.controller");
 
 //this is a firebase config object dont worry about it ;
@@ -70,6 +71,7 @@ app.use("/myaccount", myAccountController);
 app.use("/payments", paymentsController);
 app.use("/checkout", checkoutController);
 
+app.use("/orderNumbers", orderNumberController);
 app.use("/orders", orderController);
 
 app.get("/landingpage", function (req, res) {
