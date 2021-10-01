@@ -52,6 +52,7 @@ app.set("view engine", "ejs");
 app.use("/users", userController);
 app.use("/wishlist", wishlistController);
 app.use("/wishlistDetails", wishlistDetailsController);
+
 app.use("/address", addressController);
 
 app.use("/productCategories", productCategoryController);
