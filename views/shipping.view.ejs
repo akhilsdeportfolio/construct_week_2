@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,52 +173,7 @@
                     </div>
                     <div class="col-xl-10" >
                       <div class="container-fluid">
-
-                         <h4 style="line-height: 5;">wishlist</h4>
-                         <p> You have added <%= wishlist_details.length %> items to wishlist</p>
-
-
-                         
-
-                         <div class="container">
-                              <div class="row">
-                                   <% wishlist_details.forEach((item)=>{ %>
-
-                                       
-                                             <div class="col-sm">
-
-                                             <div class="flex">
-                                                  <div style="text-align: center;">
-                                                  <img style="height: 200px;width:200px;" src="<%=item.product_id.images[0]%>" alt="..." class="img-fluid img-thumbnail">
-                                                  <p style="text-align: center; "><%= item.product_id.name %></p>
-                                                  <p  style="text-align: center;"><%= item.product_id.price %></p>
-
-                                             
-
-
-                                             <div class="container">
-                                                  <a href="/products/<%= item.product_id._id %>"   
-                                                      class="btn btn-sm btn-primary" >Buy now</a> 
-                                                  <a href="/wishListDetails/delete/<%=item._id%>/<%=user._id%>" class="btn btn-sm  btn-primary">Remove</a>
-                                             </div>
-                                                  
-                                             </div>
-                                             </div>
-
-                                        
-
-                                             
-                                        </div>         
-          
-                                        
-                                        
-                                   <% }) %>                                 
-                               
-                                
-                              </div>
-                            </div>
-
-
+                         <%- include("address.view.ejs"); %>
                          
                       </div>
                     </div>

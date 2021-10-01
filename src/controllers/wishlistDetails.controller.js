@@ -30,7 +30,13 @@ router.get("",async(req,res)=>{
         wishlist_details: wishlist_details
     })
 })
+//GET wishlist  of user
+router.get("/:wishlistId",async(req,res)=>{
 
+    const wishlist_details=await WishlistDetails.find({wishlist_id:req.params.wishlistId}).populate("product_id").lean().exec()
+
+    return res.send({wishlist_details});
+})
 
 //     3. PATCH
 
@@ -45,11 +51,12 @@ router.patch("/:id",async(req,res)=>{
 //     4.  DELETE
 
 
-router.delete("/:id",async(req,res)=>{
+router.get("/delete/:id/:uid",async(req,res)=>{
 
     const wishlist_details=await WishlistDetails.findByIdAndDelete(req.params.id).lean().exec()
 
-    return res.send({wishlist_details})
+    let url="/myaccount/"+req.params.uid+"/wishlist"
+    return res.redirect(url);
 })
 
 module.exports=router;

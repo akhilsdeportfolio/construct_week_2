@@ -8,7 +8,8 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet">
-     
+      <link rel="stylesheet" href="/css/myaccount.css" type="text/css" />
+      
 
       <style>
            .list-group-item:nth-child(1){
@@ -32,7 +33,7 @@
 
      <div class="container-fluid">
 
-          
+          <%- include("partials/navbar"); %>
 
           
 
@@ -51,7 +52,8 @@
                                         <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
                                    </div>
                                    <div class="p-2" style="height:100%">
-                                        <h5 style="line-height: 5;">K akhil</h5>
+                                        <h5 style="line-height: 5;"><%= user.first_name%> <%= user.last_name%></h5>
+                                        
                                    </div>
                                    
                                  </div>
@@ -59,7 +61,7 @@
                
                          </div>
                          <div class="list-group" style="width:100%;margin:0px;">
-                              <a href="/myaccount" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>" class="list-group-item list-group-item-action ">
                                 <div class="d-flex w-100">
                                   
                                    <span class="material-icons">
@@ -70,7 +72,7 @@
                                 
                               </a>
 
-                              <a href="/myaccount/wishlist" class="list-group-item list-group-item-action ">
+                              <a href="/myaccount/<%=user._id%>/wishlist" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -81,7 +83,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/rewards" class="list-group-item list-group-item-action active">
+                              <a href="/myaccount/<%=user._id%>/rewards" class="list-group-item list-group-item-action active">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -92,7 +94,7 @@
                                    
                               </a>
                              
-                              <a href="/myaccount/looks" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/looks" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -106,7 +108,7 @@
 
                               <hr style="color: whitesmoke;margin:10px"/>
 
-                              <a href="/myaccount/password" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/password" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -117,7 +119,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/shipping" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/shipping" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -128,7 +130,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/payments" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/payments" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -139,7 +141,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/preferences" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/preferences" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -150,7 +152,7 @@
                                    
                               </a>
 
-                              <a href="/myaccount/signout" class="list-group-item list-group-item-action">
+                              <a href="/myaccount/<%=user._id%>/signout" class="list-group-item list-group-item-action">
                                    <div class="d-flex w-100">
                                      
                                       <span class="material-icons">
@@ -202,6 +204,11 @@
                       </div>
                     </div>
           </div>
+
+
+
+          <%- include("partials/footer"); %>
+
           
           <script>
                function getOrders()

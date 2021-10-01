@@ -139,7 +139,7 @@
                             
                         if(res.status==true)
                         {
-                            localStorage.setItem("user_id",res.user._id);
+                            localStorage.setItem("uid",res.user._id);
                             alert("login success");
                             let user_id=localStorage.getItem("user_id");
                             window.location=`/myaccount/${user_id}`;

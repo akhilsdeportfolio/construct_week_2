@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 const Addresses = require("../models/address.model");
+
+
+
+router.get("/del/:id/user/:uid", async (req, res) => {
+  let deleteAddress = await Addresses.findByIdAndDelete(req.params.id);
+  let url ="/myaccount/"+req.params.uid+"/shipping"
+  res.redirect(url);
+});
+
 //get all the address details
 router.get("", async (req, res) => {
   let address = await Addresses.find().lean().exec();
@@ -12,14 +21,10 @@ router.get("", async (req, res) => {
 // post user address
 router.post("", async (req, res) => {
   let createdAddress = await Addresses.create(req.body);
-  res.send({ createdAddress });
+  res.send({ status:true,createdAddress });
 });
 
 // delete user address
-router.get("/delete/:id", async (req, res) => {
-  let deleteAddress = await Addresses.findByIdAndDelete(req.params.id);
-  res.redirect("/address");
-});
 
 //update a particular address
 router.patch("/updateAddress/:id", async (req, res) => {
@@ -47,8 +52,11 @@ router.get("/:id", async function (req, res) {
   let singleAddress = await Addresses.find({ user_id: { $eq: req.params.id } })
     .lean()
     .exec();
+
+  console.log(req.params.id);
+
   res.render("address.view.ejs", {
-    address: singleAddress,
+    address: singleAddress,user_id:req.params.id
   });
 });
   //res.send(singleAddress);
