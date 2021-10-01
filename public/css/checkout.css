@@ -545,6 +545,10 @@ i {
   filter: blur(1px);
 }
 
+.noblur {
+  filter: blur(0);
+}
+
 .modal-content img {
   width: 100%;
   margin-bottom: 20px;

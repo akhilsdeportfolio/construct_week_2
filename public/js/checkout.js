@@ -1,17 +1,14 @@
 var item_price_value;
+var required_event;
+var ordernum = document.getElementById("orderId");
+var c = document.getElementById("anotherbtn");
+var total_price = document.getElementById("total_price");
+var shoppingBag_items;
 
 checkoutPage = (shoppingBag) => {
   var required_value;
-  var total_price = document.getElementById("total_price");
-  var required_event;
-  var d = document.getElementById("continue");
-  var ordernum = document.getElementById("orderId");
-  var to_check;
-  var c = document.getElementById("anotherbtn");
-
   var shoppingBag_id = shoppingBag._id;
   var user_id = shoppingBag.user_id;
-
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
 };
@@ -27,6 +24,7 @@ getShoppingBagDetails = (shoppingBag_id) => {
       return res.json();
     })
     .then((res) => {
+      shoppingBag_items = res.items;
       createProducts(res.items);
     })
     .catch((err) => {
@@ -122,6 +120,8 @@ function required(num) {
     required_value = 2487;
   }
 
+  var total_price = document.getElementById("total_price");
+
   total_price.textContent =
     "₹" + Number(item_price_value + required_value + 2360);
   var shipping_price = document.getElementById("shipping_price");
@@ -194,7 +194,11 @@ populateUserAddress = (arr) => {
 };
 
 function checkValues() {
-  if (event.target.textContent == "Continue>>") {
+  var ordernum = document.getElementById("orderId");
+
+  var c = document.getElementById("anotherbtn");
+  var d = document.getElementById("continue");
+  if (event.target.textContent.trim() == "Continue>>") {
     var emlLable = document.getElementById("emaillabel");
     var firstNameLabel = document.getElementById("firstNamelabel");
     var lastNameLabel = document.getElementById("lastNamelabel");
@@ -312,7 +316,6 @@ function checkValues() {
       if (gone.style.display === "none") {
         gone.style.display = "block";
       } else {
-        console.log("Flag...");
         gone.style.display = "none";
         address_display.style.display = "flex";
         credit_details.style.display = "block";
@@ -326,6 +329,11 @@ function checkValues() {
 }
 
 function placeOrder() {
+  var ordernum = document.getElementById("orderId");
+  var c = document.getElementById("anotherbtn");
+  var d = document.getElementById("continue");
+  var modal = document.getElementById("simpleModal");
+  var blur_effect = document.getElementById("entire-body");
   if (event.target.textContent == "SHOP MORE") {
     window.location.href = "landing_page.html";
   } else {
@@ -360,7 +368,8 @@ function placeOrder() {
           modal.style.display = "block";
           blur_effect.setAttribute("class", "blur");
           ordernum.textContent = num;
-          localStorage.setItem(to_check, JSON.stringify([]));
+          //localStorage.setItem(to_check, JSON.stringify([]));
+          createOrder();
         }, 3000);
       } else {
         cardnumber.style.borderColor = "#d30c0c";
@@ -370,3 +379,59 @@ function placeOrder() {
     }
   }
 }
+
+function card(cardNumber, k) {
+  var cardArray = cardNumber.split("");
+  for (let i = 0; i < cardArray.length; i++) {
+    if (cardArray[i].charCodeAt() > 57 || cardArray[i].charCodeAt() < 48) {
+      return false;
+    }
+  }
+
+  if (k == 0) {
+    if (cardArray.length == 16) {
+      return true;
+    }
+  } else if (k == 1) {
+    if (cardArray.length == 4) {
+      let month = Number(cardNumber.slice(0, 2));
+      let year = Number(cardNumber.slice(2, 4));
+      if (month >= 1 && month <= 12 && year > 21) {
+        return true;
+      }
+    }
+  } else if (k == 2) {
+    if (cardArray.length == 3) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+closeModal = (shoppingBag_id) => {
+  var modal = document.getElementById("simpleModal");
+  var blur_effect = document.getElementById("entire-body");
+
+  modal.style.display = "none";
+  blur_effect.setAttribute("class", "noblur");
+
+  //window.location.href = `http://localhost:5000/shoppingBagDetails/${shoppingBag_id}`;
+};
+
+createOrder = () => {
+  var products = [];
+
+  for (k in shoppingBag_items) {
+    var item = shoppingBag_items[k];
+
+    var obj = {
+      product: item.product_id,
+      quantity: item.quantity,
+    };
+
+    products.push(obj);
+  }
+
+  console.log(products);
+};

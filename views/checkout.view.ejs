@@ -431,7 +431,11 @@
 
     <div id="simpleModal" class="modal">
       <div class="modal-content">
-        <span id="closeBtn">&times;</span>
+        <span
+          id="closeBtn"
+          onclick="closeModal(<%= JSON.stringify(shoppingBag._id) %>)"
+          >&times;</span
+        >
         <img src="https://n.nordstrommedia.com/alias/nordstrom-logo.svg" />
         <hr />
         <h1>Congratulations!</h1>
@@ -445,7 +449,7 @@
           your email and message for order related details.
         </p>
         <button style="margin-top: 15px">
-          <a href="landing_page.html">SHOP MORE</a>
+          <a href="/">SHOP MORE</a>
         </button>
       </div>
     </div>
