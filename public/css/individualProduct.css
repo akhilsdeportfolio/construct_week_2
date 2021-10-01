@@ -45,7 +45,7 @@ body {
 
 }
 
-.prod-img {
+#prod-img {
     width: 50%;
 }
 
@@ -65,8 +65,9 @@ body {
     color: white;
     padding: 5px;
     font-size: 20px;
-    line-height: 0px;
+    line-height: 2px;
     border: 0px;
+    padding-bottom: 15px;
 }
 
 .pro_det_p {

@@ -13,33 +13,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/individualProduct.css" type="text/css">
+    <script src="/js/navbar.js"> </script>
 
     <title>Products</title>
 </head>
 
-<body>
+<body onclick="removeDropdown()">
 
     <div id="product-grid-container">
         <%- include("partials/navbar"); %>
             <div id="details" style="position:relative;overflow:hidden">
                 <div class="image-holder">
-                    <div id="image_product" class="flex-box"><img class="prod-img"
-                            src=<%=(product.images[0]) %>
-                            style="min-height: 200px; max-height: 520px;"></div>
+                    <div id="image_product" class="flex-box"><img id="prod-img" src=<%=(product.images[0]) %>
+                        style="min-height: 200px; max-height: 520px;"></div>
 
                 </div>
 
                 <div class="product-holder">
                     <div id="discription_product" class="flex-box">
-                        <h2 class="pro_det_name"><%= product.name %></h2>
-                        <p class="pro_det_p" style="font-size: 15px;"><%= product.brand_id.brand_name %></p>
-                        <h3 class="pro_det_h3">INR <%= product.price %></h3>
+                        <h2 class="pro_det_name">
+                            <%= product.name %>
+                        </h2>
+                        <p class="pro_det_p" style="font-size: 15px;">
+                            <%= product.brand_id.brand_name %>
+                        </p>
+                        <h3 class="pro_det_h3">INR <%= product.price %>
+                        </h3>
                         <p class="pro_det_p2">Price varies with currency exchange rates and may be different than in
                             store.</p>
-                        <p class="pro_det_p"><%= product.description %></p>
+                        <p class="pro_det_p">
+                            <%= product.description %>
+                        </p>
                         <p class="pro_det_p" style="font-weight: 400;">Colors available: <span
-                                style="font-weight: 500;color: <%= product.color %>;"><%= product.color %></span></p><input type="text" id="quantity"
-                            value="1"><br><button id="button1" style="font-size: 19px;"><span class="material-icons"
+                                style="font-weight: 500;color: <%= product.color %>;">
+                                <%= product.color %>
+                            </span></p><input type="text" id="quantity" value="1"><br><button id="button1"
+                            class=<%=product._id %>
+                            style="font-size: 19px;"><span class="material-icons"
                                 style="font-size: 24px;">shopping_bag</span> Add to Bag</button><button id="wishlist">+
                             Add To Wish List</button>
                     </div>
@@ -64,9 +74,12 @@
             <div id="flex" style="margin-left:30px;">
                 <div id="discription_list" class="disc">
                     <h4 class="pro_det_h4">DETAILS &amp; CARE</h4>
-                    <p class="pro_det_p" style="font-size: 14px;"><%= product.description %>
+                    <p class="pro_det_p" style="font-size: 14px;">
+                        <%= product.description %>
                     </p>
-                    <p><%- product.details %></p>
+                    <p>
+                        <%- product.details %>
+                    </p>
                     <p class="pro_det_p3" style="color: rgb(37, 37, 37); font-weight: 500;">Free Shipping &amp; Returns
                         <a href="http://www.google.com" style="color: rgb(37, 37, 37); font-weight: 400;">See more</a>
                     </p>
@@ -84,5 +97,107 @@
     </div>
 
 </body>
+
+<script>
+
+
+    //uid
+    let imgDiv = document.getElementById("prod-img")
+    let wishlist = document.getElementById("wishlist")
+
+    imgDiv.onmouseover = function () {
+
+        imgDiv.style.width = "40%"
+        imgDiv.style.position = "absolute"
+        imgDiv.style.top = "0px"
+        imgDiv.style.left = "10px"
+
+    }
+    imgDiv.onmouseleave = function () {
+
+        imgDiv.style.position = "static"
+    }
+
+    // localhost:5000/shoppingBagDetails
+
+    let addToBag = document.getElementById("button1")
+
+    addToBag.onclick = async () => {
+
+
+        if (localStorage.getItem('uid')) {
+
+            //shud add the product to the bag
+
+            let quantity = document.getElementById("quantity")
+
+            // let response = await fetch("localhost:5000/shoppingBagDetails", (
+            //     {
+            //         method: 'POST',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify({
+            //             "product_id": addToBag.className,
+            //             "shopping_bag_id":"", //will be getting from the localstorage,
+            //             "quantity": quantity.value,
+            //             "ordered_flag":true,
+            //         })
+            //     }
+            // ));
+
+            // let res = await response.json();
+            // console.log(res);
+
+        } else {
+
+            //shud be taken to sigin page
+
+            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            window.location.href = "/login"
+        }
+    }
+
+
+    //wid - wishlist id
+    //sid - shopping bag id
+
+    wishlist.onclick = async () => {
+
+        if (localStorage.getItem('uid')) {
+
+            let response = await fetch(`localhost:5000/wishlistDetails/${user_id}`, (
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "product_id": addToBag.className,
+                        "shopping_bag_id": "", //will be getting from the localstorage,
+                        "quantity": quantity.value,
+                        "ordered_flag": true,
+                    })
+                }
+            ));
+
+            let res = await response.json();
+            console.log(res);
+        } else {
+
+            //shud be taken to sigin page
+
+            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            window.location.href = "/login"
+        }
+
+
+    }
+
+
+
+</script>
 
 </html>

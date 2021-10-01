@@ -1,4 +1,5 @@
-let currentArray; let products;
+let currentArray; 
+let products;
 
 let data_div = document.getElementById('product-grid-data');
 
@@ -44,31 +45,23 @@ function toggleDisplay(divID, id) {
     }
 }
 
-
-// /filter/:brand
-
-// filter/?brands=nike,puma,adida&color=pink,red,white
-
-
 async function addfilter() {
 
     clearLocalStorge();
 
-    var brandfilters = [];
+    var filters = [];
     var checkbox = document.getElementsByClassName('product-grid-checkmark');
     for (let i = 0; i < checkbox.length; i++) {
 
         if (checkbox[i].checked) {
 
-            brandfilters.push(checkbox[i].value);
+            filters.push(checkbox[i].value);
 
         }
     }
 
-    console.log(brandfilters)
 
-
-    if (brandfilters.length === 0) {
+    if (filters.length === 0) {
 
         data_div.innerHTML = "";
         allProducts()
@@ -79,18 +72,17 @@ async function addfilter() {
         let colors = []
         let range = []
 
-        for (let i = 0; i < brandfilters.length; i++) {
+        for (let i = 0; i < filters.length; i++) {
 
-            if (brandfilters[i] == "Deny Designs" || brandfilters[i] == "Oliver Gal" || brandfilters[i] == "Chopvalue" || brandfilters[i] == "Marimekko") {
-                brands.push(brandfilters[i])
-            } else if(brandfilters[i] == "0-2000" || brandfilters[i] == "2001-4000" || brandfilters[i] == "4001-10000" || brandfilters[i] == "More than 10000") {
-                range.push(brandfilters[i])
+            if (filters[i] == "Deny Designs" || filters[i] == "Oliver Gal" || filters[i] == "Chopvalue" || filters[i] == "Marimekko") {
+                brands.push(filters[i])
+            } else if(filters[i] == "0-2000" || filters[i] == "2001-4000" || filters[i] == "4001-10000" || filters[i] == "More than 10000") {
+                range.push(filters[i])
             }else{
-                colors.push(brandfilters[i])
+                colors.push(filters[i])
             }
 
         }
-        console.log(brands, colors, range)
 
         let x;
 
@@ -141,12 +133,9 @@ async function addfilter() {
 
         }
 
-        console.log(x)
         let response = await fetch(x)
 
         products = await response.json();
-
-        console.log(products)
 
         currentArray = products;
 
@@ -240,21 +229,18 @@ function createProductCatalogue(products) {
         if (!localStorage.getItem('productIDs')) {
 
             localStorage.setItem('productIDs', JSON.stringify([product._id]));
+
         } else {
 
-            //append
-            console.log(localStorage.getItem('productIDs'));
             pr_arr=JSON.parse(localStorage.getItem("productIDs"));
-            console.log(typeof pr_arr)
+            
             pr_arr.push(`${product._id}`);
 
             localStorage.setItem("productIDs",JSON.stringify(pr_arr));
         }
 
     })
-    console.log(JSON.parse(localStorage.getItem("productIDs")).length)
 }
-
 
 
 function clearLocalStorge()
