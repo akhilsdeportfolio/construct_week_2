@@ -142,7 +142,7 @@
                         if(res.status==true)
                         {
                             localStorage.setItem("uid",res.user._id);
-                            alert("login success");
+                            //alert("login success");
                             let user_id=localStorage.getItem("uid");                            
                             let url="http://localhost:5000/wishlist/user/"+user_id
 
@@ -164,11 +164,11 @@
 
                             console.log(resp2);
 
-                            localStorage.setItem("cid",resp2.item[0]._id);
+                            localStorage.setItem("sid",resp2.item[0]._id);
 
+                            let recently=localStorage.getItem("recently_visited_product_id")
 
-
-                            //window.location=`/myaccount/${res.user._id}`;
+                            window.location=`/products/${recently}`;
                         }
                         else
                         {
