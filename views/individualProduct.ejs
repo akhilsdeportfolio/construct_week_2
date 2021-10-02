@@ -135,7 +135,7 @@
 
             let sid = JSON.parse(localStorage.getItem("sid"))
 
-            let response = await fetch("localhost:5000/shoppingBagDetails", (
+            let response = await fetch("http://localhost:5000/shoppingBagDetails", (
                 {
                     method: 'POST',
                     headers: {
@@ -157,8 +157,7 @@
         } else {
 
             //shud be taken to sigin page
-
-            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            localStorage.setItem('recently_visited_product_id', JSON.stringify(`${addToBag.className}`));
             window.location.href = "/login"
         }
     }
@@ -175,7 +174,7 @@
 
             //if product already present in wishlist then dnt add it
 
-            let response = await fetch(`localhost:5000/wishlistDetails`, (
+            let response = await fetch(`http://localhost:5000/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {
