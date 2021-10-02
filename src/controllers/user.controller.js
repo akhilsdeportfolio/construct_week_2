@@ -51,7 +51,7 @@ router.post("/login",async (req,res)=>{
         }
         else
         {
-          res.send({"status":flase,error:"please enter password and email correctly and try again"});
+          res.send({"status":false,error:"please enter password and email correctly and try again"});
         }
 
         //res.send(user);

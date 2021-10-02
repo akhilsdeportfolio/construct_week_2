@@ -75,12 +75,8 @@
      
 
    </style>
-<<<<<<< HEAD
-<body onclick="removeDropdown()">
-=======
 <body onclick="removeDropdown()"
 >
->>>>>>> 66db90d080b7dd7d34320938c04a720bda58f4eb
     
     <%- include("partials/navbar"); %>
      
@@ -106,7 +102,7 @@
           <input class="signup-input" type="password" id="password" name="password" style="margin:10px;"  />
 
 
-          <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
+          <p id="error_message" style="visibility:hidden;margin:10px;color:red">Please check your password and username.</p>
           <button type="submit" class="signup-btn" >Next</button>
   
           <p style="margin:10px;">By tapping Next, you agree to our<a href="privacy.html">Privacy Policy</a> and <a
@@ -181,7 +177,7 @@
                         }
                         else
                         {
-                            alert("failed to login please check the details and try again");
+                            document.getElementById("error_message").style.visibility='visible';
                         }
                     }
 
