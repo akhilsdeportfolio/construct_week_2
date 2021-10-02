@@ -179,7 +179,7 @@ body {
     margin-top: 10px;
     font-size: 13px;
     background-color: transparent;
-    width: 140px;
+    width: 100%;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -189,6 +189,7 @@ body {
 #wishlist:hover{
     text-decoration: underline;
     cursor: pointer;
+    font-size: 15px;
 }
 
 #product-grid-modalBox {
@@ -290,8 +291,13 @@ body {
 
 #product-grid-modal-product-add {
     font-size: 14px;
+    width:80%;
     text-align: center;
-    text-decoration: underline;
+    cursor: pointer;
+}
+
+#product-grid-modal-product-add:hover {
+    text-decoration-line: underline;
 }
 
 #product-grid-modal-product-add>p:hover {

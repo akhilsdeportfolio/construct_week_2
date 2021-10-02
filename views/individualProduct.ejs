@@ -116,7 +116,7 @@
                             may be different than in store.</p><button id="product-grid-modal-product-checkout">
                             <p>CHECK OUT</p>
                         </button>
-                        <p id="product-grid-modal-product-add" style="text-decoration: none;">View Shopping Bag</p>
+                        <p id="product-grid-modal-product-add">View Shopping Bag</p>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
             var res = await response.json();
 
             if (res.length) {
-                alert("already present")
+                wishlist.textContent = "Product has already been added in your wishlist"
             } else {
 
                 let response = await fetch(`http://localhost:5000/wishlistDetails`, (
@@ -283,6 +283,8 @@
 
                 var res = await response.json();
                 console.log(res);
+
+                wishlist.textContent = "Product Added In Your Wishlist"
 
             }
 
