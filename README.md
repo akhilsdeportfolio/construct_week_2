@@ -19,10 +19,13 @@ Nordstrom, Inc. (/ˈnɔːrdstrəm/) is an American luxury department store chain
 To run this application on your local system, execute the following commands on your terminal/command line:
   
   <code>git clone https://github.com/akhilsdeportfolio/construct_week_2.git</code>
+  <code>npm i</code> 
+  <code>npm run server</code> 
   
-  <code>cd construct_week</code> 
+  create a .env file with username and password of mongodb
+  
 
-To start using the application, open the `landing.html` file using the Live Server
+To start using the application, open the `http://localhost:5000/landingpage` file using the Live Server
 
 ## Features 
 <!-- --- -->
