@@ -726,3 +726,19 @@ ul {
 #main-content a:hover {
     border-bottom: 2px solid black;
 }
+
+
+#wish:hover{
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#bagadd:hover{
+    font-size: 16px;
+}
+
+#product-grid-modal-product-details:hover{
+    font-size: 20px;
+    cursor: pointer;
+}

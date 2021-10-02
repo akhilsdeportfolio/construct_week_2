@@ -1,6 +1,7 @@
 let currentArray;
 let products;
 
+
 let data_div = document.getElementById('product-grid-data');
 
 
@@ -315,7 +316,7 @@ function openModal(product) {
 
     var p_add = document.createElement('p');
     p_add.setAttribute('id', 'product-grid-modal-product-add')
-    p_add.innerHTML = `<span class="material-icons">add</span><p>Add to Wish List</p>`;
+    p_add.innerHTML = `<span class="material-icons">add</span><p id="wish">Add to Wish List</p>`;
     p_add.onmouseover = function () {
         p_add.style.textDecoration = 'underline';
     }
@@ -469,6 +470,8 @@ addToBag = async (product) => {
 
 addToWishlist = async (product) => {
 
+    let wish = document.getElementById("wish")
+    
     if (localStorage.getItem('uid')) {
 
         let wid = localStorage.getItem("wid");
