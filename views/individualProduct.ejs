@@ -139,7 +139,7 @@
             // 2nd - patch the document and increase the quantity by 1.
 
 
-            let response = await fetch(`localhost:5000/shoppingBagDetails/product/${addToBag.className}/${sid}`, (
+            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${addToBag.className}/${sid}`, (
                 {
                     method: 'GET',
                     headers: {
@@ -154,7 +154,7 @@
 
             if (res.length) {
 
-                let response = await fetch(`localhost:5000/shoppingBagDetails/product/${res._id}`, (
+                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res._id}`, (
                     {
                         method: 'PATCH',
                         headers: {
@@ -172,7 +172,7 @@
 
             } else {
 
-                let response = await fetch("localhost:5000/shoppingBagDetails", (
+                let response = await fetch("http://localhost:5000/shoppingBagDetails", (
                     {
                         method: 'POST',
                         headers: {
@@ -196,8 +196,7 @@
         } else {
 
             //shud be taken to sigin page
-
-            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            localStorage.setItem('recently_visited_product_id', JSON.stringify(`${addToBag.className}`));
             window.location.href = "/login"
         }
     }
@@ -214,7 +213,24 @@
 
             //if product already present in wishlist then dnt add it
 
-            let response = await fetch(`localhost:5000/wishlistDetails`, (
+
+            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${addToBag.className}/${wid}`, (
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ));
+
+            let res = await response.json();
+
+            if(res.length){
+                alert("already present")
+            }else{
+
+                let response = await fetch(`http://localhost:5000/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {
@@ -230,6 +246,8 @@
 
             let res = await response.json();
             console.log(res);
+
+            }
 
         } else {
 

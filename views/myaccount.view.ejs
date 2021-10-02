@@ -16,6 +16,8 @@
                 border-radius: 0px;
            }
 
+           
+
            .mb-1{
                 margin-left:10px;
            }
@@ -38,13 +40,19 @@
                 font-weight: 700;
                 
            }
-           .material-icons {
+           .material-icons.inside{
                position: relative;
                /* Adjust these values accordingly */
                top: 5px;
                left: 5px;
                font-size: 20px;
+               
                }
+
+
+           .list-group-item:hover{
+                color: gray;
+           }    
       </style>
 
 </head>
@@ -55,6 +63,7 @@
 
           
           
+
 
 
 
@@ -184,73 +193,87 @@
                          </div>     
                     </div>
                     <div class="col-xl-10" >
-                      <div class="container-fluid">
+
+
+
+                         <div  style="margin:auto;width: 80%;">
+
+                              <div class="container-fluid">
 
                         
 
                          
                          
-                         <% if(orders==0) {%>
-                              <p>you have not made any purchases in this time period</p>
-                              <button type="button" class="btn btn-light border padding">shop now</button>
-
-                              <br/>
-                              <br/>
-
-                              <h6>Helpful Information</h6>
-                              <br/>
-                              <p><span>Questions? </span><a href="https://nordstrom.custhelp.com/app/chat/chat_launch/incidents.c$sent_queueid/1" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Chat with us</span></a><span> or call 1.888.282.6060.</span></p>
-
-                              <p>Shipping internationally? <a target="_blank" href="https://tracking.borderfree.com/" class="_18W94"><span class="_3MTTT _1IsgD">Check your order status</span></a>.</p>
-                              
-                              <a target="_blank" href="/content/shipping-methods-charges" class="_18W94"><span class="_3MTTT _1IsgD">Shipping methods and charges</span></a>
-                              <br/>
-                              <br/>
-                              
-                              <div class="_169_i b4KdL"><span>How do you feel about our account page updates?</span> <a href="https://cxsurvey.foresee.com/sv?cid=hJsEYpCO3ycR8vTFZ+swiw==&amp;sid=functional-acct&amp;cpp[shopperid]=5769DFA6D83E4ED948FB4B3CB3922D09&amp;cpp[channel]=NORDSTROM" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Give us feedback</span></a><span>.</span></div>
-
-                         <% } else { %>
-                              <div class="list-group" style="border: 2px solid whitesmoke;">
-
-                                   <% response.forEach((resp)=>{%>
-                                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                     <div class="d-flex w-100 justify-content-between" style="max-width: 60%;">
-                                      <div class="left">
-
-                                             
-                                             <img height="200px" width="200px" src="<%=resp.products[0].product.images[0]%>" class="img-responsive" alt="...">
-                                      </div>
-
-                                      <div class="right" style="text-align: left;">
-                                        <h5 class="mb-1" style="color: black;">Order ID : &nbsp;<%=resp._id%></h5>
-                                        <bold style="margin-left: 10px;"><i class="material-icons" >payments</i> <span style="font-size: 16px;">&nbsp; &#8377; <%=resp.total_price%></bold>
-
+                                   <% if(orders==0) {%>
+                                        <p>you have not made any purchases in this time period</p>
+                                        <button type="button" class="btn btn-light border padding">shop now</button>
+          
+                                        <br/>
+                                        <br/>
+          
+                                        <h6>Helpful Information</h6>
+                                        <br/>
+                                        <p><span>Questions? </span><a href="https://nordstrom.custhelp.com/app/chat/chat_launch/incidents.c$sent_queueid/1" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Chat with us</span></a><span> or call 1.888.282.6060.</span></p>
+          
+                                        <p>Shipping internationally? <a target="_blank" href="https://tracking.borderfree.com/" class="_18W94"><span class="_3MTTT _1IsgD">Check your order status</span></a>.</p>
                                         
-                                        <p class="mb-1">
-                                             <bold ><i class="material-icons" >shopping_bag</i> <span style="font-size: 16px;">&nbsp;</bold>
-                                             
-                                                  <span><%=resp.products.length%> Items ordered</span>
+                                        <a target="_blank" href="/content/shipping-methods-charges" class="_18W94"><span class="_3MTTT _1IsgD">Shipping methods and charges</span></a>
+                                        <br/>
+                                        <br/>
+                                        
+                                        <div class="_169_i b4KdL"><span>How do you feel about our account page updates?</span> <a href="https://cxsurvey.foresee.com/sv?cid=hJsEYpCO3ycR8vTFZ+swiw==&amp;sid=functional-acct&amp;cpp[shopperid]=5769DFA6D83E4ED948FB4B3CB3922D09&amp;cpp[channel]=NORDSTROM" target="_blank" class="_18W94"><span class="_3MTTT _1IsgD">Give us feedback</span></a><span>.</span></div>
+          
+                                   <% } else { %>
+                                        <div class="list-group card" style="border: 0px solid whitesmoke;padding: 10px;">
+          
+                                             <% response.forEach((resp)=>{%>
+                                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                               <div class="d-flex w-100 justify-content-between" style="max-width: 80%;">
+                                                <div class="left">
+          
+                                                       
+                                                       <img height="200px" width="200px" src="<%=resp.products[0].product.images[0]%>" class="img-responsive" alt="...">
+                                                </div>
+          
+                                                <div class="right" style="text-align: left;padding: 10px;margin-top: 20px;">
+                                                  <h5 class="mb-1" style="color: black;">Order Number : &nbsp;<%=resp.order_number%></h5>
+                                                  <bold style="margin-left: 10px;"><i class="material-icons inside" >payments</i> <span style="font-size: 16px;">&nbsp; &#8377; <%=resp.total_price%></bold>
+          
                                                   
-                                             
-                                        
-                                        <br/>
-                                        <small><i class="material-icons" >home</i> <span style="font-size: 16px;">&nbsp; <%=resp.delivery_address%></span></small>
-                                        <br/>
-                                        <small ><i class="material-icons" >schedule</i> <span style="font-size: 16px;">&nbsp; <%=resp.createdAt%></span></small> <small><span><i class="material-icons">check_circle</i>&nbsp;  Delivered </small>
-                                       
+                                                  <p class="mb-1">
+                                                       <bold ><i class="material-icons inside" >shopping_bag</i> <span style="font-size: 16px;">&nbsp;</bold>
+                                                       
+                                                            <span><%=resp.products.length%> Items ordered</span>
+                                                            
+                                                       
+                                                  
+                                                  <br/>
 
-                                        </p>          
-                                     </div>
+                                                  <small><i class="material-icons inside" >home</i> <span style="font-size: 16px;">&nbsp; <%=resp.delivery_address%></span></small>
 
-                                     <div class="clear"></div>
-                                     
-                                      </div>
-                                       
-                                   </a>
-                                   <%})%>
-                              </div>     
-                          <% } %>  
-                      </div>
+                                                  <br/>
+                                                  
+                                                  <small ><i class="material-icons inside" >schedule</i> <span style="font-size: 16px;">&nbsp; <%=resp.createdAt%></span></small> <small><span><i class="material-icons inside">check_circle</i>&nbsp;  Delivered </small>
+                                                 
+          
+                                                  </p>          
+                                               </div>
+          
+                                               <div class="clear"></div>
+                                               
+                                                </div>
+                                                 
+                                             </a>
+                                             <%})%>
+                                        </div>     
+                                    <% } %>  
+                                </div>
+
+
+                         </div>
+
+
+                      
                     </div>
           </div>
 
