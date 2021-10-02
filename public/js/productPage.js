@@ -1,5 +1,6 @@
-let currentArray; 
+let currentArray;
 let products;
+
 
 let data_div = document.getElementById('product-grid-data');
 
@@ -11,7 +12,7 @@ let sortBy = (value) => {
     } else if (value === 'highToLow') {
         sorting(-1)
     } else if (value === "newest") {
-        window.location.href= "http://localhost:5000/products/"
+        window.location.href = "http://localhost:5000/products/"
     }
 }
 
@@ -76,9 +77,9 @@ async function addfilter() {
 
             if (filters[i] == "Deny Designs" || filters[i] == "Oliver Gal" || filters[i] == "Chopvalue" || filters[i] == "Marimekko") {
                 brands.push(filters[i])
-            } else if(filters[i] == "0-2000" || filters[i] == "2001-4000" || filters[i] == "4001-10000" || filters[i] == "More than 10000") {
+            } else if (filters[i] == "0-2000" || filters[i] == "2001-4000" || filters[i] == "4001-10000" || filters[i] == "More than 10000") {
                 range.push(filters[i])
-            }else{
+            } else {
                 colors.push(filters[i])
             }
 
@@ -101,31 +102,31 @@ async function addfilter() {
 
             x = encodeURI(`http://localhost:5000/products/filters?brands=${presentbrands}&colors=${presentcolors}`)
 
-        } else if(brands.length && range.length){
+        } else if (brands.length && range.length) {
 
             let presentbrands = brands.join(",")
             let presentranges = colors.join(",")
 
             x = encodeURI(`http://localhost:5000/products/filters?brands=${presentbrands}&ranges=${presentranges}`)
 
-        }else if(colors.length && range.length){
+        } else if (colors.length && range.length) {
 
             let presentcolors = colors.join(",")
             let presentranges = range.join(",")
 
             x = encodeURI(`http://localhost:5000/products/filters?colors=${presentcolors}&ranges=${presentranges}`)
 
-        }else if(brands.length){
+        } else if (brands.length) {
 
             let presentbrands = brands.join(",")
 
             x = encodeURI(`http://localhost:5000/products/filters?brands=${presentbrands}`)
 
-        }else if(colors.length){
+        } else if (colors.length) {
             let presentcolors = colors.join(",")
 
             x = encodeURI(`http://localhost:5000/products/filters?colors=${presentcolors}`)
-        }else{
+        } else {
 
             let presentranges = range.join(",")
 
@@ -151,6 +152,8 @@ let pr_arr;
 function createProductCatalogue(products) {
 
     currentArray = products
+
+    console.log(products)
 
     data_div.innerHTML = "";
 
@@ -234,23 +237,24 @@ function createProductCatalogue(products) {
 
         } else {
 
-            pr_arr=JSON.parse(localStorage.getItem("productIDs"));
-            
+            pr_arr = JSON.parse(localStorage.getItem("productIDs"));
+
             pr_arr.push(`${product._id}`);
 
-            localStorage.setItem("productIDs",JSON.stringify(pr_arr));
+            localStorage.setItem("productIDs", JSON.stringify(pr_arr));
         }
 
     })
 }
 
 
-function clearLocalStorge()
-{
+function clearLocalStorge() {
     localStorage.removeItem("productIDs");
 }
 
 async function allProducts() {
+
+    console.log("inside allProducts")
 
     let response = await fetch("http://localhost:5000/products/all")
 
@@ -263,171 +267,262 @@ async function allProducts() {
 allProducts()
 
 
-window.onload = function() {
+window.onload = function () {
     localStorage.removeItem("productIDs");
-  }
+    verfiyUserDetails();
+}
 
 
 
-  var closeBtn = document.getElementById('product-grid-closeBtn');
-  var modal = document.getElementById('product-grid-modalBox');
-  var modalContent = document.getElementById('product-grid-modal-content');
-  var container = document.getElementById('product-grid-main-container');
-  var modalImage = document.getElementById('product-grid-modal-img');
-  var footer = document.getElementById('product-grid-footer');
+var closeBtn = document.getElementById('product-grid-closeBtn');
+var modal = document.getElementById('product-grid-modalBox');
+var modalContent = document.getElementById('product-grid-modal-content');
+var container = document.getElementById('product-grid-main-container');
+var modalImage = document.getElementById('product-grid-modal-img');
+var footer = document.getElementById('product-grid-footer');
 
-  function openModal(product) {
-   
-      var image = document.createElement('img');
-      image.src = product.images[0];
-      modalImage.appendChild(image);
+function openModal(product) {
 
-      var p_name = document.createElement('p');
-      p_name.innerText = product.name;
-      p_name.setAttribute('id', 'product-grid-modal-product-name');
+    var image = document.createElement('img');
+    image.src = product.images[0];
+    modalImage.appendChild(image);
 
-      var p_brand = document.createElement('p');
-      p_brand.innerText = product.brand_id.brand_name.toUpperCase();
-      p_brand.setAttribute('id', 'product-grid-modal-product-brand');
+    var p_name = document.createElement('p');
+    p_name.innerText = product.name;
+    p_name.setAttribute('id', 'product-grid-modal-product-name');
 
-      var p_price = document.createElement('p');
-      p_price.innerText = "INR " + product.price;
-      p_price.setAttribute('id', 'product-grid-modal-product-price');
+    var p_brand = document.createElement('p');
+    p_brand.innerText = product.brand_id.brand_name.toUpperCase();
+    p_brand.setAttribute('id', 'product-grid-modal-product-brand');
 
-      var p_priceContent = document.createElement('p');
-      p_priceContent.innerText = "Price varies with currency exchange rates and may be different than in store.";
-      p_priceContent.setAttribute('id', 'product-grid-modal-product-price-content');
+    var p_price = document.createElement('p');
+    p_price.innerText = "INR " + product.price;
+    p_price.setAttribute('id', 'product-grid-modal-product-price');
 
-      var p_about = document.createElement('p');
-      p_about.innerText = product.description;
-      p_about.setAttribute('id', 'product-grid-modal-product-about');
+    var p_priceContent = document.createElement('p');
+    p_priceContent.innerText = "Price varies with currency exchange rates and may be different than in store.";
+    p_priceContent.setAttribute('id', 'product-grid-modal-product-price-content');
 
-      var p_addToBagBtn = document.createElement('button');
-      p_addToBagBtn.innerHTML = `<div><span class="material-icons">shopping_bag</span></div><p>Add to Bag</p>`;
-      p_addToBagBtn.setAttribute('id', 'product-grid-modal-product-addToBag');
-      p_addToBagBtn.onclick = function () {
-          addingToBag(product);
-      }
+    var p_about = document.createElement('p');
+    p_about.innerText = product.description;
+    p_about.setAttribute('id', 'product-grid-modal-product-about');
 
-      var p_add = document.createElement('p');
-      p_add.setAttribute('id', 'product-grid-modal-product-add')
-      p_add.innerHTML = `<span class="material-icons">add</span><p>Add to Wish List</p>`;
-      p_add.onmouseover = function () {
-          p_add.style.textDecoration = 'underline';
-      }
-      p_add.onclick = function () {
-          addToWishlist(product);
-      }
+    var p_addToBagBtn = document.createElement('button');
+    p_addToBagBtn.innerHTML = `<div><span class="material-icons">shopping_bag</span></div><p id="bagadd">Add to Bag</p>`;
+    p_addToBagBtn.setAttribute('id', 'product-grid-modal-product-addToBag');
+    p_addToBagBtn.onclick = function () {
+        addToBag(product);
+    }
 
-      p_add.onmouseout = function () {
-          p_add.style.textDecoration = 'none';
-      }
+    var p_add = document.createElement('p');
+    p_add.setAttribute('id', 'product-grid-modal-product-add')
+    p_add.innerHTML = `<span class="material-icons">add</span><p id="wish">Add to Wish List</p>`;
+    p_add.onmouseover = function () {
+        p_add.style.textDecoration = 'underline';
+    }
+    p_add.onclick = function () {
+        addToWishlist(product);
+    }
 
-      var p_seeDetails = document.createElement('p');
-      p_seeDetails.setAttribute('id', 'product-grid-modal-product-details');
-      p_seeDetails.innerText = 'See full details';
-      p_seeDetails.style.textDecoration = 'underline';
-      p_seeDetails.onmouseover = function () {
-          p_seeDetails.style.textDecorationThickness = "2px"
-      }
-      p_seeDetails.onclick = function () {
-        window.location.href =`http://localhost:5000/products/${product._id}`
-      }
+    p_add.onmouseout = function () {
+        p_add.style.textDecoration = 'none';
+    }
 
-      p_seeDetails.onmouseout = function () {
-          p_add.style.textDecoration = 'none';
-          p_seeDetails.style.textDecorationThickness = "0px"
-      }
+    var p_seeDetails = document.createElement('p');
+    p_seeDetails.setAttribute('id', 'product-grid-modal-product-details');
+    p_seeDetails.innerText = 'See full details';
+    p_seeDetails.style.textDecoration = 'underline';
+    p_seeDetails.onmouseover = function () {
+        p_seeDetails.style.textDecorationThickness = "2px"
+    }
+    p_seeDetails.onclick = function () {
+        window.location.href = `http://localhost:5000/products/${product._id}`
+    }
 
-
-      modalContent.append(p_name, p_brand, p_price, p_priceContent, p_about, p_addToBagBtn, p_add, p_seeDetails);
-      modal.style.display = 'block';
-      container.style.filter = 'blur(6px)';
-  }
-
-  function closeModal() {
-      modal.style.display = "none";
-      modalImage.innerHTML = "";
-      modalContent.innerHTML = "";
-      container.style.filter = "blur(0px)";
-  }
+    p_seeDetails.onmouseout = function () {
+        p_add.style.textDecoration = 'none';
+        p_seeDetails.style.textDecorationThickness = "0px"
+    }
 
 
-     // localhost:5000/shoppingBagDetails
+    modalContent.append(p_name, p_brand, p_price, p_priceContent, p_about, p_addToBagBtn, p_add, p_seeDetails);
+    modal.style.display = 'block';
+    container.style.filter = 'blur(6px)';
+}
 
-     addingToBag = async (product) => {
- 
- 
-         if (localStorage.getItem('uid')) {
- 
-             //shud add the product to the bag
-             //if product already present in shopping bag then just increase the quantity of the product using patch
- 
-             let sid = JSON.parse(localStorage.getItem("sid"))
- 
-             let response = await fetch("localhost:5000/shoppingBagDetails", (
-                 {
-                     method: 'POST',
-                     headers: {
-                         'Accept': 'application/json',
-                         'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify({
-                         "product_id": product._id,
-                         "shopping_bag_id":sid, 
-                         "quantity": 1,
-                         "ordered_flag":false,
-                     })
-                 }
-             ));
- 
-             let res = await response.json();
-             console.log(res);
- 
-         } else {
- 
-             //shud be taken to sigin page
- 
-             window.location.href = "/login"
+ async function closeModal() {
+    modal.style.display = "none";
+    modalImage.innerHTML = "";
+    modalContent.innerHTML = "";
+    container.style.filter = "blur(0px)";
 
-         }
-     }
- 
- 
-     //wid - wishlist id
-     //sid - shopping bag id
- 
-     addToWishlist = async (product) => {
- 
-         if (localStorage.getItem('uid')) {
- 
-             let wid = JSON.parse(localStorage.getItem("wid"))
+    let sid = localStorage.getItem("sid");
 
-             //if product already present in wishlist then dnt add it
- 
-             let response = await fetch(`localhost:5000/wishlistDetails`, (
-                 {
-                     method: 'POST',
-                     headers: {
-                         'Accept': 'application/json',
-                         'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify({
-                         "wishlist_id": wid,
-                         "product_id": product._id,
-                     })
-                 }
-             ));
- 
-             let res = await response.json();
-             console.log(res);
- 
-         } else {
- 
-             //shud be taken to sigin page
- 
-             window.location.href = "/login"
-         }
- 
- 
-     }
+    var items = await getShoppingBagItems(sid);
+    var quantity = 0;
+
+    for (k in items) {
+        quantity += items[k].quantity;
+    }
+
+    var itemsInBag = document.getElementById('itemsInBag');
+    itemsInBag.innerText = `(${quantity})`;
+
+}
+
+getShoppingBagItems = async (shopping_bag_id) => {
+    const response = await fetch(`http://localhost:5000/shoppingBagDetails/details/${shopping_bag_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    const data = await response.json();
+    const items = data.items;
+
+    return items;
+}
+
+
+addToBag = async (product) => {
+
+    let bagadd = document.getElementById('bagadd');
+
+    if (localStorage.getItem('uid')) {
+
+        let sid = localStorage.getItem("sid");
+
+        //shud add the product to the bag
+
+        //if product already present in shopping bag then just increase the quantity of the product using patch
+
+        // 1st - find and get the document using product id & shopping bag id, get the quantity. , flag wud be length of the received collection.
+        // 2nd - patch the document and increase the quantity by 1.
+
+
+        let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${product._id}/${sid}`, (
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        ));
+
+        var res = await response.json();
+        console.log(res);
+
+        if (res.length) {
+
+            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res[0]._id}`, (
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "quantity": res[0].quantity + 1,
+                    })
+                }
+            ));
+
+            var res = await response.json();
+            console.log(res);
+
+        } else {
+
+            let response = await fetch("http://localhost:5000/shoppingBagDetails", (
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "product_id": product._id,
+                        "shopping_bag_id": sid,
+                        "quantity": 1,
+                        "ordered_flag": false,
+                    })
+                }
+            ));
+
+            var res = await response.json();
+            console.log(res);
+        }
+
+        bagadd.textContent = 'Added To The Bag';
+
+    } else {
+
+        //shud be taken to sigin page
+        localStorage.setItem('recently_visited_product_id', product._id);
+        window.location.href = "/login"
+    }
+}
+
+
+//wid - wishlist id
+//sid - shopping bag id
+
+addToWishlist = async (product) => {
+
+    let wish = document.getElementById("wish")
+    
+    if (localStorage.getItem('uid')) {
+
+        let wid = localStorage.getItem("wid");
+
+        //if product already present in wishlist then dnt add it
+
+
+        let response = await fetch(`http://localhost:5000/wishlistDetails/product/${product._id}/${wid}`, (
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        ));
+
+        var res = await response.json();
+
+        if (res.length) {
+            wish.textContent = "Product has already been added in your wishlist"
+        } else {
+
+            let response = await fetch(`http://localhost:5000/wishlistDetails`, (
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "wishlist_id": wid,
+                        "product_id": product._id,
+                    })
+                }
+            ));
+
+            var res = await response.json();
+            console.log(res);
+
+            wish.textContent = "Product Added In Your Wishlist"
+
+        }
+
+    } else {
+
+        //shud be taken to sigin page
+
+        localStorage.setItem('recently_visited_product_id', product._id);
+        window.location.href = "/login"
+    }
+
+
+}

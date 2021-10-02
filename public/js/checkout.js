@@ -9,16 +9,33 @@ var total;
 var user_address;
 var userDetails;
 var order_number;
+var shoppingBag_id
 
-checkoutPage = (shoppingBag) => {
+checkoutPage = async (shoppingBag) => {
   var required_value;
-  var shoppingBag_id = shoppingBag._id;
+  shoppingBag_id = shoppingBag._id;
   user_id = shoppingBag.user_id;
+
+  var bagIconLink = document.getElementById('bag-icon-text');
+  bagIconLink.setAttribute('href', `/shoppingBagDetails/${shoppingBag_id}`);
+
+  var items = await getShoppingBagItems(shoppingBag_id);
+  var quantity = 0;
+
+  for (k in items) {
+    quantity += items[k].quantity;
+  }
+
+  var itemsInBag = document.getElementById('itemsInBag');
+  itemsInBag.innerText = `(${quantity})`;
+
   getUserDetails(user_id);
   getShoppingBagDetails(shoppingBag_id);
   getUserAddress(user_id);
   fetchNewOrderNumber();
 };
+
+
 
 getShoppingBagDetails = (shoppingBag_id) => {
   fetch(`http://localhost:5000/shoppingBagDetails/details/${shoppingBag_id}`, {
@@ -630,4 +647,18 @@ removeProduct = (documentId) => {
     .catch((err) => {
       console.log("err:", err);
     });
+}
+
+getShoppingBagItems = async (shopping_bag_id) => {
+  const response = await fetch(`http://localhost:5000/shoppingBagDetails/details/${shopping_bag_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  const data = await response.json();
+  const items = data.items;
+
+  return items;
 }

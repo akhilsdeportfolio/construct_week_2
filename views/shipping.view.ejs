@@ -13,6 +13,12 @@
       
       <script src="/js/navbar.js"> </script>
       <style>
+
+           
+          .list-group-item.active{
+          z-index:0;
+          }
+
            .list-group-item:nth-child(1){
                 border-radius: 0px;
            }
@@ -39,7 +45,7 @@
       </style>
 
 </head>
-<body>
+<body onclick="removeDropdown()">
 
      <%- include("partials/navbar")%>
 
@@ -64,7 +70,7 @@
                                         <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
                                    </div>
                                    <div class="p-2" style="height:100%">
-                                        <h5 style="line-height: 5;"><%= user.first_name%> <%= user.last_name%></h5>
+                                        <h5 style="line-height: 5;"><%= user.first_name%></h5>
                                         
                                    </div>
                                    
@@ -186,7 +192,7 @@
 
 
 
-          <%- include("partials/footer"); %>
+          
 
           
           <script>
@@ -200,5 +206,7 @@
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+          <%- include("partials/footer"); %>
 </body>
 </html>

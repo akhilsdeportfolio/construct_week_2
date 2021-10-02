@@ -1,123 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
-     <link rel="stylesheet" href="/css/navbar_footer.css">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-      rel="stylesheet">
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/navbar_footer.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </head>
 <style>
-.signup-container {
-     width: 30%;
-     margin: auto;
+    .signup-container {
+        width: 30%;
+        margin: auto;
 
-     border-radius: 10px;
-     padding: 20px;
+        border-radius: 10px;
+        padding: 20px;
 
- }
- .signup-btn {
-     background-color: black;
-     border: none;
-     color: white;
-     margin-left: 10px;
-     padding: 10px;
-     width: 95%;
-     font-weight: 700;
+    }
 
- }
+    .signup-btn {
+        background-color: black;
+        border: none;
+        color: white;
+        margin-left: 10px;
+        padding: 10px;
+        width: 95%;
+        font-weight: 700;
 
- .signup-btn:hover {
-     background-color: rgb(36, 36, 36);
- }
+    }
 
- .signup-label {
-     font-weight: bold;
-     font-size: 14px;
-     margin: 10px;
- }
+    .signup-btn:hover {
+        background-color: rgb(36, 36, 36);
+    }
 
- .signup-input {
-     padding: 10px;
-     margin-left: 10px;
-     width: 90%;
-     border: 1px solid #bbb
- }
+    .signup-label {
+        font-weight: bold;
+        font-size: 14px;
+        margin: 10px;
+    }
 
- .error {
-     padding: 10px;
-     margin-left: 10px;
-     width: 90%;
-     border: 1px solid red;
-     border-bottom: 3px solid red;
- }
+    .signup-input {
+        padding: 10px;
+        margin-left: 10px;
+        width: 90%;
+        border: 1px solid #bbb
+    }
 
- input:focus {
+    .error {
+        padding: 10px;
+        margin-left: 10px;
+        width: 90%;
+        border: 1px solid red;
+        border-bottom: 3px solid red;
+    }
 
-     border-bottom: 3px solid black;
-     border-left: none;
-     border-right: none;
-     border-top: none;
+    input:focus {
 
- }
+        border-bottom: 3px solid black;
+        border-left: none;
+        border-right: none;
+        border-top: none;
 
- .signup-a {
-     text-decoration: underline;
-     color: black;
- }
+    }
+
+    .signup-a {
+        text-decoration: underline;
+        color: black;
+    }
 </style>
 
-<body onclick="removeDropdown()"
->
-     <%- include("partials/navbar"); %>
-     
-     <div class="signup-container container" id="email_container">
-          <h2 style="margin:10px;">Sign In | Create Account</h2>
-          <p style="margin:10px;">Enter your email to get started</p>
-  
-          <form onsubmit="signupUser(event)">
+<body onclick="removeDropdown()">
+    <%- include("partials/navbar"); %>
 
-            <!--action="/users/createUser" method="post"-->
+        <div class="signup-container container" id="email_container">
+            <h2 style="margin:10px;">Sign In | Create Account</h2>
+            <p style="margin:10px;">Enter your email to get started</p>
 
-               <label class="signup-label" for="email">First Name</label>
-               <br>
-               <input class="signup-input" type="text" id="fname" name="first_name" id="email" style="margin:10px;"  />    
+            <form onsubmit="signupUser(event)">
 
-               <label class="signup-label" for="email">Last Name</label>
-          <br>
-          <input class="signup-input" type="text" id="lname" name="last_name" id="email" style="margin:10px;"/>
+                <!--action="/users/createUser" method="post"-->
 
+                <label class="signup-label" for="email">First Name</label>
+                <br>
+                <input class="signup-input" type="text" id="fname" name="first_name" id="email" style="margin:10px;" />
 
-          <label class="signup-label" for="email">Email</label>
-          <br>
-          <input class="signup-input" type="text" id="email" name="email" id="email" style="margin:10px;" value="<%=email%>" disabled/>
-          <br>
+                <label class="signup-label" for="email">Last Name</label>
+                <br>
+                <input class="signup-input" type="text" id="lname" name="last_name" id="email" style="margin:10px;" />
 
 
-          <label class="signup-label" for="email">Password</label>
-          <br>
-          <input class="signup-input" type="password" id="password" name="password" id="email" style="margin:10px;"  />
+                <label class="signup-label" for="email">Email</label>
+                <br>
+                <input class="signup-input" type="text" id="email" name="email" id="email" style="margin:10px;"
+                    value="<%=email%>" disabled />
+                <br>
 
-          <p style="color:red" id="error"></p>
-          <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
-          <button type="submit" class="signup-btn" >Next</button>
 
-          
-  
-          <p style="margin:10px;">By tapping Next, you agree to our<a href="privacy.html">Privacy Policy</a> and <a
-                  href="terms.html">Terms & Conditions</a>.</p>
-          </form>                  
-      </div>
-       <%- include("partials/footer"); %>
-       <script src="/js/navbar.js"> </script>
+                <label class="signup-label" for="email">Password</label>
+                <br>
+                <input class="signup-input" type="password" id="password" name="password" id="email"
+                    style="margin:10px;" />
 
-      <script>
+                <p style="color:red" id="error"></p>
+                <p id="error_message" style="visibility:hidden;margin:10px">Enter Email address as name@email.com</p>
+                <button type="submit" class="signup-btn">Next</button>
+
+
+
+                <p style="margin:10px;">By tapping Next, you agree to our<a href="privacy.html">Privacy Policy</a> and
+                    <a href="terms.html">Terms & Conditions</a>.
+                </p>
+            </form>
+        </div>
+        <%- include("partials/footer"); %>
+            <script src="/js/navbar.js"> </script>
+
+            <script>
 
 
 
@@ -143,13 +153,12 @@
 
 
 
-                async function signupUser(e)
-                {
-                    e.preventDefault(); 
-                    
-                    
+                async function signupUser(e) {
+                    e.preventDefault();
 
-                
+
+
+
                     let fName = document.getElementById("fname").value.trim();
                     let lName = document.getElementById("lname").value.trim();
                     let email = document.getElementById("email").value.trim();
@@ -157,95 +166,92 @@
 
 
 
-                    if(fName==''||lName==''||isValidPassword(password)==false||validateEmail(email)==false)
-                    {
+                    if (fName == '' || lName == '' || isValidPassword(password) == false || validateEmail(email) == false) {
                         console.error("error in form validation")
 
 
-                        document.getElementById("fname").setAttribute("class","error");
-                        document.getElementById("lname").setAttribute("class","error");
-                        document.getElementById("password").setAttribute("class","error");
+                        document.getElementById("fname").setAttribute("class", "error");
+                        document.getElementById("lname").setAttribute("class", "error");
+                        document.getElementById("password").setAttribute("class", "error");
 
 
 
 
-                        document.getElementById("error").innerText="please enter all fields password should be alphanumeric with capital and small case letters and 1 special character.length should be atleast 6 chars long"
+                        document.getElementById("error").innerText = "please enter all fields password should be alphanumeric with capital and small case letters and 1 special character.length should be atleast 6 chars long"
                     }
-                    else
-                    {
+                    else {
 
-                        
-                        document.getElementById("error").innerText=null;
-                        
+
+                        document.getElementById("error").innerText = null;
+
 
                         let json = JSON.stringify(
-                        {
-                            first_name :fName,
-                            last_name:lName,
-                            email:email,
-                            password:password
-                        }
-                    )
+                            {
+                                first_name: fName,
+                                last_name: lName,
+                                email: email,
+                                password: password
+                            }
+                        )
 
 
-                    let resp=await fetch("http://localhost:5000/users/createUser",(
-                        {
-                            method:"POST",
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body:json
-                        }
-                    ));
+                        let resp = await fetch("http://localhost:5000/users/createUser", (
+                            {
+                                method: "POST",
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: json
+                            }
+                        ));
 
-                    resp=await resp.json();
+                        resp = await resp.json();
 
-                    console.log(resp);
-                    if(resp.status==true)
-                    {
-
-
-                        let wid = resp.jsonResp.wishlist.wishlist._id;
-                        let sid = resp.jsonResp.shoppingBag.item._id;
-                        let uid = resp.jsonResp.createdUser._id;
- 
-                        localStorage.setItem("wid",wid);
-                        localStorage.setItem("sid",sid);
-                        localStorage.setItem("uid",uid);
+                        console.log(resp);
+                        if (resp.status == true) {
 
 
-                        let recently=localStorage.getItem("recently_visited_product_id")
+                            let wid = resp.jsonResp.wishlist.wishlist._id;
+                            let sid = resp.jsonResp.shoppingBag.item._id;
+                            let uid = resp.jsonResp.createdUser._id;
 
-                        console.log(recently);
+                            localStorage.setItem("wid", wid);
+                            localStorage.setItem("sid", sid);
+                            localStorage.setItem("uid", uid);
 
-                            if(recently!=undefined)
-                                window.location=`/products/${recently}`;
+
+                            let recently = localStorage.getItem("recently_visited_product_id")
+
+                            console.log(recently);
+
+                            if (recently != undefined)
+                                window.location = `/products/${recently}`;
                             else
-                                window.location="/landingpage";
-                     
-                    }
-                    else
-                    {
-                        alert("error");
-                    }
+                                window.location = "/landingpage";
+
+                        }
+                        else {
+                            alert("error");
+                        }
 
 
 
                     }
 
 
-                    
 
 
 
-                    
+
+
 
 
                 }
 
 
 
-      </script>
+            </script>
 </body>
+
 </html>

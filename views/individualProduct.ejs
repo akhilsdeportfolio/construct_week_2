@@ -35,7 +35,7 @@
                             <%= product.name %>
                         </h2>
                         <p class="pro_det_p" style="font-size: 15px;">
-                            <%= product.brand_id.brand_name %>
+                            <%= product.brand_id.brand_name.toUpperCase() %>
                         </p>
                         <h3 class="pro_det_h3">INR <%= product.price %>
                         </h3>
@@ -48,9 +48,9 @@
                                 style="font-weight: 500;color: <%= product.color %>;">
                                 <%= product.color %>
                             </span></p><input type="text" id="quantity" value="1"><br><button id="button1"
-                            class=<%=product._id %>
+                            onclick="addToBag(<%= JSON.stringify(product) %>)"
                             style="font-size: 19px;"><span class="material-icons"
-                                style="font-size: 24px;">shopping_bag</span> Add to Bag</button><button id="wishlist">+
+                                style="font-size: 24px;">shopping_bag</span> Add to Bag</button><button id="wish" onclick="wishlist(<%= JSON.stringify(product) %>)">+
                             Add To Wish List</button>
                     </div>
                 </div>
@@ -95,15 +95,41 @@
             </div>
             <%- include("partials/footer"); %>
     </div>
+    <div id="product-grid-modalBox">
+        <div id="product-grid-modal-product-info">
+
+            <div>
+                <span id="product-grid-closeBtn" class="material-icons" onclick="closeModal(<%= JSON.stringify(product) %>)">close</span>
+                <p style="font-size: 20px;font-weight: 500;text-align: center;">Added To your bag</p>
+                <div id="product-grid-modal-div">
+                    <div id="product-grid-modal-img"><img src=<%=(product.images[0]) %>></div>
+                    <div id="product-grid-modal-content">
+                        <p id="product-grid-modal-product-name">
+                            <%= product.name %>
+                        </p>
+                        <p id="product-grid-modal-product-brand">
+                            <%= product.brand_id.brand_name.toUpperCase() %>
+                        </p>
+                        <p id="product-grid-modal-product-price">INR <%= product.price %>
+                        </p>
+                        <p id="product-grid-modal-product-price-content">Price varies with currency exchange rates and
+                            may be different than in store.</p><button id="product-grid-modal-product-checkout" onclick="checkout()">
+                            <p>CHECK OUT</p>
+                        </button>
+                        <p id="product-grid-modal-product-add" onclick="viewShopBag()">View Shopping Bag</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
 <script>
 
 
-    //uid
     let imgDiv = document.getElementById("prod-img")
-    let wishlist = document.getElementById("wishlist")
+    let wish = document.getElementById("wish")
 
     imgDiv.onmouseover = function () {
 
@@ -118,19 +144,23 @@
         imgDiv.style.position = "static"
     }
 
-    // localhost:5000/shoppingBagDetails
+    //let addToBag = document.getElementById("button1")
 
-    let addToBag = document.getElementById("button1")
+    var closeBtn = document.getElementById('product-grid-closeBtn');
+    var modal = document.getElementById('product-grid-modalBox');
+    var modalContent = document.getElementById('product-grid-modal-content');
+    var container = document.getElementById('product-grid-container');
+    var modalImage = document.getElementById('product-grid-modal-img');
+    var footer = document.getElementById('product-grid-footer');
 
-    addToBag.onclick = async () => {
+    let addToBag = async (product) => {
 
 
         if (localStorage.getItem('uid')) {
-            console.log("Consoling this...")
-            let quantity = document.getElementById("quantity")
+
+            let quant = document.getElementById("quantity")
 
             let sid = localStorage.getItem("sid");
-            console.log(sid);
 
             //shud add the product to the bag
 
@@ -140,7 +170,7 @@
             // 2nd - patch the document and increase the quantity by 1.
 
 
-            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${addToBag.className}/${sid}`, (
+            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${product._id}/${sid}`, (
                 {
                     method: 'GET',
                     headers: {
@@ -163,7 +193,7 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            "quantity": res[0].quantity+1,
+                            "quantity": res[0].quantity + Number(quant.value),
                         })
                     }
                 ));
@@ -181,9 +211,9 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            "product_id": addToBag.className,
+                            "product_id": product._id,
                             "shopping_bag_id": sid,
-                            "quantity": quantity.value,
+                            "quantity": Number(quant.value),
                             "ordered_flag": false,
                         })
                     }
@@ -191,22 +221,21 @@
 
                 var res = await response.json();
                 console.log(res);
-
             }
+
+            modal.style.display = 'block';
+            container.style.filter = 'blur(6px)';
 
         } else {
 
             //shud be taken to sigin page
-            localStorage.setItem('recently_visited_product_id', addToBag.className);
+            localStorage.setItem('recently_visited_product_id', product._id);
             window.location.href = "/login"
         }
     }
 
 
-    //wid - wishlist id
-    //sid - shopping bag id
-
-    wishlist.onclick = async () => {
+    let wishlist = async (product) => {
 
         if (localStorage.getItem('uid')) {
 
@@ -215,7 +244,7 @@
             //if product already present in wishlist then dnt add it
 
 
-            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${addToBag.className}/${wid}`, (
+            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${product._id}/${wid}`, (
                 {
                     method: 'GET',
                     headers: {
@@ -227,26 +256,28 @@
 
             var res = await response.json();
 
-            if(res.length){
-                alert("already present")
-            }else{
+            if (res.length) {
+                wish.textContent = "Product has already been added in your wishlist"
+            } else {
 
                 let response = await fetch(`http://localhost:5000/wishlistDetails`, (
-                {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "wishlist_id": wid,
-                        "product_id": addToBag.className,
-                    })
-                }
-            ));
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "wishlist_id": wid,
+                            "product_id": product._id,
+                        })
+                    }
+                ));
 
-            var res = await response.json();
-            console.log(res);
+                var res = await response.json();
+                console.log(res);
+
+                wish.textContent = "Product Added In Your Wishlist"
 
             }
 
@@ -254,7 +285,7 @@
 
             //shud be taken to sigin page
 
-            localStorage.setItem('recently_visited_product_id', addToBag.className);
+            localStorage.setItem('recently_visited_product_id', product._id);
             window.location.href = "/login"
         }
 
@@ -262,7 +293,27 @@
     }
 
 
+    function closeModal(product) {
+        modal.style.display = "none";
+        modalImage.innerHTML = "";
+        modalContent.innerHTML = "";
+        container.style.filter = "blur(0px)";
+        window.location.href = `http://localhost:5000/products/${product._id}`
+    }
 
+    let checkout = () =>{
+
+        let uid = localStorage.getItem('uid')
+
+        window.location.href = `http://localhost:5000/checkout/${uid}`
+    }
+
+    let viewShopBag = () =>{
+
+        let sid = localStorage.getItem('sid')
+
+        window.location.href = `http://localhost:5000/shoppingBagDetails/${sid}`
+    }
 </script>
 
 </html>

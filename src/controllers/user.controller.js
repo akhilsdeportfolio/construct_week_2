@@ -21,6 +21,11 @@ router.get("/:id", async (req, res) => {
 
 
 
+router.post("/password/:id/update",async (req,res)=>{
+  let changed = await User.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec();
+  res.send({status:true});
+})
+
 
 router.post("/login",async (req,res)=>{
 
@@ -51,7 +56,7 @@ router.post("/login",async (req,res)=>{
         }
         else
         {
-          res.send({"status":flase,error:"please enter password and email correctly and try again"});
+          res.send({"status":false,error:"please enter password and email correctly and try again"});
         }
 
         //res.send(user);

@@ -56,7 +56,7 @@
       </style>
 
 </head>
-<body>
+<body onclick="removeDropdown()">
      <%- include("partials/navbar")%>
 
      <div class="container-fluid">
@@ -205,8 +205,8 @@
                          
                          
                                    <% if(orders==0) {%>
-                                        <p>you have not made any purchases in this time period</p>
-                                        <button type="button" class="btn btn-light border padding">shop now</button>
+                                        <p>You have not made any purchases in this </p>
+                                        <a href="/products/" type="button" class="btn btn-light border padding">Shop now</a>
           
                                         <br/>
                                         <br/>
@@ -254,13 +254,27 @@
                                                   <br/>
                                                   
                                                   <small ><i class="material-icons inside" >schedule</i> <span style="font-size: 16px;">&nbsp; <%=resp.createdAt%></span></small> <small><span><i class="material-icons inside">check_circle</i>&nbsp;  Delivered </small>
-                                                 
+                                                  <br>
+                                                  <br>
+
+                                                  <% resp.products.forEach((prod,index)=>{%>
+                                                       
+                                                       <small  ><button class="btn btn-sm btn-light" onclick="move(`<%=prod.product._id%>`)"> Veiw Product <%= index+1 %></button></small>     
+                                                  <% })%>
+                                                  
+                                                  
+
+                                                       
           
                                                   </p>          
+
+                                                  
                                                </div>
           
                                                <div class="clear"></div>
-                                               
+
+
+                                                  
                                                 </div>
                                                  
                                              </a>
@@ -287,6 +301,11 @@
                {
                     console.log("changed" + document.getElementById("time").value);
 
+               }
+
+               function move(id)
+               {
+                    window.location="/products/"+id;
                }
           </script>
           

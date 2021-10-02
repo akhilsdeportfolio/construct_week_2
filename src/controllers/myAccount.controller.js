@@ -16,7 +16,10 @@ router.get("/:id",async (req,res)=>{
 
      axios.get(`http://localhost:5000/orders/users/${req.params.id}`,{          
      }).then((response)=>{
-          res.render("myaccount.view.ejs",{user:userData[0],orders:response.data.length,response:response.data.items});
+
+
+          
+          res.render("myaccount.view.ejs",{user:userData[0],orders:response.data.items.length,response:response.data.items});
      }).catch((err)=>{
           console.error(err);
      })
