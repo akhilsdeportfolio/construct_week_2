@@ -72,7 +72,6 @@ body {
 
 #button1:hover{
     cursor: pointer;
-    background-color: rgb(59, 56, 56);
     font-size: 25px;
     font-weight: 600;
     border: 3px solid black;
@@ -175,7 +174,7 @@ body {
     transition: background .2s, border-color .2s;
 }
 
-#wishlist {
+#wish {
     margin-top: 10px;
     font-size: 13px;
     background-color: transparent;
@@ -186,7 +185,7 @@ body {
     border-bottom: black;
 }
 
-#wishlist:hover{
+#wish:hover{
     text-decoration: underline;
     cursor: pointer;
     font-size: 15px;
@@ -279,6 +278,11 @@ body {
     cursor: pointer;
 }
 
+#product-grid-modal-product-checkout:hover{
+    font-weight: 600;
+    border: 3px solid black;
+}
+
 #product-grid-modal-product-addToBag>* {
     display: inline-block;
     margin-top: 5px;
@@ -298,6 +302,7 @@ body {
 
 #product-grid-modal-product-add:hover {
     text-decoration-line: underline;
+    font-size: 16px;
 }
 
 #product-grid-modal-product-add>p:hover {
