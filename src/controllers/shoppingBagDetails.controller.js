@@ -81,4 +81,22 @@ router.delete("/:id", async (req, res) => {
   return res.status(203).send({ item });
 });
 
+//find using product id
+router.get("/product/:product_id/:shoppingbag_id", async (req, res) => {
+
+  const items = await ShoppingBagDetails.find({product_id:req.params.product_id, shopping_bag_id:req.params.shoppingbag_id}).lean();
+
+  // res.render("shoppingBag.view.ejs", { items, user });
+  res.status(200).send(items);
+});
+
+//patch the quantity if product already present
+router.patch("/product/:id", async (req, res) => {
+
+  const items = await ShoppingBagDetails.findByIdAndUpdate(req.params.id,req.body,{ new: true });
+
+  // res.render("shoppingBag.view.ejs", { items, user });
+  res.status(200).send(items);
+});
+
 module.exports = router;

@@ -127,34 +127,76 @@
 
         if (localStorage.getItem('uid')) {
 
-            //shud add the product to the bag
-
             let quantity = document.getElementById("quantity")
 
-            // let response = await fetch("localhost:5000/shoppingBagDetails", (
-            //     {
-            //         method: 'POST',
-            //         headers: {
-            //             'Accept': 'application/json',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({
-            //             "product_id": addToBag.className,
-            //             "shopping_bag_id":"", //will be getting from the localstorage,
-            //             "quantity": quantity.value,
-            //             "ordered_flag":true,
-            //         })
-            //     }
-            // ));
+            let sid = JSON.parse(localStorage.getItem("sid"))
 
-            // let res = await response.json();
-            // console.log(res);
+            //shud add the product to the bag
+
+            //if product already present in shopping bag then just increase the quantity of the product using patch
+
+            // 1st - find and get the document using product id & shopping bag id, get the quantity. , flag wud be length of the received collection.
+            // 2nd - patch the document and increase the quantity by 1.
+
+
+            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${addToBag.className}/${sid}`, (
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ));
+
+            let res = await response.json();
+            console.log(res);
+
+            if (res.length) {
+
+                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res._id}`, (
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "quantity": res.quantity+1,
+                        })
+                    }
+                ));
+
+                let res = await response.json();
+                console.log(res);
+
+            } else {
+
+                let response = await fetch("http://localhost:5000/shoppingBagDetails", (
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "product_id": addToBag.className,
+                            "shopping_bag_id": sid,
+                            "quantity": quantity.value,
+                            "ordered_flag": false,
+                        })
+                    }
+                ));
+
+                let res = await response.json();
+                console.log(res);
+
+            }
 
         } else {
 
             //shud be taken to sigin page
-
-            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            localStorage.setItem('recently_visited_product_id', JSON.stringify(`${addToBag.className}`));
             window.location.href = "/login"
         }
     }
@@ -167,7 +209,28 @@
 
         if (localStorage.getItem('uid')) {
 
-            let response = await fetch(`localhost:5000/wishlistDetails/${user_id}`, (
+            let wid = JSON.parse(localStorage.getItem("wid"))
+
+            //if product already present in wishlist then dnt add it
+
+
+            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${addToBag.className}/${wid}`, (
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ));
+
+            let res = await response.json();
+
+            if(res.length){
+                alert("already present")
+            }else{
+
+                let response = await fetch(`http://localhost:5000/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {
@@ -175,16 +238,17 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        "wishlist_id": wid,
                         "product_id": addToBag.className,
-                        "shopping_bag_id": "", //will be getting from the localstorage,
-                        "quantity": quantity.value,
-                        "ordered_flag": true,
                     })
                 }
             ));
 
             let res = await response.json();
             console.log(res);
+
+            }
+
         } else {
 
             //shud be taken to sigin page
