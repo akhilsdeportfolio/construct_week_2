@@ -126,10 +126,11 @@
 
 
         if (localStorage.getItem('uid')) {
-
+            console.log("Consoling this...")
             let quantity = document.getElementById("quantity")
 
-            let sid = JSON.parse(localStorage.getItem("sid"))
+            let sid = localStorage.getItem("sid");
+            console.log(sid);
 
             //shud add the product to the bag
 
@@ -149,12 +150,12 @@
                 }
             ));
 
-            let res = await response.json();
+            var res = await response.json();
             console.log(res);
 
             if (res.length) {
 
-                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res._id}`, (
+                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res[0]._id}`, (
                     {
                         method: 'PATCH',
                         headers: {
@@ -162,12 +163,12 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            "quantity": res.quantity+1,
+                            "quantity": res[0].quantity+1,
                         })
                     }
                 ));
 
-                let res = await response.json();
+                var res = await response.json();
                 console.log(res);
 
             } else {
@@ -188,7 +189,7 @@
                     }
                 ));
 
-                let res = await response.json();
+                var res = await response.json();
                 console.log(res);
 
             }
@@ -196,7 +197,7 @@
         } else {
 
             //shud be taken to sigin page
-            localStorage.setItem('recently_visited_product_id', JSON.stringify(`${addToBag.className}`));
+            localStorage.setItem('recently_visited_product_id', addToBag.className);
             window.location.href = "/login"
         }
     }
@@ -209,7 +210,7 @@
 
         if (localStorage.getItem('uid')) {
 
-            let wid = JSON.parse(localStorage.getItem("wid"))
+            let wid = localStorage.getItem("wid");
 
             //if product already present in wishlist then dnt add it
 
@@ -224,7 +225,7 @@
                 }
             ));
 
-            let res = await response.json();
+            var res = await response.json();
 
             if(res.length){
                 alert("already present")
@@ -244,7 +245,7 @@
                 }
             ));
 
-            let res = await response.json();
+            var res = await response.json();
             console.log(res);
 
             }
@@ -253,7 +254,7 @@
 
             //shud be taken to sigin page
 
-            localStorage.setItem('recently_visited_product_id', JSON.stringify(addToBag.className));
+            localStorage.setItem('recently_visited_product_id', addToBag.className);
             window.location.href = "/login"
         }
 
