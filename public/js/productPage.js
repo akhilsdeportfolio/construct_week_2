@@ -343,7 +343,6 @@ window.onload = function() {
       modalContent.append(p_name, p_brand, p_price, p_priceContent, p_about, p_addToBagBtn, p_add, p_seeDetails);
       modal.style.display = 'block';
       container.style.filter = 'blur(6px)';
-      //footer.style.filter = 'blur(6px)';
   }
 
   function closeModal() {
@@ -351,7 +350,6 @@ window.onload = function() {
       modalImage.innerHTML = "";
       modalContent.innerHTML = "";
       container.style.filter = "blur(0px)";
-      //footer.style.filter = 'blur(0px)';
   }
 
 
@@ -363,6 +361,7 @@ window.onload = function() {
          if (localStorage.getItem('uid')) {
  
              //shud add the product to the bag
+             //if product already present in shopping bag then just increase the quantity of the product using patch
  
              let sid = JSON.parse(localStorage.getItem("sid"))
  
@@ -377,7 +376,7 @@ window.onload = function() {
                          "product_id": product._id,
                          "shopping_bag_id":sid, 
                          "quantity": 1,
-                         "ordered_flag":true,
+                         "ordered_flag":false,
                      })
                  }
              ));
@@ -403,6 +402,8 @@ window.onload = function() {
          if (localStorage.getItem('uid')) {
  
              let wid = JSON.parse(localStorage.getItem("wid"))
+
+             //if product already present in wishlist then dnt add it
  
              let response = await fetch(`localhost:5000/wishlistDetails`, (
                  {

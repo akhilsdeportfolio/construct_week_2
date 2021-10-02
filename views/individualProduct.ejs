@@ -129,6 +129,8 @@
 
             //shud add the product to the bag
 
+            //if product already present in shopping bag then just increase the quantity of the product using patch
+
             let quantity = document.getElementById("quantity")
 
             let sid = JSON.parse(localStorage.getItem("sid"))
@@ -144,7 +146,7 @@
                         "product_id": addToBag.className,
                         "shopping_bag_id":sid, 
                         "quantity": quantity.value,
-                        "ordered_flag":true,
+                        "ordered_flag":false,
                     })
                 }
             ));
@@ -170,6 +172,8 @@
         if (localStorage.getItem('uid')) {
 
             let wid = JSON.parse(localStorage.getItem("wid"))
+
+            //if product already present in wishlist then dnt add it
 
             let response = await fetch(`localhost:5000/wishlistDetails`, (
                 {
