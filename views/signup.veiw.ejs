@@ -215,18 +215,14 @@
 
                         let recently=localStorage.getItem("recently_visited_product_id")
 
+                        console.log(recently);
+
                             if(recently!=undefined)
                                 window.location=`/products/${recently}`;
                             else
                                 window.location="/landingpage";
-                        }
-                        else
-                        {
-                            alert("failed to login please check the details and try again");
-                        }
-                        
-
-
+                    
+                     
                     }
                     else
                     {
