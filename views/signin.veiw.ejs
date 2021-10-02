@@ -75,7 +75,7 @@
      
 
    </style>
-<body>
+<body onclick="removeDropdown()">
     
     <%- include("partials/navbar"); %>
      
@@ -108,7 +108,7 @@
                   href="terms.html">Terms & Conditions</a>.</p>
           </form>                  
       </div>
-          <%- include("partials/footer"); %>
+        
           <script src="/js/navbar.js"> </script>
       <script>
 
@@ -187,6 +187,6 @@
 
 
       </script>
-  
+      <%- include("partials/footer"); %>
 </body>
 </html>
