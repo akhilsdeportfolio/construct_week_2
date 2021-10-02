@@ -143,8 +143,32 @@
                         {
                             localStorage.setItem("uid",res.user._id);
                             alert("login success");
-                            let user_id=localStorage.getItem("user_id");
-                            window.location=`/myaccount/${res.user._id}`;
+                            let user_id=localStorage.getItem("uid");                            
+                            let url="http://localhost:5000/wishlist/user/"+user_id
+
+                            console.log(url);
+                            let sid = await fetch(url,({
+                                method:"GET"
+                            }));
+                            let  resp = await sid.json();
+
+                            localStorage.setItem("wid",resp._id);
+
+
+                            let url2="http://localhost:5000/shoppingBag/"+user_id
+
+                            let cid = await fetch(url2,({
+                                method:"GET"
+                            }));
+                            let  resp2 = await cid.json();
+
+                            console.log(resp2);
+
+                            localStorage.setItem("cid",resp2.item[0]._id);
+
+
+
+                            //window.location=`/myaccount/${res.user._id}`;
                         }
                         else
                         {

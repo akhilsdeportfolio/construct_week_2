@@ -28,6 +28,15 @@ router.post("",async(req,res)=>{
 })
 
 
+router.get("/user/:id",async(req,res)=>{
+
+    const wishlist=await Wishlist.find({user_id:req.params.id}).lean().exec()
+    console.log(wishlist)
+
+    res.send(wishlist[0]);
+})
+
+
 //    2. GET
 
 router.get("",async(req,res)=>{
