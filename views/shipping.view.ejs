@@ -13,6 +13,12 @@
       
       <script src="/js/navbar.js"> </script>
       <style>
+
+           
+          .list-group-item.active{
+          z-index:0;
+          }
+
            .list-group-item:nth-child(1){
                 border-radius: 0px;
            }
@@ -64,7 +70,7 @@
                                         <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
                                    </div>
                                    <div class="p-2" style="height:100%">
-                                        <h5 style="line-height: 5;"><%= user.first_name%> <%= user.last_name%></h5>
+                                        <h5 style="line-height: 5;"><%= user.first_name%></h5>
                                         
                                    </div>
                                    

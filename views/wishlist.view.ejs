@@ -62,7 +62,7 @@
                                         <img src="https://via.placeholder.com/100x100.png?text=Profile Pic" alt="..." class="img-thumbnail">
                                    </div>
                                    <div class="p-2" style="height:100%">
-                                        <h5 style="line-height: 5;"><%= user.first_name%> <%= user.last_name%></h5>
+                                        <h5 style="line-height: 5;"><%= user.first_name%> </h5>
                                         
                                    </div>
                                    
@@ -177,35 +177,35 @@
                     <div class="col-xl-10" >
                       <div class="container-fluid">
 
-                         <h4 style="line-height: 5;">wishlist</h4>
+                         <h4 >wishlist</h4>
                          <p> You have added <%= wishlist_details.length %> items to wishlist</p>
 
 
                          
 
-                         <div class="container">
+                         <div >
                               <div class="row">
                                    <% wishlist_details.forEach((item)=>{ %>
 
                                        
-                                             <div class="col-sm">
+                                             <div class="col-3 card" style="padding:10px;margin-right: 10px;margin-bottom: 10px;">
 
-                                             <div class="flex">
+                                             
                                                   <div style="text-align: center;">
-                                                  <img style="height: 200px;width:200px;" src="<%=item.product_id.images[0]%>" alt="..." class="img-fluid img-thumbnail">
-                                                  <p style="text-align: center; "><%= item.product_id.name %></p>
-                                                  <p  style="text-align: center;"><%= item.product_id.price %></p>
+                                                  <img style="height: 200px;width:100%;" src="<%=item.product_id.images[0]%>" alt="..." class="img">
+                                                  <p style="word-wrap: break-word;text-align: center;font-weight: 500;"><%= item.product_id.name %></p>
+                                                  <p style="word-wrap: break-word;text-align: center;font-weight: 500;"> &#8377;  <%= item.product_id.price %></p>
 
                                              
 
 
-                                             <div class="container">
-                                                  <a href="/products/<%= item.product_id._id %>"   
-                                                      class="btn btn-sm btn-primary" >Buy now</a> 
-                                                  <a href="/wishListDetails/delete/<%=item._id%>/<%=user._id%>" class="btn btn-sm  btn-primary">Remove</a>
-                                             </div>
+                                                       <div class="container">
+                                                            <a href="/products/<%= item.product_id._id %>"   
+                                                            class="btn btn-sm btn-primary" >Buy now</a> 
+                                                            <a href="/wishListDetails/delete/<%=item._id%>/<%=user._id%>" class="btn btn-sm  btn-primary">Remove</a>
+                                                       </div>
                                                   
-                                             </div>
+                                                  
                                              </div>
 
                                         

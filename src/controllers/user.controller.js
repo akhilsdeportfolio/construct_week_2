@@ -21,6 +21,11 @@ router.get("/:id", async (req, res) => {
 
 
 
+router.post("/password/:id/update",async (req,res)=>{
+  let changed = await User.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec();
+  res.send({status:true});
+})
+
 
 router.post("/login",async (req,res)=>{
 
