@@ -35,7 +35,7 @@
                             <%= product.name %>
                         </h2>
                         <p class="pro_det_p" style="font-size: 15px;">
-                            <%= product.brand_id.brand_name %>
+                            <%= product.brand_id.brand_name.toUpperCase() %>
                         </p>
                         <h3 class="pro_det_h3">INR <%= product.price %>
                         </h3>
@@ -95,6 +95,33 @@
             </div>
             <%- include("partials/footer"); %>
     </div>
+    <div id="product-grid-modalBox">
+        <div id="product-grid-modal-product-info">
+
+            <div>
+                <span id="product-grid-closeBtn" class="material-icons" onclick="closeModal()">close</span>
+                <p style="font-size: 20px;font-weight: 500;text-align: center;">Added To your bag</p>
+                <div id="product-grid-modal-div">
+                    <div id="product-grid-modal-img"><img src=<%=(product.images[0]) %></div>
+                    <div id="product-grid-modal-content">
+                        <p id="product-grid-modal-product-name">
+                            <%= product.name %>
+                        </p>
+                        <p id="product-grid-modal-product-brand">
+                            <%= product.brand_id.brand_name.toUpperCase() %>
+                        </p>
+                        <p id="product-grid-modal-product-price">INR <%= product.price %>
+                        </p>
+                        <p id="product-grid-modal-product-price-content">Price varies with currency exchange rates and
+                            may be different than in store.</p><button id="product-grid-modal-product-checkout">
+                            <p>CHECK OUT</p>
+                        </button>
+                        <p id="product-grid-modal-product-add" style="text-decoration: none;">View Shopping Bag</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
@@ -122,12 +149,19 @@
 
     let addToBag = document.getElementById("button1")
 
+    var closeBtn = document.getElementById('product-grid-closeBtn');
+    var modal = document.getElementById('product-grid-modalBox');
+    var modalContent = document.getElementById('product-grid-modal-content');
+    var container = document.getElementById('product-grid-container');
+    var modalImage = document.getElementById('product-grid-modal-img');
+    var footer = document.getElementById('product-grid-footer');
+
     addToBag.onclick = async () => {
 
 
         if (localStorage.getItem('uid')) {
             console.log("Consoling this...")
-            let quantity = document.getElementById("quantity")
+            let quant = document.getElementById("quantity")
 
             let sid = localStorage.getItem("sid");
             console.log(sid);
@@ -163,7 +197,7 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            "quantity": res[0].quantity+1,
+                            "quantity": res[0].quantity + Number(quant.value),
                         })
                     }
                 ));
@@ -183,7 +217,7 @@
                         body: JSON.stringify({
                             "product_id": addToBag.className,
                             "shopping_bag_id": sid,
-                            "quantity": quantity.value,
+                            "quantity": Number(quant.value),
                             "ordered_flag": false,
                         })
                     }
@@ -191,8 +225,10 @@
 
                 var res = await response.json();
                 console.log(res);
-
             }
+
+            modal.style.display = 'block';
+            container.style.filter = 'blur(6px)';
 
         } else {
 
@@ -227,26 +263,26 @@
 
             var res = await response.json();
 
-            if(res.length){
+            if (res.length) {
                 alert("already present")
-            }else{
+            } else {
 
                 let response = await fetch(`http://localhost:5000/wishlistDetails`, (
-                {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "wishlist_id": wid,
-                        "product_id": addToBag.className,
-                    })
-                }
-            ));
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "wishlist_id": wid,
+                            "product_id": addToBag.className,
+                        })
+                    }
+                ));
 
-            var res = await response.json();
-            console.log(res);
+                var res = await response.json();
+                console.log(res);
 
             }
 
@@ -261,6 +297,15 @@
 
     }
 
+
+
+    function closeModal() {
+        modal.style.display = "none";
+        modalImage.innerHTML = "";
+        modalContent.innerHTML = "";
+        container.style.filter = "blur(0px)";
+
+    }
 
 
 </script>

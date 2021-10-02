@@ -265,6 +265,7 @@ allProducts()
 
 window.onload = function() {
     localStorage.removeItem("productIDs");
+    verfiyUserDetails();
   }
 
 
