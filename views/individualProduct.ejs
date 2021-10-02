@@ -129,26 +129,30 @@
 
             //shud add the product to the bag
 
+            //if product already present in shopping bag then just increase the quantity of the product using patch
+
             let quantity = document.getElementById("quantity")
 
-            // let response = await fetch("localhost:5000/shoppingBagDetails", (
-            //     {
-            //         method: 'POST',
-            //         headers: {
-            //             'Accept': 'application/json',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({
-            //             "product_id": addToBag.className,
-            //             "shopping_bag_id":"", //will be getting from the localstorage,
-            //             "quantity": quantity.value,
-            //             "ordered_flag":true,
-            //         })
-            //     }
-            // ));
+            let sid = JSON.parse(localStorage.getItem("sid"))
 
-            // let res = await response.json();
-            // console.log(res);
+            let response = await fetch("localhost:5000/shoppingBagDetails", (
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "product_id": addToBag.className,
+                        "shopping_bag_id":sid, 
+                        "quantity": quantity.value,
+                        "ordered_flag":false,
+                    })
+                }
+            ));
+
+            let res = await response.json();
+            console.log(res);
 
         } else {
 
@@ -167,7 +171,11 @@
 
         if (localStorage.getItem('uid')) {
 
-            let response = await fetch(`localhost:5000/wishlistDetails/${user_id}`, (
+            let wid = JSON.parse(localStorage.getItem("wid"))
+
+            //if product already present in wishlist then dnt add it
+
+            let response = await fetch(`localhost:5000/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {
@@ -175,16 +183,15 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        "wishlist_id": wid,
                         "product_id": addToBag.className,
-                        "shopping_bag_id": "", //will be getting from the localstorage,
-                        "quantity": quantity.value,
-                        "ordered_flag": true,
                     })
                 }
             ));
 
             let res = await response.json();
             console.log(res);
+
         } else {
 
             //shud be taken to sigin page

@@ -190,6 +190,10 @@ function createProductCatalogue(products) {
         quick_view_text.innerText = "Quick View";
         quick_view.appendChild(quick_view_text);
 
+        quick_view.onclick = function () {
+            openModal(product);
+        }
+
 
         if (product.rating) {
             var rating = document.createElement('p');
@@ -222,8 +226,6 @@ function createProductCatalogue(products) {
 
         var itemCount = document.getElementById('product-grid-itemCount');
         itemCount.innerText = `${currentArray.length} items`;
-
-
 
 
         if (!localStorage.getItem('productIDs')) {
@@ -265,3 +267,167 @@ window.onload = function() {
     localStorage.removeItem("productIDs");
   }
 
+
+
+  var closeBtn = document.getElementById('product-grid-closeBtn');
+  var modal = document.getElementById('product-grid-modalBox');
+  var modalContent = document.getElementById('product-grid-modal-content');
+  var container = document.getElementById('product-grid-main-container');
+  var modalImage = document.getElementById('product-grid-modal-img');
+  var footer = document.getElementById('product-grid-footer');
+
+  function openModal(product) {
+   
+      var image = document.createElement('img');
+      image.src = product.images[0];
+      modalImage.appendChild(image);
+
+      var p_name = document.createElement('p');
+      p_name.innerText = product.name;
+      p_name.setAttribute('id', 'product-grid-modal-product-name');
+
+      var p_brand = document.createElement('p');
+      p_brand.innerText = product.brand_id.brand_name.toUpperCase();
+      p_brand.setAttribute('id', 'product-grid-modal-product-brand');
+
+      var p_price = document.createElement('p');
+      p_price.innerText = "INR " + product.price;
+      p_price.setAttribute('id', 'product-grid-modal-product-price');
+
+      var p_priceContent = document.createElement('p');
+      p_priceContent.innerText = "Price varies with currency exchange rates and may be different than in store.";
+      p_priceContent.setAttribute('id', 'product-grid-modal-product-price-content');
+
+      var p_about = document.createElement('p');
+      p_about.innerText = product.description;
+      p_about.setAttribute('id', 'product-grid-modal-product-about');
+
+      var p_addToBagBtn = document.createElement('button');
+      p_addToBagBtn.innerHTML = `<div><span class="material-icons">shopping_bag</span></div><p>Add to Bag</p>`;
+      p_addToBagBtn.setAttribute('id', 'product-grid-modal-product-addToBag');
+      p_addToBagBtn.onclick = function () {
+          addingToBag(product);
+      }
+
+      var p_add = document.createElement('p');
+      p_add.setAttribute('id', 'product-grid-modal-product-add')
+      p_add.innerHTML = `<span class="material-icons">add</span><p>Add to Wish List</p>`;
+      p_add.onmouseover = function () {
+          p_add.style.textDecoration = 'underline';
+      }
+      p_add.onclick = function () {
+          addToWishlist(product);
+      }
+
+      p_add.onmouseout = function () {
+          p_add.style.textDecoration = 'none';
+      }
+
+      var p_seeDetails = document.createElement('p');
+      p_seeDetails.setAttribute('id', 'product-grid-modal-product-details');
+      p_seeDetails.innerText = 'See full details';
+      p_seeDetails.style.textDecoration = 'underline';
+      p_seeDetails.onmouseover = function () {
+          p_seeDetails.style.textDecorationThickness = "2px"
+      }
+      p_seeDetails.onclick = function () {
+        window.location.href =`http://localhost:5000/products/${product._id}`
+      }
+
+      p_seeDetails.onmouseout = function () {
+          p_add.style.textDecoration = 'none';
+          p_seeDetails.style.textDecorationThickness = "0px"
+      }
+
+
+      modalContent.append(p_name, p_brand, p_price, p_priceContent, p_about, p_addToBagBtn, p_add, p_seeDetails);
+      modal.style.display = 'block';
+      container.style.filter = 'blur(6px)';
+  }
+
+  function closeModal() {
+      modal.style.display = "none";
+      modalImage.innerHTML = "";
+      modalContent.innerHTML = "";
+      container.style.filter = "blur(0px)";
+  }
+
+
+     // localhost:5000/shoppingBagDetails
+
+     addingToBag = async (product) => {
+ 
+ 
+         if (localStorage.getItem('uid')) {
+ 
+             //shud add the product to the bag
+             //if product already present in shopping bag then just increase the quantity of the product using patch
+ 
+             let sid = JSON.parse(localStorage.getItem("sid"))
+ 
+             let response = await fetch("localhost:5000/shoppingBagDetails", (
+                 {
+                     method: 'POST',
+                     headers: {
+                         'Accept': 'application/json',
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         "product_id": product._id,
+                         "shopping_bag_id":sid, 
+                         "quantity": 1,
+                         "ordered_flag":false,
+                     })
+                 }
+             ));
+ 
+             let res = await response.json();
+             console.log(res);
+ 
+         } else {
+ 
+             //shud be taken to sigin page
+ 
+             window.location.href = "/login"
+
+         }
+     }
+ 
+ 
+     //wid - wishlist id
+     //sid - shopping bag id
+ 
+     addToWishlist = async (product) => {
+ 
+         if (localStorage.getItem('uid')) {
+ 
+             let wid = JSON.parse(localStorage.getItem("wid"))
+
+             //if product already present in wishlist then dnt add it
+ 
+             let response = await fetch(`localhost:5000/wishlistDetails`, (
+                 {
+                     method: 'POST',
+                     headers: {
+                         'Accept': 'application/json',
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         "wishlist_id": wid,
+                         "product_id": product._id,
+                     })
+                 }
+             ));
+ 
+             let res = await response.json();
+             console.log(res);
+ 
+         } else {
+ 
+             //shud be taken to sigin page
+ 
+             window.location.href = "/login"
+         }
+ 
+ 
+     }
