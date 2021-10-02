@@ -47,11 +47,15 @@
                         <p class="pro_det_p" style="font-weight: 400;">Colors available: <span
                                 style="font-weight: 500;color: <%= product.color %>;">
                                 <%= product.color %>
-                            </span></p><input type="text" id="quantity" value="1"><br><button id="button1"
-                            onclick="addToBag(<%= JSON.stringify(product) %>)"
-                            style="font-size: 19px;"><span class="material-icons"
-                                style="font-size: 24px;">shopping_bag</span> Add to Bag</button><button id="wish" onclick="wishlist(<%= JSON.stringify(product) %>)">+
-                            Add To Wish List</button>
+                            </span>
+                        </p>
+                        <input type="Number" id="quantity" value="1">
+                        <p id="flag">Kindly specify a non zero positive value.</p>
+                        <button id="button1" onclick="addToBag(<%= JSON.stringify(product) %>)" style="font-size: 19px;">
+                            <span class="material-icons" style="font-size: 24px;">shopping_bag</span> Add to
+                            Bag
+                        </button>
+                        <button id="wish" onclick="wishlist(<%= JSON.stringify(product) %>)">+ Add To Wish List</button>
                     </div>
                 </div>
 
@@ -99,7 +103,8 @@
         <div id="product-grid-modal-product-info">
 
             <div>
-                <span id="product-grid-closeBtn" class="material-icons" onclick="closeModal(<%= JSON.stringify(product) %>)">close</span>
+                <span id="product-grid-closeBtn" class="material-icons"
+                    onclick="closeModal(<%= JSON.stringify(product) %>)">close</span>
                 <p style="font-size: 20px;font-weight: 500;text-align: center;">Added To your bag</p>
                 <div id="product-grid-modal-div">
                     <div id="product-grid-modal-img"><img src=<%=(product.images[0]) %>></div>
@@ -113,7 +118,8 @@
                         <p id="product-grid-modal-product-price">INR <%= product.price %>
                         </p>
                         <p id="product-grid-modal-product-price-content">Price varies with currency exchange rates and
-                            may be different than in store.</p><button id="product-grid-modal-product-checkout" onclick="checkout()">
+                            may be different than in store.</p><button id="product-grid-modal-product-checkout"
+                            onclick="checkout()">
                             <p>CHECK OUT</p>
                         </button>
                         <p id="product-grid-modal-product-add" onclick="viewShopBag()">View Shopping Bag</p>
@@ -130,6 +136,7 @@
 
     let imgDiv = document.getElementById("prod-img")
     let wish = document.getElementById("wish")
+    let flag = document.getElementById("flag")
 
     imgDiv.onmouseover = function () {
 
@@ -160,15 +167,16 @@
 
             let quant = document.getElementById("quantity")
 
+            if (Number(quant.value)<=0) {
+                flag.style.display = "block"
+                return
+            }
+
+            if(flag.style.display == "block"){
+                flag.style.display = "none"
+            }
+
             let sid = localStorage.getItem("sid");
-
-            //shud add the product to the bag
-
-            //if product already present in shopping bag then just increase the quantity of the product using patch
-
-            // 1st - find and get the document using product id & shopping bag id, get the quantity. , flag wud be length of the received collection.
-            // 2nd - patch the document and increase the quantity by 1.
-
 
             let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${product._id}/${sid}`, (
                 {
@@ -301,14 +309,14 @@
         window.location.href = `http://localhost:5000/products/${product._id}`
     }
 
-    let checkout = () =>{
+    let checkout = () => {
 
         let uid = localStorage.getItem('uid')
 
         window.location.href = `http://localhost:5000/checkout/${uid}`
     }
 
-    let viewShopBag = () =>{
+    let viewShopBag = () => {
 
         let sid = localStorage.getItem('sid')
 
