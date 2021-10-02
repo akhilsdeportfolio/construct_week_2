@@ -55,3 +55,93 @@ function removeDropdown() {
         reset[i].style.textDecoration = "none"
     }
 }
+
+
+
+window.onload = () => {
+    verfiyUserDetails();
+}
+
+var userDetails;
+verfiyUserDetails = async () => {
+    var account = document.getElementById('your-account');
+    var wishlist = document.getElementById('your-wishlist');
+    var signin = document.getElementById('sign-in-btn');
+    var signup = document.getElementById('sign-up-btn');
+    var signout = document.getElementById('signout');
+
+    var user_id = localStorage.getItem('uid');
+    var shopping_bag_id = localStorage.getItem('sid');
+    var wishlist_id = localStorage.getItem('wid');
+
+    if (user_id) {
+        userDetails = await getUserDetails(user_id);
+
+        signin.style.display = 'none';
+        signup.style.display = 'none';
+
+        let welcomeMessage = document.getElementById('welcome_message');
+        welcomeMessage.innerText = `Hi ${userDetails.first_name}`;
+
+        var accountLink = document.getElementById('your-account-link');
+        accountLink.setAttribute('href', `/myaccount/${user_id}`);
+
+        var wishlistLink = document.getElementById('your-wishlist-link');
+        wishlistLink.setAttribute('href', `/myaccount/${user_id}/wishlist`);
+
+        var shoppingBag = document.getElementById('bag-icon-text');
+        shoppingBag.setAttribute('href', `/shoppingBagDetails/${shopping_bag_id}`);
+
+        var items = await getShoppingBagItems(shopping_bag_id);
+        var quantity = 0;
+
+        for (k in items) {
+            quantity += items[k].quantity;
+        }
+
+        var itemsInBag = document.getElementById('itemsInBag');
+        itemsInBag.innerText = `(${quantity})`;
+
+        signout.onclick = () => {
+            localStorage.setItem('uid', "");
+            localStorage.setItem('sid', "");
+            localStorage.setItem('wid', "");
+            window.location.href = '/landingpage';
+        }
+
+    } else if (!user_id) {
+
+        account.style.display = 'none';
+        wishlist.style.display = 'none';
+        signout.style.display = 'none';
+    }
+}
+
+getUserDetails = async (user_id) => {
+    const response = await fetch(`http://localhost:5000/users/${user_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    const data = await response.json();
+    const user = data.userDetails;
+
+    return user;
+};
+
+getShoppingBagItems = async (shopping_bag_id) => {
+    const response = await fetch(`http://localhost:5000/shoppingBagDetails/details/${shopping_bag_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    const data = await response.json();
+    const items = data.items;
+
+    return items;
+}
+

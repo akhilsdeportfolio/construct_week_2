@@ -70,6 +70,14 @@ body {
     padding-bottom: 15px;
 }
 
+#button1:hover{
+    cursor: pointer;
+    background-color: rgb(59, 56, 56);
+    font-size: 25px;
+    font-weight: 600;
+    border: 3px solid black;
+}
+
 .pro_det_p {
     font-size: 14px;
     float: left;
@@ -176,6 +184,11 @@ body {
     border-left: none;
     border-right: none;
     border-bottom: black;
+}
+
+#wishlist:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #product-grid-modalBox {

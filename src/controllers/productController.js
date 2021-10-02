@@ -178,7 +178,7 @@ router.get("/filters", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 
-     let product = await Product.findById(req.params.id).lean();
+     let product = await Product.findById(req.params.id).populate("brand_id").lean();
 
      return res.render('individualProduct.ejs', {
           product: product,

@@ -61,6 +61,8 @@ checkShoppingBag = (items) => {
     });
     tag.innerText = `Shopping Bag (${quantity})`;
   }
+
+  verfiyUserDetails();
 };
 
 goToPage = (product_id) => {

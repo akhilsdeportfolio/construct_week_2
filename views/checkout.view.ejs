@@ -1,361 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout Page</title>
-    <link
-      rel="icon"
-      href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
-      type="image/x-icon"
-    />
-    <title>
-      Nordstrom Online & In Store: Shoes, Jewelry, Clothing, Makeup, Dresses
-    </title>
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/checkout.css" />
-    <script src="/js/checkout.js"></script>
-  </head>
-  <body onload="checkoutPage(<%= JSON.stringify(shoppingBag) %>)">
-    <div id="entire-body">
-      <div id="Checkout-Nav">
-        <div id="logo">
-          <a href="landing_page.html"
-            ><img src="https://n.nordstrommedia.com/alias/nordstrom-logo.svg"
-          /></a>
-        </div>
-        <div id="bag">
-          <a id="bag-icon-text" href="shopping_bag.html">
-            <div>
-              <span class="material-icons" style="font-size: 36px; color: black"
-                >shopping_bag</span
-              >
-            </div>
-            <p id="itemsInBag"></p>
-          </a>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout Page</title>
+  <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
+    type="image/x-icon" />
+  <title>
+    Nordstrom Online & In Store: Shoes, Jewelry, Clothing, Makeup, Dresses
+  </title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/checkout.css" />
+  <script src="/js/checkout.js"></script>
+</head>
+
+<body onload="checkoutPage(<%= JSON.stringify(shoppingBag) %>)">
+  <div id="entire-body">
+    <div id="Checkout-Nav">
+      <div id="logo">
+        <a href="/landingpage"><img src="https://n.nordstrommedia.com/alias/nordstrom-logo.svg" /></a>
       </div>
-      <div id="main-checkout">
-        <div id="address">
-          <div class="upper-div">
-            <div>1</div>
+      <div id="bag">
+        <a id="bag-icon-text" href="/">
+          <div>
+            <span class="material-icons" style="font-size: 36px; color: black">shopping_bag</span>
+          </div>
+          <p id="itemsInBag"></p>
+        </a>
+      </div>
+    </div>
+    <div id="main-checkout">
+      <div id="address">
+        <div class="upper-div">
+          <div>1</div>
+          <div>
+            <p>Delivery</p>
+          </div>
+        </div>
+
+        <div id="Gone">
+          <div>
+            <input class="allInputs" type="email" id="emailInput" placeholder="Email" />
+            <label class="alert" id="emaillabel">Email address is required</label>
+          </div>
+          <div>
             <div>
-              <p>Delivery</p>
+              <input class="allInputs" type="text" id="firstName" placeholder="First Name" /><br />
+              <label class="alert" id="firstNamelabel">First name is required</label>
+            </div>
+            <div>
+              <input class="allInputs" type="text" id="lastName" placeholder="Last Name" /><br />
+              <label class="alert" id="lastNamelabel">Last name is required</label>
             </div>
           </div>
-
-          <div id="Gone">
+          <div>
+            <input class="allInputs" type="text" id="addressInput" placeholder="Address" />
+            <label class="alert" id="addresslabel">Address is required</label>
+          </div>
+          <div>
             <div>
-              <input
-                class="allInputs"
-                type="email"
-                id="emailInput"
-                placeholder="Email"
-              />
-              <label class="alert" id="emaillabel"
-                >Email address is required</label
-              >
+              <input type="text" id="address2" placeholder="Address2 (Optional)" />
             </div>
             <div>
-              <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="firstName"
-                  placeholder="First Name"
-                /><br />
-                <label class="alert" id="firstNamelabel"
-                  >First name is required</label
-                >
-              </div>
-              <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="lastName"
-                  placeholder="Last Name"
-                /><br />
-                <label class="alert" id="lastNamelabel"
-                  >Last name is required</label
-                >
-              </div>
+              <input class="allInputs" type="text" id="Postal" placeholder="Postal Code" /><br />
+              <label class="alert" id="Postallabel">Postal code is required</label>
+            </div>
+          </div>
+          <div>
+            <div>
+              <input class="allInputs" type="text" id="city" placeholder="City" /><br />
+              <label class="alert" id="citylabel">City is required</label>
             </div>
             <div>
-              <input
-                class="allInputs"
-                type="text"
-                id="addressInput"
-                placeholder="Address"
-              />
-              <label class="alert" id="addresslabel">Address is required</label>
+              <input type="text" id="region" placeholder="Region (Optional)" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <input class="allInputs" type="text" id="phone" placeholder="Phone" /><br />
+              <label class="alert" id="phonelabel">Phone number is required</label>
             </div>
             <div>
+              <input class="allInputs" type="text" id="Country" placeholder="Country" /><br />
+              <label class="alert" id="Countrylabel">Country is required</label>
+            </div>
+          </div>
+          <div id="delivery">
+            <div id="heading">
               <div>
-                <input
-                  type="text"
-                  id="address2"
-                  placeholder="Address2 (Optional)"
-                />
+                <p><strong>Delivery Method</strong></p>
               </div>
               <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="Postal"
-                  placeholder="Postal Code"
-                /><br />
-                <label class="alert" id="Postallabel"
-                  >Postal code is required</label
-                >
+                <p><strong>Estimated Arrival</strong></p>
+              </div>
+              <div>
+                <p><strong>Shipping Cost</strong></p>
               </div>
             </div>
-            <div>
-              <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="city"
-                  placeholder="City"
-                /><br />
-                <label class="alert" id="citylabel">City is required</label>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  id="region"
-                  placeholder="Region (Optional)"
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="phone"
-                  placeholder="Phone"
-                /><br />
-                <label class="alert" id="phonelabel"
-                  >Phone number is required</label
-                >
-              </div>
-              <div>
-                <input
-                  class="allInputs"
-                  type="text"
-                  id="Country"
-                  placeholder="Country"
-                /><br />
-                <label class="alert" id="Countrylabel"
-                  >Country is required</label
-                >
-              </div>
-            </div>
-            <div id="delivery">
-              <div id="heading">
+            <div id="border-color" class="required" onclick="required(1)">
+              <div class="blue-div">
                 <div>
-                  <p><strong>Delivery Method</strong></p>
+                  <button>1</button>
                 </div>
                 <div>
-                  <p><strong>Estimated Arrival</strong></p>
+                  <p>Standard</p>
+                  <p style="font-style: italic">
+                    No additional import charges at delivery
+                  </p>
+                </div>
+              </div>
+              <div class="center-text">
+                <p>11–21 business days</p>
+              </div>
+              <div class="center-text">
+                <p>₹2,487</p>
+              </div>
+            </div>
+            <div class="required border-color" onclick="required(2)">
+              <div class="blue-div">
+                <div>
+                  <button>2</button>
                 </div>
                 <div>
-                  <p><strong>Shipping Cost</strong></p>
+                  <p>Standard</p>
+                  <p style="font-style: italic">
+                    Import charges collected upon delivery
+                  </p>
                 </div>
               </div>
-              <div id="border-color" class="required" onclick="required(1)">
-                <div class="blue-div">
-                  <div>
-                    <button>1</button>
-                  </div>
-                  <div>
-                    <p>Standard</p>
-                    <p style="font-style: italic">
-                      No additional import charges at delivery
-                    </p>
-                  </div>
-                </div>
-                <div class="center-text">
-                  <p>11–21 business days</p>
-                </div>
-                <div class="center-text">
-                  <p>₹2,487</p>
-                </div>
+              <div class="center-text">
+                <p>11–21 business days</p>
               </div>
-              <div class="required border-color" onclick="required(2)">
-                <div class="blue-div">
-                  <div>
-                    <button>2</button>
-                  </div>
-                  <div>
-                    <p>Standard</p>
-                    <p style="font-style: italic">
-                      Import charges collected upon delivery
-                    </p>
-                  </div>
-                </div>
-                <div class="center-text">
-                  <p>11–21 business days</p>
-                </div>
-                <div class="center-text">
-                  <a style="color: #2a9dcc">Calculate</a>
-                </div>
-              </div>
-              <div class="required border-color" onclick="required(3)">
-                <div class="blue-div">
-                  <div>
-                    <button>3</button>
-                  </div>
-                  <div>
-                    <p>Standard</p>
-                    <p style="font-style: italic">
-                      No additional import charges at delivery
-                    </p>
-                  </div>
-                </div>
-                <div class="center-text">
-                  <p>11–16 business days</p>
-                </div>
-                <div class="center-text">
-                  <a style="color: #2a9dcc">Calculate</a>
-                </div>
-              </div>
-              <div class="required border-color" onclick="required(4)">
-                <div class="blue-div">
-                  <div>
-                    <button>4</button>
-                  </div>
-                  <div>
-                    <p>Standard</p>
-                    <p style="font-style: italic">
-                      Import charges collected upon delivery
-                    </p>
-                  </div>
-                </div>
-                <div class="center-text">
-                  <p>11–16 business days</p>
-                </div>
-                <div class="center-text">
-                  <a style="color: #2a9dcc">Calculate</a>
-                </div>
-              </div>
-              <div>
-                <button id="continueAnother" onclick="checkValues()">
-                  Continue>>
-                </button>
+              <div class="center-text">
+                <a style="color: #2a9dcc">Calculate</a>
               </div>
             </div>
+            <div class="required border-color" onclick="required(3)">
+              <div class="blue-div">
+                <div>
+                  <button>3</button>
+                </div>
+                <div>
+                  <p>Standard</p>
+                  <p style="font-style: italic">
+                    No additional import charges at delivery
+                  </p>
+                </div>
+              </div>
+              <div class="center-text">
+                <p>11–16 business days</p>
+              </div>
+              <div class="center-text">
+                <a style="color: #2a9dcc">Calculate</a>
+              </div>
+            </div>
+            <div class="required border-color" onclick="required(4)">
+              <div class="blue-div">
+                <div>
+                  <button>4</button>
+                </div>
+                <div>
+                  <p>Standard</p>
+                  <p style="font-style: italic">
+                    Import charges collected upon delivery
+                  </p>
+                </div>
+              </div>
+              <div class="center-text">
+                <p>11–16 business days</p>
+              </div>
+              <div class="center-text">
+                <a style="color: #2a9dcc">Calculate</a>
+              </div>
+            </div>
+            <div>
+              <button id="continueAnother" onclick="checkValues()">
+                Continue>>
+              </button>
+            </div>
           </div>
+        </div>
 
-          <div id="address_display">
+        <div id="address_display">
+          <div>
             <div>
-              <div>
-                <p class="highlightText">DELIVERY ADDRESS:</p>
-              </div>
-              <div>
-                <p id="displayname">PRATIK JADHAV</p>
-                <p id="displayAddress">
-                  B94 2ND FLOOR KALACHOWKI OLD POLICE MUMBAI, MAHARASHTRA 400033
-                  INDIA
-                </p>
-              </div>
+              <p class="highlightText">DELIVERY ADDRESS:</p>
             </div>
             <div>
-              <div>
-                <p class="highlightText">DELIVERY METHOD:</p>
-              </div>
-              <div style="width: 50%">
-                <p id="imports">
-                  STANDARD IMPORT CHARGES COLLECTED UPON DELIVERY 11–21 BUSINESS
-                  DAYS
-                </p>
-              </div>
+              <p id="displayname">PRATIK JADHAV</p>
+              <p id="displayAddress">
+                B94 2ND FLOOR KALACHOWKI OLD POLICE MUMBAI, MAHARASHTRA 400033
+                INDIA
+              </p>
             </div>
           </div>
-          <hr />
-          <div class="upper-div upper-div-2">
-            <div>2</div>
+          <div>
             <div>
-              <p>Payment</p>
+              <p class="highlightText">DELIVERY METHOD:</p>
+            </div>
+            <div style="width: 50%">
+              <p id="imports">
+                STANDARD IMPORT CHARGES COLLECTED UPON DELIVERY 11–21 BUSINESS
+                DAYS
+              </p>
             </div>
           </div>
-          <div id="credit-details">
-            <div id="firstDiv">
-              <div id="creditDiv" style="display: flex">
-                <input type="checkbox" id="credit" checked />
-                <label for="credit" style="padding-top: 10px; margin-left: 5px"
-                  >Credit or Debit card</label
-                >
-              </div>
-              <div>
-                <img
-                  style="width: 50px"
-                  src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png"
-                />
-                <img
-                  style="width: 50px"
-                  src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png"
-                />
-              </div>
+        </div>
+        <hr />
+        <div class="upper-div upper-div-2">
+          <div>2</div>
+          <div>
+            <p>Payment</p>
+          </div>
+        </div>
+        <div id="credit-details">
+          <div id="firstDiv">
+            <div id="creditDiv" style="display: flex">
+              <input type="checkbox" id="credit" checked />
+              <label for="credit" style="padding-top: 10px; margin-left: 5px">Credit or Debit card</label>
             </div>
             <div>
-              <ol style="list-style-type: circle; margin: 20px">
-                <li>Kindly make sure to mention the card details correctly.</li>
-                <li>
-                  Do not include any spaces or characters other than numbers.
-                </li>
-                <li>
-                  If above conditions are not met, you will not be able to
-                  proceed further.
-                </li>
-              </ol>
+              <img style="width: 50px" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" />
+              <img style="width: 50px" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" />
             </div>
-            <div id="card_div" style="display: flex">
-              <input
-                id="cardnumber"
-                type="number"
-                placeholder="Card Number(16 digits)"
-                style="flex-basis: 200px"
-              />
-              <div id="card_details">
-                <input id="month" type="text" placeholder="MMYY" />
-                <input id="code" type="number" placeholder="CVV(3 digits)" />
-              </div>
+          </div>
+          <div>
+            <ol style="list-style-type: circle; margin: 20px">
+              <li>Kindly make sure to mention the card details correctly.</li>
+              <li>
+                Do not include any spaces or characters other than numbers.
+              </li>
+              <li>
+                If above conditions are not met, you will not be able to
+                proceed further.
+              </li>
+            </ol>
+          </div>
+          <div id="card_div" style="display: flex">
+            <input id="cardnumber" type="number" placeholder="Card Number(16 digits)" style="flex-basis: 200px" />
+            <div id="card_details">
+              <input id="month" type="text" placeholder="MMYY" />
+              <input id="code" type="number" placeholder="CVV(3 digits)" />
             </div>
-            <hr style="border-top: 2px dotted rgb(97, 94, 94)" />
-            <div style="display: flex">
-              <input type="checkbox" id="ele" checked />
+          </div>
+          <hr style="border-top: 2px dotted rgb(97, 94, 94)" />
+          <div style="display: flex">
+            <input type="checkbox" id="ele" checked />
 
-              <label
-                for="ele"
-                style="
+            <label for="ele" style="
                   color: rgb(187, 179, 179);
                   padding-top: 10px;
                   margin-left: 5px;
-                "
-                >Send me electronic or mail offers from Nordstrom. You may opt
-                out at any time.</label
-              ><br />
-            </div>
-            <button
-              id="anotherbtn"
-              onclick="placeOrder()"
-              onMouseOver="this.style.backgroundColor='rgb(226, 19, 19)'"
-              onMouseOut="this.style.backgroundColor='black'"
-              style="
+                ">Send me electronic or mail offers from Nordstrom. You may opt
+              out at any time.</label><br />
+          </div>
+          <button id="anotherbtn" onclick="placeOrder()" onMouseOver="this.style.backgroundColor='rgb(226, 19, 19)'"
+            onMouseOut="this.style.backgroundColor='black'" style="
                 width: 40%;
                 background-color: black;
                 border: none;
@@ -365,95 +270,86 @@
                 margin-top: 35px;
                 margin-left: 200px;
                 margin-bottom: 30px;
-              "
-            >
-              Place Order>>
-            </button>
+              ">
+            Place Order>>
+          </button>
 
-            <p
-              style="
+          <p style="
                 text-align: center;
                 margin-top: 10px;
                 margin-bottom: 30px;
                 color: rgb(100, 97, 97);
                 font-size: 18px;
-              "
-            >
-              This order total does not include duties or taxes. You will be
-              required to pay those, along with any collection fees, to the
-              shipping carrier upon receipt.
-            </p>
-          </div>
-          <hr />
-          <div id="foot">
-            <p>
-              By placing your order, you agree to the
-              <span><a href="">Terms & Conditions</a></span> and
-              <span
-                ><a href=""
-                  >Privacy Policy of Borderfree from Pitney Bowes</a
-                ></span
-              >, Nordstrom’s international fulfillment service. Borderfree is an
-              online merchant that is located at 27 Waterview Drive, Shelton,
-              CT, 06484, US.
-            </p>
-          </div>
+              ">
+            This order total does not include duties or taxes. You will be
+            required to pay those, along with any collection fees, to the
+            shipping carrier upon receipt.
+          </p>
         </div>
-        <div id="payment-details">
-          <div>
-            <i style="font-size: 25px" class="fa fa-shopping-cart"></i>
-            <p>Your Order</p>
-          </div>
-          <button id="continue" onclick="checkValues()">Continue>></button>
-          <div id="product-prices">
-            <div>
-              <p>Items</p>
-              <p id="items_price"></p>
-            </div>
-            <div>
-              <p>Shipping</p>
-              <p id="shipping_price">₹2487</p>
-            </div>
-            <div>
-              <p>Duties & Taxes</p>
-              <p>₹2360</p>
-            </div>
-            <div>
-              <h2>TOTAL</h2>
-              <h2 id="total_price"></h2>
-            </div>
-          </div>
-          <hr />
-          <div id="checkout-image-div">
-            
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="simpleModal" class="modal">
-      <div class="modal-content">
-        <span
-          id="closeBtn"
-          onclick="closeModal(<%= JSON.stringify(shoppingBag._id) %>)"
-          >&times;</span
-        >
-        <img src="https://n.nordstrommedia.com/alias/nordstrom-logo.svg" />
         <hr />
-        <h1>Congratulations!</h1>
-        <h3>Your order has been placed Successfully.</h3>
-        <h3>Thank you for Shopping in Nordstrom.</h3>
-        <h3 style="line-height: 1.4; font-size: 25px">
-          YOUR ORDER NUMBER : <span id="orderId">1</span>
-        </h3>
-        <p style="line-height: 1.4; font-size: 17px">
-          We received your order and will begin processing it soon. Please check
-          your email and message for order related details.
-        </p>
-        <button style="margin-top: 15px">
-          <a href="http://localhost:5000/landingpage">SHOP MORE</a>
-        </button>
+        <div id="foot">
+          <p>
+            By placing your order, you agree to the
+            <span><a href="">Terms & Conditions</a></span> and
+            <span><a href="">Privacy Policy of Borderfree from Pitney Bowes</a></span>, Nordstrom’s international
+            fulfillment service. Borderfree is an
+            online merchant that is located at 27 Waterview Drive, Shelton,
+            CT, 06484, US.
+          </p>
+        </div>
+      </div>
+      <div id="payment-details">
+        <div>
+          <i style="font-size: 25px" class="fa fa-shopping-cart"></i>
+          <p>Your Order</p>
+        </div>
+        <button id="continue" onclick="checkValues()">Continue>></button>
+        <div id="product-prices">
+          <div>
+            <p>Items</p>
+            <p id="items_price"></p>
+          </div>
+          <div>
+            <p>Shipping</p>
+            <p id="shipping_price">₹2487</p>
+          </div>
+          <div>
+            <p>Duties & Taxes</p>
+            <p>₹2360</p>
+          </div>
+          <div>
+            <h2>TOTAL</h2>
+            <h2 id="total_price"></h2>
+          </div>
+        </div>
+        <hr />
+        <div id="checkout-image-div">
+
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+
+  <div id="simpleModal" class="modal">
+    <div class="modal-content">
+      <span id="closeBtn" onclick="closeModal(<%= JSON.stringify(shoppingBag._id) %>)">&times;</span>
+      <img src="https://n.nordstrommedia.com/alias/nordstrom-logo.svg" />
+      <hr />
+      <h1>Congratulations!</h1>
+      <h3>Your order has been placed Successfully.</h3>
+      <h3>Thank you for Shopping in Nordstrom.</h3>
+      <h3 style="line-height: 1.4; font-size: 25px">
+        YOUR ORDER NUMBER : <span id="orderId">1</span>
+      </h3>
+      <p style="line-height: 1.4; font-size: 17px">
+        We received your order and will begin processing it soon. Please check
+        your email and message for order related details.
+      </p>
+      <button style="margin-top: 15px">
+        <a href="http://localhost:5000/landingpage">SHOP MORE</a>
+      </button>
+    </div>
+  </div>
+</body>
+
 </html>
