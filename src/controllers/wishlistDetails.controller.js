@@ -59,4 +59,13 @@ router.get("/delete/:id/:uid",async(req,res)=>{
     return res.redirect(url);
 })
 
+
+router.get("/product/:product_id/:wishlist_id",async(req,res)=>{
+
+    const wishlist = await WishlistDetails.find({wishlist_id:req.params.wishlist_id, product_id:req.params.product_id}).lean();
+
+    res.status(200).send(wishlist);
+
+})
+
 module.exports=router;

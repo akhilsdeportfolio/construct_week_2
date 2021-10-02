@@ -127,32 +127,71 @@
 
         if (localStorage.getItem('uid')) {
 
-            //shud add the product to the bag
-
-            //if product already present in shopping bag then just increase the quantity of the product using patch
-
             let quantity = document.getElementById("quantity")
 
             let sid = JSON.parse(localStorage.getItem("sid"))
 
-            let response = await fetch("http://localhost:5000/shoppingBagDetails", (
+            //shud add the product to the bag
+
+            //if product already present in shopping bag then just increase the quantity of the product using patch
+
+            // 1st - find and get the document using product id & shopping bag id, get the quantity. , flag wud be length of the received collection.
+            // 2nd - patch the document and increase the quantity by 1.
+
+
+            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${addToBag.className}/${sid}`, (
                 {
-                    method: 'POST',
+                    method: 'GET',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "product_id": addToBag.className,
-                        "shopping_bag_id":sid, 
-                        "quantity": quantity.value,
-                        "ordered_flag":false,
-                    })
+                    }
                 }
             ));
 
             let res = await response.json();
             console.log(res);
+
+            if (res.length) {
+
+                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res._id}`, (
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "quantity": res.quantity+1,
+                        })
+                    }
+                ));
+
+                let res = await response.json();
+                console.log(res);
+
+            } else {
+
+                let response = await fetch("http://localhost:5000/shoppingBagDetails", (
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "product_id": addToBag.className,
+                            "shopping_bag_id": sid,
+                            "quantity": quantity.value,
+                            "ordered_flag": false,
+                        })
+                    }
+                ));
+
+                let res = await response.json();
+                console.log(res);
+
+            }
 
         } else {
 
@@ -174,7 +213,24 @@
 
             //if product already present in wishlist then dnt add it
 
-            let response = await fetch(`http://localhost:5000/wishlistDetails`, (
+
+            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${addToBag.className}/${wid}`, (
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ));
+
+            let res = await response.json();
+
+            if(res.length){
+                alert("already present")
+            }else{
+
+                let response = await fetch(`http://localhost:5000/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {
@@ -190,6 +246,8 @@
 
             let res = await response.json();
             console.log(res);
+
+            }
 
         } else {
 
