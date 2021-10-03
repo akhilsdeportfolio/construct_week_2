@@ -29,7 +29,7 @@ To run this application on your local system, execute the following commands on 
   create a .env file with username and password of mongodb
   
 
-To start using the application, open the `http://localhost:5000/landingpage` file using the Live Server
+To start using the application, open the `http://localhost:5000/landingpage` link in your browser.
 
 ## Features 
 <!-- --- -->
