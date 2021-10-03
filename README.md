@@ -12,7 +12,9 @@ Nordstrom, Inc. (/ˈnɔːrdstrəm/) is an American luxury department store chain
 <!-- <hr> -->
 - HTML , CSS
 - JAVASCRIPT
-- Browser LocalStorage
+- Browser LocalStorage for Frendend
+- MongoDB as Database
+- Express , EJS for Backend
 
 ## Installing and Running
 <!-- <hr> -->
@@ -34,6 +36,7 @@ To start using the application, open the `http://localhost:5000/landingpage` fil
 - Customers can view the Products list of a particular category.
 - Complete product details page, showing various sizes and variants.
 - Checkout page which calculates the shipping prices dynamically.
+- My account page which contain purchase history and the details related to respected customer
 
 ## Steps to navigate the website:
 <!-- <hr> -->
@@ -53,6 +56,12 @@ To start using the application, open the `http://localhost:5000/landingpage` fil
   - Enter their Credit/Debit card details
   - Place the Order
 - On placing the Order, a pop-up displays the order no. generated for the user and the shopping bag is also cleared.
+- On the Landing Page header, user can click on the "Your Account" which is inside the username in the display
+- On My Account page
+   -Customer can view products or he/she can remove the products from Wishlist
+   - Add or Remove the delivary Addres
+   - Customer can change their password if they needed
+  
 
 ## Screenshots
 <!-- --- -->
@@ -83,6 +92,10 @@ A glimpse of our website
 
 ![Screenshot (122).png](https://cdn.hashnode.com/res/hashnode/image/upload/v1630219352528/km3ZkSW82.png)
 ---
+- On My Account page user can change their addres and the password if they need
+
+- ![My Account](https://user-images.githubusercontent.com/87421863/135756494-f0e72fdd-fbf0-41a9-ab37-d629f43ada39.png)
+
 
 ## Demo
  [Demo link here](https://shark2killer-e7e79.web.app/) 
@@ -94,5 +107,8 @@ A glimpse of our website
   1. [Vaishnavi Kawthankar](https://github.com/vcow10kar) 
   2. [Pratik Jadhav](https://github.com/pratikjadhav080) 
   3. [Akhil Kamsala](https://github.com/akhilsdeportfolio) 
-  4. [Nikhil CN ](https://github.com/nikhilcn94) 
+  4. [Nikhil CN ](https://github.com/nikhilcn94)
+  5. [Prakash Chandra](https://github.com/Prakashchandra041)
+  
+  
 
