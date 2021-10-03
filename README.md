@@ -12,7 +12,7 @@ Nordstrom, Inc. (/ˈnɔːrdstrəm/) is an American luxury department store chain
 <!-- <hr> -->
 - HTML , CSS
 - JAVASCRIPT
-- Browser LocalStorage for Frendend
+- Browser LocalStorage for Frontend
 - MongoDB as Database
 - Express , EJS for Backend
 
