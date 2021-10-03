@@ -178,7 +178,7 @@
 
             let sid = localStorage.getItem("sid");
 
-            let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${product._id}/${sid}`, (
+            let response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${product._id}/${sid}`, (
                 {
                     method: 'GET',
                     headers: {
@@ -193,7 +193,7 @@
 
             if (res.length) {
 
-                let response = await fetch(`http://localhost:5000/shoppingBagDetails/product/${res[0]._id}`, (
+                let response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${res[0]._id}`, (
                     {
                         method: 'PATCH',
                         headers: {
@@ -211,7 +211,7 @@
 
             } else {
 
-                let response = await fetch("http://localhost:5000/shoppingBagDetails", (
+                let response = await fetch("http://nordstrom-cloned.herokuapp.com/shoppingBagDetails", (
                     {
                         method: 'POST',
                         headers: {
@@ -252,7 +252,7 @@
             //if product already present in wishlist then dnt add it
 
 
-            let response = await fetch(`http://localhost:5000/wishlistDetails/product/${product._id}/${wid}`, (
+            let response = await fetch(`http://nordstrom-cloned.herokuapp.com/wishlistDetails/product/${product._id}/${wid}`, (
                 {
                     method: 'GET',
                     headers: {
@@ -268,7 +268,7 @@
                 wish.textContent = "Product has already been added in your wishlist"
             } else {
 
-                let response = await fetch(`http://localhost:5000/wishlistDetails`, (
+                let response = await fetch(`http://nordstrom-cloned.herokuapp.com/wishlistDetails`, (
                     {
                         method: 'POST',
                         headers: {
@@ -306,21 +306,21 @@
         modalImage.innerHTML = "";
         modalContent.innerHTML = "";
         container.style.filter = "blur(0px)";
-        window.location.href = `http://localhost:5000/products/${product._id}`
+        window.location.href = `http://nordstrom-cloned.herokuapp.com/products/${product._id}`
     }
 
     let checkout = () => {
 
         let uid = localStorage.getItem('uid')
 
-        window.location.href = `http://localhost:5000/checkout/${uid}`
+        window.location.href = `http://nordstrom-cloned.herokuapp.com/checkout/${uid}`
     }
 
     let viewShopBag = () => {
 
         let sid = localStorage.getItem('sid')
 
-        window.location.href = `http://localhost:5000/shoppingBagDetails/${sid}`
+        window.location.href = `http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${sid}`
     }
 </script>
 
