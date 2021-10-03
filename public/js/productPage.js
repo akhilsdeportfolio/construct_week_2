@@ -105,7 +105,7 @@ async function addfilter() {
         } else if (brands.length && range.length) {
 
             let presentbrands = brands.join(",")
-            let presentranges = ranges.join(",")
+            let presentranges = range.join(",")
 
             x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&ranges=${presentranges}`)
 
