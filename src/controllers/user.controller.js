@@ -90,14 +90,14 @@ router.post("/createUser", async (req, res) => {
   // create shopping id 
 
   let jsonResp = {createdUser};
-  axios.post('http://localhost:5000/wishlist', {
+  axios.post('http://nordstrom-cloned.herokuapp.com/wishlist', {
     user_id:createdUser._id
   })
   .then(function (response) {
     console.log(response.data);
     jsonResp["wishlist"]=response.data;
 
-    axios.post('http://localhost:5000/shoppingBag', {
+    axios.post('http://nordstrom-cloned.herokuapp.com/shoppingBag', {
     user_id:createdUser._id
     }).then((response)=>{
       jsonResp["shoppingBag"]=response.data;

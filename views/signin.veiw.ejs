@@ -124,7 +124,7 @@
 
 
 
-                        let response = await fetch("http://localhost:5000/users/login",(
+                        let response = await fetch("http://nordstrom-cloned.herokuapp.com/users/login",(
                             {
                                 method:'POST',
                                 headers: {
@@ -146,7 +146,7 @@
                             localStorage.setItem("uid",res.user._id);
                             //alert("login success");
                             let user_id=localStorage.getItem("uid");                            
-                            let url="http://localhost:5000/wishlist/user/"+user_id
+                            let url="http://nordstrom-cloned.herokuapp.com/wishlist/user/"+user_id
 
                             console.log(url);
                             let sid = await fetch(url,({
@@ -157,7 +157,7 @@
                             localStorage.setItem("wid",resp._id);
 
 
-                            let url2="http://localhost:5000/shoppingBag/"+user_id
+                            let url2="http://nordstrom-cloned.herokuapp.com/shoppingBag/"+user_id
 
                             let cid = await fetch(url2,({
                                 method:"GET"

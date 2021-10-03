@@ -118,7 +118,7 @@ verfiyUserDetails = async () => {
 }
 
 getUserDetails = async (user_id) => {
-    const response = await fetch(`http://localhost:5000/users/${user_id}`, {
+    const response = await fetch(`http://nordstrom-cloned.herokuapp.com/users/${user_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -132,7 +132,7 @@ getUserDetails = async (user_id) => {
 };
 
 getShoppingBagItems = async (shopping_bag_id) => {
-    const response = await fetch(`http://localhost:5000/shoppingBagDetails/details/${shopping_bag_id}`, {
+    const response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
