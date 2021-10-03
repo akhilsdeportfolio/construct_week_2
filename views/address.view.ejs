@@ -1,198 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/address.css">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/address.css">
 
 
-    <link rel="stylesheet" href="/css/product.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/css/product.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" href="https://n.nordstrommedia.com/id/c4fb2a09-3657-4161-9b79-6412897d9399.png"
+    type="image/x-icon" />
+  <title>Address | Nordstrom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+    integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+    integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+    crossorigin="anonymous"></script>
+
+
+  <style>
+    input {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
 
 
 
-    <title>Address_users</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
-      integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
-      crossorigin="anonymous"
-    ></script>
+  <h3>List of User's Addresses</h3>
+  <div class="eachAddDivCon">
 
-
-    <style>
-
-        input{
-          margin-top:10px;
-          margin-bottom:10px;
-        }
-    </style>
-    
-  </head>
-
-  <body>
-
-  
-
-    <h3>Address list of users</h3>
-   <div class="eachAddDivCon">
-     
     <% address.forEach(function(add){%>
       <div class="eachAddDiv">
-    <p><span>Address :</span> <%=add.address %></p>
-    <p><span>Address2 :</span>  <%=add.address2 %></p>
-    <p><span> Postal Code : </span><%=add.postal_code %></p>
-    <p><span>City :</span> <%=add.city %></p>
-    <p><span>Phone :</span> <%=add.phone %></p>
-    <a href="/address/del/<%= add._id%>/user/<%=user_id%>">Click here to delete address</a>
-    </div>
-    <%})%>
-    </div>
+        <p><span>Address:</span>
+          <%=add.address %>
+        </p>
+        <p><span>Address 2:</span>
+          <%=add.address2 %>
+        </p>
+        <p><span> Postal Code: </span>
+          <%=add.postal_code %>
+        </p>
+        <p><span>City:</span>
+          <%=add.city %>
+        </p>
+        <p><span>Phone:</span>
+          <%=add.phone %>
+        </p>
+        <a href="/address/del/<%= add._id%>/user/<%=user_id%>">Click here to delete this address...</a>
+      </div>
+      <%})%>
+  </div>
 
-        <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      id="button_right_shift"
-    >
-      Add new Address
-    </button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    id="button_right_shift">
+    Add New Address
+  </button>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Enter your address details
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form onsubmit="addAddress(event)">
-              <!-- <input placeholder="Name" name="name"/> -->
-              <input
-                id="uid"
-                type="text"
-                class="form-control"
-                name="user_id"
-                value="<%= user_id %>"
-                placeholder="Enter User Id"
-              />
-              <input type="text" id="address" class="form-control" name="address" placeholder="Adrress" />
-              <input type="text" id="address2" class="form-control" name="address2" placeholder="Address2" />
-              <input
-                id="postal"
-                type="number"
-                class="form-control"
-                name="postal_code"
-                placeholder="Enter postal code"
-              />
-              <input type="text" id="city" class="form-control" name="city" placeholder="City" />
-              <input type="text" id= "region" class="form-control" name="region" placeholder="Reigon" />
-              <input type="number" id="phone" class="form-control" name="phone" placeholder=" Phone" />
-              <input type="text" id="country" class="form-control" name="country" placeholder="Country" />
-              <input type="submit" class="btn btn-primary" />
-            </form>
-          </div>
-          <div class="modal-footer">
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Enter your address details
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="addAddress(event)">
+            <!-- <input placeholder="Name" name="name"/> -->
+            <input id="uid" type="text" class="form-control" name="user_id" value="<%= user_id %>"
+              placeholder="Enter User Id" />
+            <input type="text" id="address" class="form-control" name="address" placeholder="Adrress" />
+            <input type="text" id="address2" class="form-control" name="address2" placeholder="Address2" />
+            <input id="postal" type="number" class="form-control" name="postal_code" placeholder="Enter postal code" />
+            <input type="text" id="city" class="form-control" name="city" placeholder="City" />
+            <input type="text" id="region" class="form-control" name="region" placeholder="Reigon" />
+            <input type="number" id="phone" class="form-control" name="phone" placeholder=" Phone" />
+            <input type="text" id="country" class="form-control" name="country" placeholder="Country" />
+            <input type="submit" class="btn btn-primary" />
+          </form>
+        </div>
+        <div class="modal-footer">
         </div>
       </div>
     </div>
+  </div>
 
 
 
-    <script>
+  <script>
 
-        async function addAddress(event)
-        { 
-            event.preventDefault();
-            console.log(event);
+    async function addAddress(event) {
+      event.preventDefault();
+      console.log(event);
 
-            let user_id=document.getElementById("uid").value.trim();
-            let address = document.getElementById("address").value.trim();
-            let address2= document.getElementById("address2").value.trim();
-            let city = document.getElementById("city").value.trim();
-            let region = document.getElementById("region").value.trim();
-            let postal = document.getElementById("postal").value.trim();
-            let phone=document.getElementById("phone").value.trim();            
-            let country = document.getElementById("country").value.trim();
-          
+      let user_id = document.getElementById("uid").value.trim();
+      let address = document.getElementById("address").value.trim();
+      let address2 = document.getElementById("address2").value.trim();
+      let city = document.getElementById("city").value.trim();
+      let region = document.getElementById("region").value.trim();
+      let postal = document.getElementById("postal").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+      let country = document.getElementById("country").value.trim();
 
 
-            let json = JSON.stringify(
-              {
-                user_id:user_id,
-                address:address,
-                address2:address2,
-                city:city,
-                region:region,
-                postal_code:postal,
-                phone:phone,
-                country:country
-              }
-            )
 
-
-            let response = await fetch("http://localhost:5000/address",({
-                method:'POST',
-                headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                },
-                body : json
-            }));
-
-            let res=await response.json();
-
-
-            if(res.status==true)
-            {
-              window.location.reload();
-              //console.log(res);
-            }
-            else{
-              console.error(res);
-            }
-
-
-            
-
+      let json = JSON.stringify(
+        {
+          user_id: user_id,
+          address: address,
+          address2: address2,
+          city: city,
+          region: region,
+          postal_code: postal,
+          phone: phone,
+          country: country
         }
+      )
 
 
-    </script>
-    
+      let response = await fetch("http://localhost:5000/address", ({
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: json
+      }));
 
-  </body>
+      let res = await response.json();
+
+
+      if (res.status == true) {
+        window.location.reload();
+        //console.log(res);
+      }
+      else {
+        console.error(res);
+      }
+
+
+
+
+    }
+
+
+  </script>
+
+
+</body>
+
 </html>
 <script src="/js/navbar.js"> </script>
