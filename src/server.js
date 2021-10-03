@@ -82,7 +82,7 @@ app.get("/login", function (req, res) {
   res.render("login.veiw.ejs", {});
 });
 
-app.listen(5000, async () => {
+app.listen(process.env.PORT || 5000, async () => {
   await connect();
   console.log("app is listening on the port 5000");
 });
