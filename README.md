@@ -21,7 +21,9 @@ Nordstrom, Inc. (/ˈnɔːrdstrəm/) is an American luxury department store chain
 To run this application on your local system, execute the following commands on your terminal/command line:
   
   <code>git clone https://github.com/akhilsdeportfolio/construct_week_2.git</code>
+  
   <code>npm i</code> 
+  
   <code>npm run server</code> 
   
   create a .env file with username and password of mongodb
@@ -96,10 +98,6 @@ A glimpse of our website
 
 - ![My Account](https://user-images.githubusercontent.com/87421863/135756494-f0e72fdd-fbf0-41a9-ab37-d629f43ada39.png)
 
-
-## Demo
- [Demo link here](https://shark2killer-e7e79.web.app/) 
- 
 
 
 ## Authors
