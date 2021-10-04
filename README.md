@@ -30,7 +30,7 @@ To run this application on your local system, execute the following commands on 
   create a .env file with username and password of mongodb
   
 
-To start using the application, open the `http://localhost:5000/landingpage` link in your browser.
+To start using the application, open the [click here](https://nordstrom-cloned.herokuapp.com/landingpage) and select > Home category > Art wall and Home decor sub category in navbar.
 
 ## Features 
 <!-- --- -->
