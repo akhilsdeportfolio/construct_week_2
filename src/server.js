@@ -74,7 +74,7 @@ app.use("/checkout", checkoutController);
 app.use("/orderNumbers", orderNumberController);
 app.use("/orders", orderController);
 
-app.get("/landingpage", function (req, res) {
+app.get("/", function (req, res) {
   res.render("landingPage.ejs", {});
 });
 
