@@ -4,7 +4,8 @@ const router = express.Router();
 const User = require("../models/user.model");
 const WishList = require("../models/wishlist.model");
 const axios = require("axios").default;
-
+const upload = require('../utils/fileupload');
+const profilePic = require("../models/profilepic.mode");
 
 // GET ALL USERS
 router.get("/all", async (req, res) => {
@@ -119,6 +120,16 @@ router.post("/createUser", async (req, res) => {
   
   
   
+});
+
+
+router.post("/upload/",upload.single("productImages"),async(req,res)=>{
+
+    let user = await profilePic.create({
+        profilePic:req.file.path
+    });
+
+    res.send(user);
 });
 
 router.patch("/updateUser/:id", async (req, res) => {
