@@ -260,14 +260,14 @@ function checkValues() {
     var Country_input = document.getElementById("Country");
 
     if (
-      eml_input.value == "" ||
-      first_input.value == "" ||
-      last_input.value == "" ||
-      add_input.value == "" ||
-      post_input.value == "" ||
-      city_input.value == "" ||
-      phone_input.value == "" ||
-      Country_input.value == ""
+      eml_input.value.trim() == "" ||
+      first_input.value.trim() == "" ||
+      last_input.value.trim() == "" ||
+      add_input.value.trim() == "" ||
+      post_input.value.trim() == "" ||
+      city_input.value.trim() == "" ||
+      phone_input.value.trim() == "" ||
+      Country_input.value.trim() == ""
     ) {
       emlLable.style.display = "block";
       firstNameLabel.style.display = "block";
@@ -395,7 +395,7 @@ function placeOrder() {
     var month = document.getElementById("month");
     var code = document.getElementById("code");
 
-    if (cardnumber.value == "" || month.value == "" || code.value == "") {
+    if (cardnumber.value.trim() == "" || month.value.trim() == "" || code.value.trim() == "") {
       cardnumber.style.borderColor = "#d30c0c";
       month.style.borderColor = "#d30c0c";
       code.style.borderColor = "#d30c0c";
