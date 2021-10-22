@@ -146,7 +146,7 @@
                             localStorage.setItem("uid",res.user._id);
                             //alert("login success");
                             let user_id=localStorage.getItem("uid");                            
-                            let url="http://nordstrom-cloned.herokuapp.com/wishlist/user/"+user_id
+                            let url="https://nordstrom-cloned.herokuapp.com/wishlist/user/"+user_id
 
                             console.log(url);
                             let sid = await fetch(url,({
