@@ -1,5 +1,5 @@
 function removeProduct(documentId) {
-  fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -9,7 +9,7 @@ function removeProduct(documentId) {
       return res.json();
     })
     .then((res) => {
-      window.location.href = `http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${res.item.shopping_bag_id}`;
+      window.location.href = `https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${res.item.shopping_bag_id}`;
     })
     .catch((err) => {
       console.log("err:", err);
@@ -17,7 +17,7 @@ function removeProduct(documentId) {
 }
 
 changeField = (documentId, fieldName, fieldValue) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
     method: "PATCH",
     body: JSON.stringify({
       [fieldName]: fieldValue,
@@ -30,7 +30,7 @@ changeField = (documentId, fieldName, fieldValue) => {
       return res.json();
     })
     .then((res) => {
-      window.location.href = `http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${res.item.shopping_bag_id}`;
+      window.location.href = `https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${res.item.shopping_bag_id}`;
     })
     .catch((err) => {
       console.log("err:", err);
@@ -38,7 +38,7 @@ changeField = (documentId, fieldName, fieldValue) => {
 };
 
 goToCheckout = (user_id) => {
-  window.location.href = `http://nordstrom-cloned.herokuapp.com/checkout/${user_id._id}`;
+  window.location.href = `https://nordstrom-cloned.herokuapp.com/checkout/${user_id._id}`;
 };
 
 checkShoppingBag = (items) => {
@@ -66,5 +66,5 @@ checkShoppingBag = (items) => {
 };
 
 goToPage = (product_id) => {
-  window.location.href = `http://nordstrom-cloned.herokuapp.com/products/${product_id}`;
+  window.location.href = `https://nordstrom-cloned.herokuapp.com/products/${product_id}`;
 };

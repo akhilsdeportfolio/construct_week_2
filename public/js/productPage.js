@@ -12,7 +12,7 @@ let sortBy = (value) => {
     } else if (value === 'highToLow') {
         sorting(-1)
     } else if (value === "newest") {
-        window.location.href = "http://nordstrom-cloned.herokuapp.com/products/"
+        window.location.href = "https://nordstrom-cloned.herokuapp.com/products/"
     }
 }
 
@@ -24,7 +24,7 @@ async function sorting(x) {
 
     console.log(ids)
 
-    let response = await fetch(`http://nordstrom-cloned.herokuapp.com/products/${x}/sort?ids=${ids}`)
+    let response = await fetch(`https://nordstrom-cloned.herokuapp.com/products/${x}/sort?ids=${ids}`)
 
     products = await response.json();
 
@@ -93,44 +93,44 @@ async function addfilter() {
             let presentcolors = colors.join(",")
             let presentranges = range.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&colors=${presentcolors}&ranges=${presentranges}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&colors=${presentcolors}&ranges=${presentranges}`)
 
         } else if (brands.length && colors.length) {
 
             let presentbrands = brands.join(",")
             let presentcolors = colors.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&colors=${presentcolors}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&colors=${presentcolors}`)
 
         } else if (brands.length && range.length) {
 
             let presentbrands = brands.join(",")
             let presentranges = range.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&ranges=${presentranges}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}&ranges=${presentranges}`)
 
         } else if (colors.length && range.length) {
 
             let presentcolors = colors.join(",")
             let presentranges = range.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?colors=${presentcolors}&ranges=${presentranges}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?colors=${presentcolors}&ranges=${presentranges}`)
 
         } else if (brands.length) {
 
             let presentbrands = brands.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?brands=${presentbrands}`)
 
         } else if (colors.length) {
             let presentcolors = colors.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?colors=${presentcolors}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?colors=${presentcolors}`)
         } else {
 
             let presentranges = range.join(",")
 
-            x = encodeURI(`http://nordstrom-cloned.herokuapp.com/products/filters?ranges=${presentranges}`)
+            x = encodeURI(`https://nordstrom-cloned.herokuapp.com/products/filters?ranges=${presentranges}`)
 
         }
 
@@ -174,13 +174,13 @@ function createProductCatalogue(products) {
         p_brand.innerText = product.brand_id.brand_name;
 
         var a = document.createElement('a');
-        a.href = `http://nordstrom-cloned.herokuapp.com/products/${product._id}`
+        a.href = `https://nordstrom-cloned.herokuapp.com/products/${product._id}`
 
         var image = document.createElement('img');
         image.src = product.images[0];
 
         var description = document.createElement('a');
-        description.href = `http://nordstrom-cloned.herokuapp.com/products/${product._id}`
+        description.href = `https://nordstrom-cloned.herokuapp.com/products/${product._id}`
         description.setAttribute('id', 'product-grid-description');
         description.innerText = product.brand_id.brand_name + " " + product.name;
 
@@ -256,7 +256,7 @@ async function allProducts() {
 
     console.log("inside allProducts")
 
-    let response = await fetch("http://nordstrom-cloned.herokuapp.com/products/all")
+    let response = await fetch("https://nordstrom-cloned.herokuapp.com/products/all")
 
     products = await response.json();
 
@@ -336,7 +336,7 @@ function openModal(product) {
         p_seeDetails.style.textDecorationThickness = "2px"
     }
     p_seeDetails.onclick = function () {
-        window.location.href = `http://nordstrom-cloned.herokuapp.com/products/${product._id}`
+        window.location.href = `https://nordstrom-cloned.herokuapp.com/products/${product._id}`
     }
 
     p_seeDetails.onmouseout = function () {
@@ -350,7 +350,7 @@ function openModal(product) {
     container.style.filter = 'blur(6px)';
 }
 
- async function closeModal() {
+async function closeModal() {
     modal.style.display = "none";
     modalImage.innerHTML = "";
     modalContent.innerHTML = "";
@@ -371,7 +371,7 @@ function openModal(product) {
 }
 
 getShoppingBagItems = async (shopping_bag_id) => {
-    const response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
+    const response = await fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -401,7 +401,7 @@ addToBag = async (product) => {
         // 2nd - patch the document and increase the quantity by 1.
 
 
-        let response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${product._id}/${sid}`, (
+        let response = await fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${product._id}/${sid}`, (
             {
                 method: 'GET',
                 headers: {
@@ -416,7 +416,7 @@ addToBag = async (product) => {
 
         if (res.length) {
 
-            let response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${res[0]._id}`, (
+            let response = await fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/product/${res[0]._id}`, (
                 {
                     method: 'PATCH',
                     headers: {
@@ -434,7 +434,7 @@ addToBag = async (product) => {
 
         } else {
 
-            let response = await fetch("http://nordstrom-cloned.herokuapp.com/shoppingBagDetails", (
+            let response = await fetch("https://nordstrom-cloned.herokuapp.com/shoppingBagDetails", (
                 {
                     method: 'POST',
                     headers: {
@@ -471,7 +471,7 @@ addToBag = async (product) => {
 addToWishlist = async (product) => {
 
     let wish = document.getElementById("wish")
-    
+
     if (localStorage.getItem('uid')) {
 
         let wid = localStorage.getItem("wid");
@@ -479,7 +479,7 @@ addToWishlist = async (product) => {
         //if product already present in wishlist then dnt add it
 
 
-        let response = await fetch(`http://nordstrom-cloned.herokuapp.com/wishlistDetails/product/${product._id}/${wid}`, (
+        let response = await fetch(`https://nordstrom-cloned.herokuapp.com/wishlistDetails/product/${product._id}/${wid}`, (
             {
                 method: 'GET',
                 headers: {
@@ -495,7 +495,7 @@ addToWishlist = async (product) => {
             wish.textContent = "Product has already been added in your wishlist"
         } else {
 
-            let response = await fetch(`http://nordstrom-cloned.herokuapp.com/wishlistDetails`, (
+            let response = await fetch(`https://nordstrom-cloned.herokuapp.com/wishlistDetails`, (
                 {
                     method: 'POST',
                     headers: {

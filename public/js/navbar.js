@@ -106,7 +106,7 @@ verfiyUserDetails = async () => {
             localStorage.setItem('uid', "");
             localStorage.setItem('sid', "");
             localStorage.setItem('wid', "");
-            window.location.href = '/landingpage';
+            window.location.href = '/';
         }
 
     } else if (!user_id) {
@@ -118,7 +118,7 @@ verfiyUserDetails = async () => {
 }
 
 getUserDetails = async (user_id) => {
-    const response = await fetch(`http://nordstrom-cloned.herokuapp.com/users/${user_id}`, {
+    const response = await fetch(`https://nordstrom-cloned.herokuapp.com/users/${user_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -132,7 +132,7 @@ getUserDetails = async (user_id) => {
 };
 
 getShoppingBagItems = async (shopping_bag_id) => {
-    const response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
+    const response = await fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

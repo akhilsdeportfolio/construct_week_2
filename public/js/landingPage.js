@@ -79,7 +79,7 @@ function pageContent() {
 
     divOverImage.append(insidelineDiv, insidetext)
 
-   // console.log(divOverImage)
+    // console.log(divOverImage)
 
 
     var h3content = document.createElement("h2")

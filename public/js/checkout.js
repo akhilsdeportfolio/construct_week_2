@@ -38,7 +38,7 @@ checkoutPage = async (shoppingBag) => {
 
 
 getShoppingBagDetails = (shoppingBag_id) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shoppingBag_id}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shoppingBag_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -153,7 +153,7 @@ function required(num) {
 }
 
 getUserDetails = (user_id) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/users/${user_id}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/users/${user_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -171,7 +171,7 @@ getUserDetails = (user_id) => {
 };
 
 getUserAddress = (user_id) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/address/dataAdd/${user_id}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/address/dataAdd/${user_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -389,7 +389,7 @@ function placeOrder() {
   var modal = document.getElementById("simpleModal");
   var blur_effect = document.getElementById("entire-body");
   if (event.target.textContent == "SHOP MORE") {
-    window.location.href = "landing_page.html";
+    window.location.href = "https://nordstrom-cloned.herokuapp.com/";
   } else {
     var cardnumber = document.getElementById("cardnumber");
     var month = document.getElementById("month");
@@ -488,11 +488,11 @@ closeModal = (shoppingBag_id) => {
   modal.style.display = "none";
   blur_effect.setAttribute("class", "noblur");
 
-  window.location.href = `http://nordstrom-cloned.herokuapp.com/landingpage`;
+  window.location.href = `https://nordstrom-cloned.herokuapp.com/`;
 };
 
 addUserAddress = (addressInput, address2, city, region, Country, Postal, phone_input) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/address`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/address`, {
     method: "POST",
     body: JSON.stringify({
       user_id: user_id,
@@ -571,7 +571,7 @@ createOrder = (total_price, items_price, shipping_price, duties_and_tax, address
 
 fetchNewOrderNumber = () => {
   var order;
-  fetch(`http://nordstrom-cloned.herokuapp.com/orderNumbers/6156b86b69c58a54ec07bd62`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/orderNumbers/6156b86b69c58a54ec07bd62`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -590,7 +590,7 @@ fetchNewOrderNumber = () => {
 
 
 uploadOrderDetails = (order) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/orders`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/orders`, {
     method: "POST",
     body: JSON.stringify(order),
     headers: {
@@ -610,7 +610,7 @@ uploadOrderDetails = (order) => {
 
 updateOrderNumber = (order_number) => {
   var number = order_number + 1;
-  fetch(`http://nordstrom-cloned.herokuapp.com/orderNumbers/6156b86b69c58a54ec07bd62`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/orderNumbers/6156b86b69c58a54ec07bd62`, {
     method: "PATCH",
     body: JSON.stringify({
       order_number: number
@@ -632,7 +632,7 @@ updateOrderNumber = (order_number) => {
 
 
 removeProduct = (documentId) => {
-  fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
+  fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/${documentId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -650,7 +650,7 @@ removeProduct = (documentId) => {
 }
 
 getShoppingBagItems = async (shopping_bag_id) => {
-  const response = await fetch(`http://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
+  const response = await fetch(`https://nordstrom-cloned.herokuapp.com/shoppingBagDetails/details/${shopping_bag_id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
